@@ -15,10 +15,10 @@
         <li><a href="#">Page 2</a></li>
         <li><a href="#">Page 3</a></li>
       </ul>
-<!--       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul> -->
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> ${user.userName}</a></li>
+        <li><a href="/login"><span class="glyphicon glyphicon-log-out"></span></a></li>
+      </ul>
     </div>
   </div>
 </nav> 
