@@ -13,6 +13,9 @@
     	<!-- INCLUDES MAIN NAVIGATION BAR -->
 		<%@include file="navbar.jsp" %>
 		
+		<!-- INCLUDES MAIN NAVIGATION BAR -->
+		<%@include file="navbar-mySwax.jsp" %>
+		
 		<!-- INCLUDES JS FORM VALIDATION -->
 		<script><%@include file="js-validator/login-js-validator.js" %></script>
 	
