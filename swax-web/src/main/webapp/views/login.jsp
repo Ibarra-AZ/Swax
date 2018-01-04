@@ -24,11 +24,13 @@
 					action="loginAction">
 					
 					<legend>Login</legend>
-					<div class="alert alert-warning alert-dismissable fade in">
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<strong>Warning!</strong> ${errorMsg}
-					</div>
 					
+					<c:if test="${!loginModelAttribute.errorMsg.equals('')}">
+						<div class="alert alert-danger">
+							${loginModelAttribute.errorMsg}
+						</div>
+					</c:if>
+										
 					<fieldset>
 					
 						<div class="form-group">

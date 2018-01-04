@@ -24,6 +24,7 @@
 					action="registerAction">
 					
 					<legend>Register</legend>
+					<span><form:errors path="errorMsg" /></span>
 					
 					<fieldset>
 					
