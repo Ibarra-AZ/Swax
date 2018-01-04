@@ -12,5 +12,5 @@ import swax.webservice.service.IUserService;
 	@Resource(name = "userDAO")	private IUserDAO userDAO = null;
 	@Override	public List<User> findAll() {		return this.userDAO.findAll();	}
 	@Override	public Integer createUpdateEntity(User user) {		return this.userDAO.saveAndFlush(user).getUserId();	}
-	@Override	public User findByEmailAndPassword(String email, String password) {		return userDAO.findByEmailAndPassword(email, password);	}
+	@Override	public User findByEmailAndPassword(String email, String password) {		return userDAO.findByEmailAndPassword(email, password);	}	@Override	public User findByEmail(String email) {		return userDAO.findByEmail(email);	}
 }

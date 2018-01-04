@@ -24,7 +24,12 @@
 					action="registerAction">
 					
 					<legend>Register</legend>
-					<span><form:errors path="errorMsg" /></span>
+					
+					<c:if test="${!registerModelAttribute.errorMsg.equals('')}">
+						<div class="alert alert-danger">
+							${registerModelAttribute.errorMsg}
+						</div>
+					</c:if>
 					
 					<fieldset>
 					

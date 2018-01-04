@@ -4,7 +4,7 @@ public class PojoModelRegisterForm {	@NotEmpty	private String userName;
 	@NotEmpty	private String email;
 	@NotEmpty	private String country;
 	@NotEmpty	private String password;
-	@NotEmpty	private String password2;		private String errorMsg;		public String getEmail() {		return email;	}
+	@NotEmpty	private String password2;		private String errorMsg="";		public String getEmail() {		return email;	}
 	public void setEmail(String email) {		this.email = email;	}
 	public String getPassword() {		return password;	}
 	public void setPassword(String password) {		this.password = password;	}
