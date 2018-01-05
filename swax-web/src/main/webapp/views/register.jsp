@@ -95,7 +95,7 @@
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
 									<button type="submit" class="btn btn-primary">Register</button>
-									<a href="/login" class="btn btn-warning" role="button">Cancel</a>
+									<a href="/logout" class="btn btn-warning" role="button">Cancel</a>
 								</div>
 							</div>
 						</div>

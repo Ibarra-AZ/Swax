@@ -20,14 +20,14 @@
         <div class="container">
 			
 			<div>
-				<form:form id="login-form" class="well form-horizontal" method="post" modelAttribute="loginModelAttribute" 
-					action="loginAction">
+				<form:form id="changePassword-form" class="well form-horizontal" method="post" 
+					modelAttribute="changePasswordModelAttribute" action="changePasswordAction">
 					
-					<legend>Login</legend>
+					<legend>Reinitialize your password</legend>
 					
-					<c:if test="${!loginModelAttribute.errorMsg.equals('')}">
+					<c:if test="${!changePasswordModelAttribute.errorMsg.equals('')}">
 						<div class="alert alert-danger">
-							${loginModelAttribute.errorMsg}
+							${changePasswordModelAttribute.errorMsg}
 						</div>
 					</c:if>
 										
@@ -45,21 +45,11 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="col-md-4 control-label">Password</label>
-							<div class="col-md-4 inputGroupContainer">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-									<form:input path="password" type="password" class="form-control" id="password" 
-										placeholder="Enter your password"/>
-								</div>
-							</div>
-						</div>
-						
-						<div class="form-group">
 							<label class="col-md-4 control-label"></label>
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
-									<button type="submit" class="btn btn-primary">Login</button>
+									<button type="submit" class="btn btn-primary">Send me a new password</button>
+									<a href="/logout" class="btn btn-warning" role="button">Cancel</a>
 								</div>
 							</div>
 						</div>
@@ -71,9 +61,7 @@
 			</div>
 			 
 			<div>
-				<p>Not a member yet? <a href="register">Register Now.</a>
-				Forgot your password? <a href="changePassword">Ask for a new one!</a>
-				</p>
+				<p>Not a member yet? <a href="register">Register Now.</a></p>
 			</div>
 		
 		</div>

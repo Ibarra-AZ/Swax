@@ -4,15 +4,11 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -45,9 +41,8 @@ public class Album implements Serializable {
 	public Album() {
 	}
 	
-	public Album(Integer albumId, String albumName, String artistName, Date releaseDate, String albumFormat) {
+	public Album(String albumName, String artistName, Date releaseDate, String albumFormat) {
 		super();
-		this.albumId = albumId;
 		this.albumName = albumName;
 		this.artistName = artistName;
 		this.releaseDate = releaseDate;

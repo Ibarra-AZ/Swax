@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,8 +29,15 @@ public class AlbumCollected implements Serializable {
 	@JoinColumn(name="USER_ID")
 	private User user;
 	
-	@Column(name="ALBUM_ID", unique=false, nullable=false)
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ALBUM_ID")
 	private Album album;
+	
+	
+	//@OneToOne(fetch=FetchType.LAZY)
+//	@Column(name="ALBUM_ID")
+//	private Integer albumId;
+	
 
 	
 	/**
@@ -39,9 +47,8 @@ public class AlbumCollected implements Serializable {
 	public AlbumCollected() {
 	}
 	
-	public AlbumCollected(Integer collectionId, User user, Album album) {
+	public AlbumCollected(User user, Album album) {
 		super();
-		this.collectionId = collectionId;
 		this.user = user;
 		this.album = album;
 	}
