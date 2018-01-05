@@ -6,15 +6,15 @@
 <html>
     
    	<!-- INCLUDES <head> -->
-	<%@include file="head.jsp" %> 
+	<%@include file="../head.jsp" %> 
     
     <body>
     
     	<!-- INCLUDES MAIN NAVIGATION BAR -->
-		<%@include file="navbar.jsp" %>
+		<%@include file="../navbar.jsp" %>
 		
 		<!-- INCLUDES JS FORM VALIDATION -->
-		<script><%@include file="js-validator/register-js-validator.js" %></script>
+		<script><%@include file="../js-validator/register-js-validator.js" %></script>
 	
 		<!-- CONTENT -->
         <div class="container">

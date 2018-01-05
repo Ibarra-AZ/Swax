@@ -6,28 +6,28 @@
 <html>
 
    	<!-- INCLUDES <head> -->
-	<%@include file="head.jsp" %> 
+	<%@include file="../head.jsp" %> 
 	
     <body>
     
     	<!-- INCLUDES MAIN NAVIGATION BAR -->
-		<%@include file="navbar.jsp" %>
+		<%@include file="../navbar.jsp" %>
 		
 		<!-- INCLUDES JS FORM VALIDATION -->
-		<script><%@include file="js-validator/login-js-validator.js" %></script>
+		<script><%@include file="../js-validator/login-js-validator.js" %></script>
 	
 		<!-- CONTENT -->
         <div class="container">
 			
 			<div>
-				<form:form id="changePassword-form" class="well form-horizontal" method="post" 
-					modelAttribute="changePasswordModelAttribute" action="changePasswordAction">
+				<form:form id="login-form" class="well form-horizontal" method="post" modelAttribute="loginModelAttribute" 
+					action="loginAction">
 					
-					<legend>Reinitialize your password</legend>
+					<legend>Login</legend>
 					
-					<c:if test="${!changePasswordModelAttribute.errorMsg.equals('')}">
+					<c:if test="${!loginModelAttribute.errorMsg.equals('')}">
 						<div class="alert alert-danger">
-							${changePasswordModelAttribute.errorMsg}
+							${loginModelAttribute.errorMsg}
 						</div>
 					</c:if>
 										
@@ -45,11 +45,21 @@
 						</div>
 						
 						<div class="form-group">
+							<label class="col-md-4 control-label">Password</label>
+							<div class="col-md-4 inputGroupContainer">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+									<form:input path="password" type="password" class="form-control" id="password" 
+										placeholder="Enter your password"/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
 							<label class="col-md-4 control-label"></label>
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
-									<button type="submit" class="btn btn-primary">Send me a new password</button>
-									<a href="/logout" class="btn btn-warning" role="button">Cancel</a>
+									<button type="submit" class="btn btn-primary">Login</button>
 								</div>
 							</div>
 						</div>
@@ -61,7 +71,9 @@
 			</div>
 			 
 			<div>
-				<p>Not a member yet? <a href="register">Register Now.</a></p>
+				<p>Not a member yet? <a href="register">Register Now.</a>
+				Forgot your password? <a href="changePassword">Ask for a new one!</a>
+				</p>
 			</div>
 		
 		</div>
