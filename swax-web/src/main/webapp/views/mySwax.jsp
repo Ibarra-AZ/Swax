@@ -21,7 +21,8 @@
 
 	<div class="col-md-10">
 
-		<img class="loader" src="/img/loading.gif" alt="loader" width="40" height="40" />
+		<img class="loader" src="/img/loading.gif" alt="loader" width="40"
+			height="40" />
 
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#home">Home</a></li>
@@ -39,6 +40,26 @@
 			<div id="collection" class="tab-pane fade">
 				<h3>Collection</h3>
 				<p>Browse your collection</p>
+				<table class="table table-hover table-bordered table-condensed">
+					<thead>
+						<tr class="active">
+							<th>Artist</th>
+							<th>Album</th>
+							<th>Release Date</th>
+							<th>Format</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${userCollection}" var="album">
+							<tr>
+								<td><c:out value="${album.artistName}" /></td>
+								<td><c:out value="${album.albumName}" /></td>
+								<td><c:out value="${album.releaseDate}" /></td>
+								<td><c:out value="${album.albumFormat}" /></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
 			<div id="wantlist" class="tab-pane fade">
 				<h3>Wantlist</h3>

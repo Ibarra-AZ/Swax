@@ -3,7 +3,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;import java.util.ArrayList;import java.util.HashSet;import java.util.List;import java.util.Set;import javax.persistence.Column;
 import javax.persistence.Entity;import javax.persistence.FetchType;import javax.persistence.GeneratedValue;
-import javax.persistence.Id;import javax.persistence.JoinColumn;import javax.persistence.OneToMany;import javax.persistence.Table;
+import javax.persistence.Id;import javax.persistence.JoinColumn;import javax.persistence.OneToMany;import javax.persistence.Table;import swax.webservice.dto.AlbumDTO;
 @Entity@Table(name="USER")public class User implements Serializable {
 	private static final long serialVersionUID = -7198215437040727852L;
 	@Id	@GeneratedValue(strategy = IDENTITY)	@Column(name="USER_ID", unique = true, nullable = false)	private Integer userId;
@@ -20,5 +20,5 @@ import javax.persistence.Id;import javax.persistence.JoinColumn;import javax.p
 	public String getUserName() {		return userName;	}
 	public void setUserName(String userName) {		this.userName = userName;	}
 	public String getCountry() {		return country;	}
-	public void setCountry(String country) {		this.country = country;	}	public List<AlbumCollected> getCollection() {		return collection;	}	public void setCollection(List<AlbumCollected> collection) {		this.collection = collection;	}
+	public void setCountry(String country) {		this.country = country;	}	public List<AlbumCollected> getCollection() {		return collection;	}	public void setCollection(List<AlbumCollected> collection) {		this.collection = collection;	}		/** METHODS **/		public List<AlbumDTO> getAlbumsDTO() {		List<AlbumDTO> albumsDTO = new ArrayList<AlbumDTO>();		for (AlbumCollected albumCollected: this.collection) {			AlbumDTO albumDTO = new AlbumDTO(albumCollected.getAlbum().getArtistName(), 					albumCollected.getAlbum().getAlbumName(), albumCollected.getAlbum().getReleaseDate().toString(), 					albumCollected.getAlbum().getFormat());			albumsDTO.add(albumDTO);		}		return albumsDTO;	}
 }
