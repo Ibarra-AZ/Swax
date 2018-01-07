@@ -13,7 +13,7 @@
 	        <li class="active"><a href="#">Home</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#"><span class="glyphicon glyphicon-user"></span> ${user.userName}</a></li>
+	        <li><a href="/loadUserProfilePage"><span class="glyphicon glyphicon-user"></span> ${user.userName}</a></li>
 	        <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
 	      </ul>
 	    </div>
