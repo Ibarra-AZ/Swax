@@ -6,35 +6,57 @@ public class AlbumDTO implements Serializable {
 
 	private static final long serialVersionUID = -8368788561833058931L;
 	
-	private String artistName;
+	private Integer albumId;
 	
 	private String albumName;
 	
+	private String artist;
+	
+	private String label;
+	
+	private String catalogNumber;
+	
+	private String format;
+	
+	private String mediaGrading;
+	
+	private String sleeveGrading;
+	
+	private String notes;
+	
 	private String releaseDate;
 	
-	private String albumFormat;
+	private int discogsId;
 	
 	/** CONTRUCTORS **/
 	
 	public AlbumDTO() {
 	}
-	
-	public AlbumDTO(String artistName, String albumName, String releaseDate, String albumFormat) {
+
+	public AlbumDTO(Integer albumId, String albumName, String artist, String label, String catalogNumber, String format,
+			String mediaGrading, String sleeveGrading, String notes, String releaseDate, Integer discogsId) {
 		super();
-		this.artistName = artistName;
+		this.albumId = albumId;
 		this.albumName = albumName;
+		this.artist = artist;
+		this.label = label;
+		this.catalogNumber = catalogNumber;
+		this.format = format;
+		this.mediaGrading = mediaGrading;
+		this.sleeveGrading = sleeveGrading;
+		this.notes = notes;
 		this.releaseDate = releaseDate;
-		this.albumFormat = albumFormat;
+		this.discogsId = discogsId;
 	}
 
 	/** GETTERS & SETTERS **/
 
-	public String getArtistName() {
-		return artistName;
+	public Integer getAlbumId() {
+		return albumId;
 	}
 
-	public void setArtistName(String artistName) {
-		this.artistName = artistName;
+	public void setAlbumId(Integer albumId) {
+		this.albumId = albumId;
 	}
 
 	public String getAlbumName() {
@@ -45,6 +67,62 @@ public class AlbumDTO implements Serializable {
 		this.albumName = albumName;
 	}
 
+	public String getArtist() {
+		return artist;
+	}
+
+	public void setArtist(String artist) {
+		this.artist = artist;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public String getCatalogNumber() {
+		return catalogNumber;
+	}
+
+	public void setCatalogNumber(String catalogNumber) {
+		this.catalogNumber = catalogNumber;
+	}
+
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
+	}
+
+	public String getMediaGrading() {
+		return mediaGrading;
+	}
+
+	public void setMediaGrading(String mediaGrading) {
+		this.mediaGrading = mediaGrading;
+	}
+
+	public String getSleeveGrading() {
+		return sleeveGrading;
+	}
+
+	public void setSleeveGrading(String sleeveGrading) {
+		this.sleeveGrading = sleeveGrading;
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
 	public String getReleaseDate() {
 		return releaseDate;
 	}
@@ -53,12 +131,12 @@ public class AlbumDTO implements Serializable {
 		this.releaseDate = releaseDate;
 	}
 
-	public String getAlbumFormat() {
-		return albumFormat;
+	public int getDiscogsId() {
+		return discogsId;
 	}
 
-	public void setAlbumFormat(String albumFormat) {
-		this.albumFormat = albumFormat;
+	public void setDiscogsId(int discogsId) {
+		this.discogsId = discogsId;
 	}	
 
 }

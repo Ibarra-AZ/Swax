@@ -6,15 +6,15 @@ import static javax.persistence.GenerationType.IDENTITY;import java.io.Seriali
 	@Column(name="EMAIL", unique = true, nullable = false)	private String email;
 	@Column(name="PASSWORD", unique = true, nullable = false)	private String password;
 	@Column(name="USER_NAME", unique = true, nullable = false)	private String userName;
-	@Column(name="COUNTRY", unique = true, nullable = false)	private String country;		@OneToMany(targetEntity=AlbumCollected.class, mappedBy="user", fetch = FetchType.LAZY)	private List<AlbumCollected> collection;			/**	 * CONSTRUCTORS	 */	
+	@Column(name="COUNTRY", unique = true, nullable = false)	private String country;	@OneToMany(targetEntity=AlbumCollected.class, mappedBy="user", fetch = FetchType.LAZY)	private List<AlbumCollected> collection;	/**	 * CONSTRUCTORS	 */
 	public User() {	}	public User(String email, String password, String userName, String country) {		super();		this.email = email;		this.password = password;		this.userName = userName;		this.country = country;	}	/**	 * GETTERS & SETTERS	 */
 	public Integer getUserId() {		return userId;	}
 	public void setUserId(Integer userId) {		this.userId = userId;	}
 	public String getPassword() {		return password;	}
-	public void setPassword(String password) {		this.password = password;	}		public String getEmail() {		return email;	}
+	public void setPassword(String password) {		this.password = password;	}	public String getEmail() {		return email;	}
 	public void setEmail(String email) {		this.email = email;	}
 	public String getUserName() {		return userName;	}
 	public void setUserName(String userName) {		this.userName = userName;	}
 	public String getCountry() {		return country;	}
-	public void setCountry(String country) {		this.country = country;	}	public List<AlbumCollected> getCollection() {		return collection;	}	public void setCollection(List<AlbumCollected> collection) {		this.collection = collection;	}		/** METHODS **/		public List<AlbumDTO> getAlbumsDTO() {		List<AlbumDTO> albumsDTO = new ArrayList<AlbumDTO>();		for (AlbumCollected albumCollected: this.collection) {			AlbumDTO albumDTO = new AlbumDTO(albumCollected.getAlbum().getArtistName(), 					albumCollected.getAlbum().getAlbumName(), albumCollected.getAlbum().getReleaseDate().toString(), 					albumCollected.getAlbum().getFormat());			albumsDTO.add(albumDTO);		}		return albumsDTO;	}
+	public void setCountry(String country) {		this.country = country;	}	public List<AlbumCollected> getCollection() {		return collection;	}	public void setCollection(List<AlbumCollected> collection) {		this.collection = collection;	}	/** METHODS **/	public List<AlbumDTO> getAlbumsDTO() {		List<AlbumDTO> albumsDTO = new ArrayList<AlbumDTO>();		for (AlbumCollected albumCollected: this.collection) {			AlbumDTO albumDTO = new AlbumDTO(albumCollected.getCollectionId(), albumCollected.getAlbum().getAlbumName(),					albumCollected.getAlbum().getArtist(), albumCollected.getAlbum().getLabel(), albumCollected.getAlbum().getCatalogNumber(), 					albumCollected.getAlbum().getFormat(), albumCollected.getMediaGrading(), 					albumCollected.getSleeveGrading(), albumCollected.getNotes(), 					albumCollected.getAlbum().getReleaseDate(), albumCollected.getAlbum().getDiscogsId());			albumsDTO.add(albumDTO);		}		return albumsDTO;	}
 }

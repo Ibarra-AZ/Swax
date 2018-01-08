@@ -3,7 +3,6 @@ package swax.webservice.entity;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,17 +21,26 @@ public class Album implements Serializable {
 	@Column(name="ALBUM_ID", unique = true, nullable = false)
 	private Integer albumId;
 	
-	@Column(name="ALBUM_NAME", unique = true, nullable = false)
+	@Column(name="DISCOGS_ID", nullable = false)
+	private Integer discogsId;
+	
+	@Column(name="ALBUM_NAME", nullable = false)
 	private String albumName;
 	
-	@Column(name="ARTIST_NAME", unique = true, nullable = false)
-	private String artistName;
+	@Column(name="ARTIST", nullable = false)
+	private String artist;
 	
-	@Column(name="RELEASE_DATE", unique = true, nullable = false)
-	private Date releaseDate;
+	@Column(name="LABEL", nullable = true)
+	private String label;
 	
-	@Column(name="ALBUM_FORMAT", unique = true, nullable = false)
-	private String albumFormat;
+	@Column(name="CATALOG_NUMBER", nullable = true)
+	private String catalogNumber;
+	
+	@Column(name="FORMAT", nullable = false)
+	private String format;
+	
+	@Column(name="RELEASE_DATE", nullable = true)
+	private String releaseDate;
 	
 	/**
 	 * CONSTRUCTORS
@@ -40,13 +48,17 @@ public class Album implements Serializable {
 	
 	public Album() {
 	}
-	
-	public Album(String albumName, String artistName, Date releaseDate, String albumFormat) {
+
+	public Album(Integer discogsId, String albumName, String artist, String label, String catalogNumber, String format,
+			String releaseDate) {
 		super();
+		this.discogsId = discogsId;
 		this.albumName = albumName;
-		this.artistName = artistName;
+		this.artist = artist;
+		this.label = label;
+		this.catalogNumber = catalogNumber;
+		this.format = format;
 		this.releaseDate = releaseDate;
-		this.albumFormat = albumFormat;
 	}
 
 	/**
@@ -61,6 +73,14 @@ public class Album implements Serializable {
 		this.albumId = albumId;
 	}
 
+	public Integer getDiscogsId() {
+		return discogsId;
+	}
+
+	public void setDiscogsId(Integer discogsId) {
+		this.discogsId = discogsId;
+	}
+
 	public String getAlbumName() {
 		return albumName;
 	}
@@ -69,28 +89,44 @@ public class Album implements Serializable {
 		this.albumName = albumName;
 	}
 
-	public String getArtistName() {
-		return artistName;
+	public String getArtist() {
+		return artist;
 	}
 
-	public void setArtistName(String artistName) {
-		this.artistName = artistName;
+	public void setArtist(String artist) {
+		this.artist = artist;
 	}
 
-	public Date getReleaseDate() {
-		return releaseDate;
+	public String getLabel() {
+		return label;
 	}
 
-	public void setReleaseDate(Date releaseDate) {
-		this.releaseDate = releaseDate;
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public String getCatalogNumber() {
+		return catalogNumber;
+	}
+
+	public void setCatalogNumber(String catalogNumber) {
+		this.catalogNumber = catalogNumber;
 	}
 
 	public String getFormat() {
-		return albumFormat;
+		return format;
 	}
 
 	public void setFormat(String format) {
-		this.albumFormat = format;
+		this.format = format;
+	}
+
+	public String getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(String releaseDate) {
+		this.releaseDate = releaseDate;
 	}
 
 }
