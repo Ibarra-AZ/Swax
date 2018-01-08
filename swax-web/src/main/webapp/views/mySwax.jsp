@@ -34,18 +34,17 @@
 
 		<div class="tab-content">
 			<div id="home" class="tab-pane fade in active">
-				<h3>HOME</h3>
 				<p>Welcome to Swax!</p>
 			</div>
 			<div id="collection" class="tab-pane fade">
-				<h3>Collection</h3>
 				<p>Browse your collection</p>
-				<table class="table table-hover table-bordered table-condensed">
+				<table id="dataTable" class="table table-hover table-bordered table-condensed">
 					<thead>
 						<tr class="active">
 							<th>Artist/Album info</th>
 							<th>Condition Media/Sleeve</th>
 							<th>Notes</th>
+							<th>Added</th>
 							<th>Discogs</th>
 						</tr>
 					</thead>
@@ -65,6 +64,9 @@
 									<c:out value="${album.notes}" />
 								</td>
 								<td>
+									<c:out value="${album.dateAdded}" />
+								</td>
+								<td>
 									<a href="https://www.discogs.com/release/${album.discogsId}" target="_blank">
 									<i class="glyphicon glyphicon-record"></i></a>
 								</td>
@@ -74,11 +76,9 @@
 				</table>
 			</div>
 			<div id="wantlist" class="tab-pane fade">
-				<h3>Wantlist</h3>
 				<p>Browse your wantlist</p>
 			</div>
 			<div id="propositions" class="tab-pane fade">
-				<h3>Wantlist</h3>
 				<p>See your swaps</p>
 			</div>
 		</div>

@@ -26,6 +26,8 @@ public class AlbumDTO implements Serializable {
 	
 	private String releaseDate;
 	
+	private String dateAdded;
+	
 	private int discogsId;
 	
 	/** CONTRUCTORS **/
@@ -34,7 +36,7 @@ public class AlbumDTO implements Serializable {
 	}
 
 	public AlbumDTO(Integer albumId, String albumName, String artist, String label, String catalogNumber, String format,
-			String mediaGrading, String sleeveGrading, String notes, String releaseDate, Integer discogsId) {
+			String mediaGrading, String sleeveGrading, String notes, String releaseDate, String dateAdded, Integer discogsId) {
 		super();
 		this.albumId = albumId;
 		this.albumName = albumName;
@@ -46,6 +48,7 @@ public class AlbumDTO implements Serializable {
 		this.sleeveGrading = sleeveGrading;
 		this.notes = notes;
 		this.releaseDate = releaseDate;
+		this.dateAdded = dateAdded;
 		this.discogsId = discogsId;
 	}
 
@@ -137,6 +140,14 @@ public class AlbumDTO implements Serializable {
 
 	public void setDiscogsId(int discogsId) {
 		this.discogsId = discogsId;
+	}
+
+	public String getDateAdded() {
+		return dateAdded;
+	}
+
+	public void setDateAdded(String dateAdded) {
+		this.dateAdded = dateAdded;
 	}	
 
 }
