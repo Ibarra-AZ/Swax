@@ -35,9 +35,11 @@
 		<div class="tab-content">
 			<div id="home" class="tab-pane fade in active">
 				<p>Welcome to Swax!</p>
+				<p>${infoMsg}</p>
 			</div>
 			<div id="collection" class="tab-pane fade">
-				<p>Browse your collection</p>
+				<c:if test="${hasCollection==true}">
+				<p>Browse your collection and start to swap your wax ;-)</p>
 				<table id="dataTable" class="table table-hover table-bordered table-condensed">
 					<thead>
 						<tr class="active">
@@ -74,6 +76,10 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				</c:if>
+				<c:if test="${hasCollection==false}">
+					<p>It seems that you don't have any collection. Do you want to import your collection from Discogs now ?</p>
+				</c:if>
 			</div>
 			<div id="wantlist" class="tab-pane fade">
 				<p>Browse your wantlist</p>
