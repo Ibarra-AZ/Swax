@@ -36,13 +36,46 @@
 			<div id="home" class="tab-pane fade in active">
 				<h2>Welcome to Swax!</h2>
 				<c:if test="${hasCollection==false}">
-				<p>It seems that you don't have any collection. Do you want to import your 
-					collection from Discogs? Ok, check out "Collection" in the menu.
+					<p>It seems that you have no collection yet. Do you want to import your 
+					collection from Discogs?</p>
+					<form:form id="importCollection-form" class="well form-horizontal"
+						method="post" modelAttribute="importCollectionModelAttribute"
+						action="importDiscogsCollection">
+
+						<legend>Import your collection from Discogs</legend>
+
+						<fieldset>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Discogs User URL</label>
+								<div class="col-md-4 inputGroupContainer">
+									<div class="input-group">
+										<span class="input-group-addon">
+										<i class="glyphicon glyphicon-download-alt"></i></span>
+										<form:input path="discogsURL" type="url"
+											class="form-control" id="discogsURL"
+											placeholder="https://www.discogs.com/fr/user/User_Name" />
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label"></label>
+								<div class="col-md-4 inputGroupContainer">
+									<div class="input-group">
+										<button type="submit" class="btn btn-primary">Import</button>
+									</div>
+								</div>
+							</div>
+
+						</fieldset>
+					</form:form>
 				</c:if>
 			</div>
 			<div id="collection" class="tab-pane fade">
 				<c:if test="${hasCollection==true}">
 				<p>Browse your collection and start to swap your wax ;-)</p>
+				<form:form>
 				<table id="dataTable" class="table table-hover table-bordered table-condensed">
 					<thead>
 						<tr class="active">
@@ -79,41 +112,10 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				</form:form>
 				</c:if>
 				<c:if test="${hasCollection==false}">
-					<br/>
-					<form:form id="importCollection-form" class="well form-horizontal"
-						method="post" modelAttribute="importCollectionModelAttribute"
-						action="importDiscogsCollection">
-
-						<legend>Import your collection from Discogs</legend>
-
-						<fieldset>
-
-							<div class="form-group">
-								<label class="col-md-4 control-label">Discogs User URL</label>
-								<div class="col-md-4 inputGroupContainer">
-									<div class="input-group">
-										<span class="input-group-addon">
-										<i class="glyphicon glyphicon-download-alt"></i></span>
-										<form:input path="discogsURL" type="url"
-											class="form-control" id="discogsURL"
-											placeholder="https://www.discogs.com/fr/user/User_Name" />
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-md-4 control-label"></label>
-								<div class="col-md-4 inputGroupContainer">
-									<div class="input-group">
-										<button type="submit" class="btn btn-primary">Import</button>
-									</div>
-								</div>
-							</div>
-
-						</fieldset>
-					</form:form>
+					You have no collection to display. Import your collection from Discogs.
 				</c:if>
 			</div>
 			<div id="wantlist" class="tab-pane fade">
