@@ -2,11 +2,11 @@
 DROP TABLE IF EXISTS USER;
 
 CREATE TABLE USER(USER_ID  INT AUTO_INCREMENT PRIMARY KEY, EMAIL VARCHAR(255), PASSWORD VARCHAR(255), USER_NAME VARCHAR(255), 
-	COUNTRY VARCHAR(255));
+	DISCOGS_NAME VARCHAR(255), COUNTRY VARCHAR(255), DATE_SIGNUP TIMESTAMP, LAST_CONNEXION TIMESTAMP, STATUS VARCHAR(255));
 
-INSERT INTO USER VALUES(1, 'ibarra@hotmail.fr', 'password', 'Alcatraz', 'FR');
-INSERT INTO USER VALUES(2, 'idobi@hotmail.fr', 'password', 'Damien', 'FR');
-INSERT INTO USER VALUES(3, 'coco@gmail.com', 'password', 'Coco', 'BE');
+INSERT INTO USER VALUES(1, 'ibarra@hotmail.fr', 'password', 'Alcatraz', 'Ibarra-AZ', 'FR', '2018-01-06', '2018-01-06', 'Authorized');
+INSERT INTO USER VALUES(2, 'idobi@hotmail.fr', 'password', 'Damien', 'Idobi', 'FR', '2018-01-06', '2018-01-06', 'Authorized');
+INSERT INTO USER VALUES(3, 'coco@gmail.com', 'password', 'Coco', 'CocoBoulette', 'BE', '2018-01-06', '2018-01-06', 'Banned');
 
 SELECT * FROM USER ORDER BY USER_ID;
 

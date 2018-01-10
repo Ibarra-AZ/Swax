@@ -89,8 +89,19 @@
 								</div>
 							</div>
 						</div>
-						
-						<div class="form-group">
+
+					<div class="form-group">
+						<label class="col-md-4 control-label">Discogs Name</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								<form:input path="discogsName" type="text"	class="form-control" id="discogsName" 
+								placeholder="Necessary to import your collection" />
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
 							<label class="col-md-4 control-label"></label>
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
