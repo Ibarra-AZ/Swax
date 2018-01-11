@@ -49,6 +49,22 @@
 		display: block;
 		margin: auto;
 	}
+	
+	.badge-error {
+	  background-color: #b94a48;
+	}
+	.badge-warning {
+	  background-color: #f89406;
+	}
+	.badge-success {
+	  background-color: #468847;
+	}
+	.badge-info {
+	  background-color: #3a87ad;
+	}
+	.badge-inverse {
+	  background-color: #333333;
+	}
 </style>
 
 </head>

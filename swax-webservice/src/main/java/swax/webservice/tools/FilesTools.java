@@ -18,6 +18,9 @@ import swax.webservice.entity.AlbumDiscogs;
 
 public class FilesTools {
 	
+//	TODO Add controls on the file uploaded (type, variables...)
+//	TODO check out how to limit the size (client validation ?)
+	
 	public static void uploadFile(MultipartFile file, HttpServletRequest request) throws IOException {
 		
         byte[] bytes = file.getBytes();
@@ -41,15 +44,27 @@ public class FilesTools {
 			line = line.replace(",", ", ");
 			System.out.println(line);
 			String[] entries = line.split(",");
-			AlbumDiscogs albumDiscogs = new AlbumDiscogs(entries[0], entries[1], entries[2], entries[3], 
-					entries[4], entries[5], entries[6], entries[7], entries[8], entries[9], entries[10],
-					entries[11], entries[12]);
+			List<String> var = new ArrayList<>();
+			
+			int i = 0;
+			for (String entry: entries) {
+				var.add(entry.trim());
+				if (var.get(i).startsWith("\"") || var.get(i).endsWith("\"")) {
+					String trimVar = var.get(i);
+					var.remove(i);					
+					var.add(i, trimVar.substring(1, trimVar.length()-1));
+				}
+				i++;
+			}
+			AlbumDiscogs albumDiscogs = new AlbumDiscogs(var.get(0), var.get(1), var.get(2), var.get(3), 
+					var.get(4), var.get(5), var.get(6), var.get(7), var.get(8), var.get(9), var.get(10),
+					var.get(11), var.get(12));
 			albumsDiscogs.add(albumDiscogs);
 			System.out.println(albumDiscogs.toString());
 		}
 
 		br.close();
-
+		
 		return albumsDiscogs;
 	}
 
