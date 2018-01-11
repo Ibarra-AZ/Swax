@@ -1,12 +1,9 @@
 package swax.webservice.entity;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,13 +13,14 @@ public class Album implements Serializable {
 
 	private static final long serialVersionUID = 6454253731785235236L;
 	
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name="ALBUM_ID", unique = true, nullable = false)
-	private Integer albumId;
+//	@Id
+//	@GeneratedValue(strategy = IDENTITY)
+//	@Column(name="ALBUM_ID", unique = true, nullable = false)
+//	private Integer albumId;
 	
+	@Id
 	@Column(name="DISCOGS_ID", nullable = false)
-	private Integer discogsId;
+	private String discogsId;
 	
 	@Column(name="ALBUM_NAME", nullable = false)
 	private String albumName;
@@ -49,7 +47,7 @@ public class Album implements Serializable {
 	public Album() {
 	}
 
-	public Album(Integer discogsId, String albumName, String artist, String label, String catalogNumber, String format,
+	public Album(String discogsId, String albumName, String artist, String label, String catalogNumber, String format,
 			String releaseDate) {
 		super();
 		this.discogsId = discogsId;
@@ -60,24 +58,34 @@ public class Album implements Serializable {
 		this.format = format;
 		this.releaseDate = releaseDate;
 	}
+	
+	public Album(AlbumDiscogs albumDiscogs) {
+		this.discogsId = albumDiscogs.getReleased_id();
+		this.albumName = albumDiscogs.getTitle();
+		this.artist = albumDiscogs.getArtist();
+		this.label = albumDiscogs.getLabel();
+		this.catalogNumber = albumDiscogs.getCatalog();
+		this.format = albumDiscogs.getFormat();
+		this.releaseDate = albumDiscogs.getReleased();
+	}
 
 	/**
 	 * GETTERS & SETTERS
 	 */
 	
-	public Integer getAlbumId() {
-		return albumId;
-	}
+//	public Integer getAlbumId() {
+//		return albumId;
+//	}
+//
+//	public void setAlbumId(Integer albumId) {
+//		this.albumId = albumId;
+//	}
 
-	public void setAlbumId(Integer albumId) {
-		this.albumId = albumId;
-	}
-
-	public Integer getDiscogsId() {
+	public String getDiscogsId() {
 		return discogsId;
 	}
 
-	public void setDiscogsId(Integer discogsId) {
+	public void setDiscogsId(String discogsId) {
 		this.discogsId = discogsId;
 	}
 

@@ -6,14 +6,14 @@ public class AlbumDiscogs implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String catalog, artist, title, label, format, rating, released, released_id, collectionFolder, dateAdded, 
+	private String catalog, artist, title, label, format, rating, released, release_id, collectionFolder, dateAdded, 
 		mediaCondition,	sleeveCondition, collectionNotes;
 
 	public AlbumDiscogs() {
 	}
 	
 	public AlbumDiscogs(String catalog, String artist, String title, String label, String format, String rating,
-			String released, String released_id, String collectionFolder, String dateAdded, String mediaCondition,
+			String released, String release_id, String collectionFolder, String dateAdded, String mediaCondition,
 			String sleeveCondition, String collectionNotes) {
 		super();
 		this.catalog = catalog;
@@ -23,7 +23,7 @@ public class AlbumDiscogs implements Serializable {
 		this.format = format;
 		this.rating = rating;
 		this.released = released;
-		this.released_id = released_id;
+		this.release_id = release_id;
 		this.collectionFolder = collectionFolder;
 		this.dateAdded = dateAdded;
 		this.mediaCondition = mediaCondition;
@@ -72,11 +72,11 @@ public class AlbumDiscogs implements Serializable {
 	}
 
 	public String getReleased_id() {
-		return released_id;
+		return release_id;
 	}
 
 	public void setReleased_id(String released_id) {
-		this.released_id = released_id;
+		this.release_id = released_id;
 	}
 
 	public String getCollectionFolder() {
@@ -139,7 +139,7 @@ public class AlbumDiscogs implements Serializable {
 	public String toString() {
 		return "AlbumDiscogs [catalog=" + catalog + ", artist=" + artist + ", title=" + title + ", label=" + label
 				+ ", format=" + format + ", rating=" + rating + ", released=" + released + ", released_id="
-				+ released_id + ", collectionFolder=" + collectionFolder + ", dateAdded=" + dateAdded
+				+ release_id + ", collectionFolder=" + collectionFolder + ", dateAdded=" + dateAdded
 				+ ", mediaCondition=" + mediaCondition + ", sleeveCondition=" + sleeveCondition + ", collectionNotes="
 				+ collectionNotes + "]";
 	}

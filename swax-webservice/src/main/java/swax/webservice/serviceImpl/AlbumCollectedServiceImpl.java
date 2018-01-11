@@ -1,0 +1,7 @@
+package swax.webservice.serviceImpl;
+import java.text.ParseException;import java.util.List;import javax.annotation.Resource;import org.springframework.stereotype.Service;import swax.webservice.dao.IAlbumCollectedDAO;import swax.webservice.entity.AlbumCollected;import swax.webservice.entity.AlbumDiscogs;import swax.webservice.entity.User;import swax.webservice.service.IAlbumCollectedService;
+@Service("albumCollectedService")public class AlbumCollectedServiceImpl implements IAlbumCollectedService {
+	@Resource(name = "albumCollectedDAO")	private IAlbumCollectedDAO albumCollectedDAO = null;
+	@Override	public List<AlbumCollected> findAll() {		return this.albumCollectedDAO.findAll();	}
+	@Override	public Integer createUpdateEntity(AlbumCollected albumCollected) {		return this.albumCollectedDAO.saveAndFlush(albumCollected).getAlbumCollectedId();	}		@Override	public void createUserCollection(User user, List<AlbumDiscogs> albumsDiscogs) throws ParseException {		for (AlbumDiscogs albumDiscogs: albumsDiscogs) {			AlbumCollected albumCollected = new AlbumCollected(user, albumDiscogs);			this.albumCollectedDAO.save(albumCollected).getAlbumCollectedId();		}		this.albumCollectedDAO.flush();	}
+}

@@ -3,6 +3,8 @@ package swax.webservice.entity;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -23,14 +25,14 @@ public class AlbumCollected implements Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name="ALBUM_COLLECTED_ID", unique = true, nullable = false)
-	private Integer collectionId;
+	private Integer albumCollectedId;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="USER_ID", nullable = false)
 	private User user;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ALBUM_ID", unique = true, nullable = false)
+	@JoinColumn(name="DISCOGS_ID", unique = true, nullable = false)
 	private Album album;
 	
 	@Column(name="MEDIA_GRADING", nullable = true)
@@ -43,7 +45,7 @@ public class AlbumCollected implements Serializable {
 	private String notes;
 	
 	@Column(name="DATE_ADDED", nullable = true)
-	private Date dateAdded;
+	private String dateAdded;
 	
 	/**
 	 * CONSTRUCTORS
@@ -53,7 +55,7 @@ public class AlbumCollected implements Serializable {
 	}
 	
 	public AlbumCollected(User user, Album album, String mediaGrading, String sleeveGrading, String notes,
-			Date dateAdded) {
+			String dateAdded) {
 		super();
 		this.user = user;
 		this.album = album;
@@ -63,16 +65,25 @@ public class AlbumCollected implements Serializable {
 		this.dateAdded = dateAdded;
 	}
 
+	public AlbumCollected(User user, AlbumDiscogs albumDiscogs) throws ParseException {
+		this.user = user;
+		this.album = new Album(albumDiscogs);
+		this.mediaGrading = albumDiscogs.getMediaCondition();
+		this.sleeveGrading = albumDiscogs.getSleeveCondition();
+		this.notes = albumDiscogs.getCollectionNotes();
+		this.dateAdded = albumDiscogs.getDateAdded();
+	}
+
 	/**
 	 * GETTERS & SETTERS
 	 */
 	
-	public Integer getCollectionId() {
-		return collectionId;
+	public Integer getAlbumCollectedId() {
+		return albumCollectedId;
 	}
 
-	public void setCollectionId(Integer collectionId) {
-		this.collectionId = collectionId;
+	public void setAlbumCollectedId(Integer collectionId) {
+		this.albumCollectedId = collectionId;
 	}
 
 	public User getUser() {
@@ -115,11 +126,11 @@ public class AlbumCollected implements Serializable {
 		this.notes = notes;
 	}
 
-	public Date getDateAdded() {
+	public String getDateAdded() {
 		return dateAdded;
 	}
 
-	public void setDateAdded(Date dateAdded) {
+	public void setDateAdded(String dateAdded) {
 		this.dateAdded = dateAdded;
 	}	
 
