@@ -60,7 +60,6 @@ public class FilesTools {
 					var.get(4), var.get(5), var.get(6), var.get(7), var.get(8), var.get(9), var.get(10),
 					var.get(11), var.get(12));
 			albumsDiscogs.add(albumDiscogs);
-			System.out.println(albumDiscogs.toString());
 		}
 
 		br.close();

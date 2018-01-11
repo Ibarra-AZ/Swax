@@ -3,5 +3,5 @@ import java.util.List;import javax.annotation.Resource;import org.springfram
 @Service("albumService")public class AlbumServiceImpl implements IAlbumService {
 	@Resource(name = "albumDAO")	private IAlbumDAO albumDAO = null;
 	@Override	public List<Album> findAll() {		return this.albumDAO.findAll();	}
-	@Override	public String createUpdateEntity(Album album) {		return this.albumDAO.saveAndFlush(album).getDiscogsId();	}		@Override	public void updateAlbumTable(List<AlbumDiscogs> albumsDiscogs) {//		this.albumDAO.save(albumsDiscogs);		for (AlbumDiscogs albumDiscogs: albumsDiscogs) {			Album album = new Album(albumDiscogs);			this.albumDAO.save(album).getDiscogsId();		}		this.albumDAO.flush();	}
+	@Override	public String createUpdateEntity(Album album) {		return this.albumDAO.saveAndFlush(album).getDiscogsId();	}		@Override	public void updateAlbumTable(List<AlbumDiscogs> albumsDiscogs) {		for (AlbumDiscogs albumDiscogs: albumsDiscogs) {			Album album = new Album(albumDiscogs);			this.albumDAO.save(album).getDiscogsId();		}		this.albumDAO.flush();	}
 }
