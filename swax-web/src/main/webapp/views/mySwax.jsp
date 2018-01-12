@@ -29,7 +29,8 @@
 			<li class="active"><a data-toggle="tab" href="#home">Home </a></li>
 			<li><a data-toggle="tab" href="#collection">Collection 
 				<span class="badge badge-info">${userCollection.size()}</span></a></li>
-			<li><a data-toggle="tab" href="#wantlist">Wantlist </a></li>
+			<li><a data-toggle="tab" href="#wantlist">Wantlist 
+				<span class="badge badge-warning">${userWantlist.size()}</span></a></li>
 			<li><a data-toggle="tab" href="#propositions">Propositions </a></li>
 		</ul>
 
@@ -52,7 +53,14 @@
 				</c:if>
 			</div>
 			<div id="wantlist" class="tab-pane fade">
-				<p>Browse your wantlist</p>
+				<c:if test="${hasWantlist==true}">
+					<p>Browse your wantlist and start to swap your wax ;-)</p>
+					<%@include file="wantlistTableForm.jsp"%>
+				</c:if>
+				<c:if test="${hasWantlist==false}">
+					You have no wantlist to display. Import your wantlist from Discogs.
+					<%@include file="importWantlistForm.jsp"%>
+				</c:if>
 			</div>
 			<div id="propositions" class="tab-pane fade">
 				<p>See your swaps</p>

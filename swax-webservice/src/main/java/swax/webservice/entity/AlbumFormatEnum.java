@@ -5,10 +5,13 @@ import java.util.List;
 
 public enum AlbumFormatEnum {
 	
-	SevenInches("7\""),
-	TenInches("10\""),
-	TwelveInches("12\""),
-	LP("LP");
+	SevenInches("7"),
+	TenInches("10"),
+	TwelveInches("12"),
+	LP("LP"),
+	TwoXTenInches("2x10"),
+	TwoXTwelveInches("2x12"),
+;
 	
 	private final String albumFormat;
 	

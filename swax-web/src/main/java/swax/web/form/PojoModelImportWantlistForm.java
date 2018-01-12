@@ -1,0 +1,3 @@
+package swax.web.form;import org.springframework.web.multipart.MultipartFile;public class PojoModelImportWantlistForm {		private String discogsURL;		private MultipartFile discogsFilePath;
+	private String errorMsg = "";	
+	public String getDiscogsURL() {		return discogsURL;	}	public void setDiscogsURL(String discogsURL) {		this.discogsURL = discogsURL;	}	public String getErrorMsg() {		return errorMsg;	}	public void setErrorMsg(String errorMsg) {		this.errorMsg = errorMsg;	}	public MultipartFile getDiscogsFilePath() {		return discogsFilePath;	}	public void setDiscogsFilePath(MultipartFile discogsFilePath) {		this.discogsFilePath = discogsFilePath;	}}

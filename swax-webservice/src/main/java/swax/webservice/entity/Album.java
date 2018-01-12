@@ -68,6 +68,16 @@ public class Album implements Serializable {
 		this.format = albumDiscogs.getFormat();
 		this.releaseDate = albumDiscogs.getReleased();
 	}
+	
+	public Album(AlbumDiscogsWantlist albumDiscogsWantlist) {
+		this.discogsId = albumDiscogsWantlist.getReleaseId();
+		this.albumName = albumDiscogsWantlist.getTitle();
+		this.artist = albumDiscogsWantlist.getArtist();
+		this.label = albumDiscogsWantlist.getLabel();
+		this.catalogNumber = albumDiscogsWantlist.getCatalog();
+		this.format = albumDiscogsWantlist.getFormat();
+		this.releaseDate = albumDiscogsWantlist.getReleased();
+	}
 
 	/**
 	 * GETTERS & SETTERS

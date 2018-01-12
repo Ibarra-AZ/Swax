@@ -51,6 +51,21 @@ public class AlbumDTO implements Serializable {
 		this.dateAdded = dateAdded;
 		this.discogsId = discogsId;
 	}
+	
+	public AlbumDTO(Integer albumId, String albumName, String artist, String label, String catalogNumber, String format,
+			String notes, String releaseDate, String dateAdded, String discogsId) {
+		super();
+		this.albumId = albumId;
+		this.albumName = albumName;
+		this.artist = artist;
+		this.label = label;
+		this.catalogNumber = catalogNumber;
+		this.format = format;
+		this.notes = notes;
+		this.releaseDate = releaseDate;
+		this.dateAdded = dateAdded;
+		this.discogsId = discogsId;
+	}
 
 	/** GETTERS & SETTERS **/
 

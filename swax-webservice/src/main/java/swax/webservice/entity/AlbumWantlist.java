@@ -14,15 +14,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ALBUM_COLLECTED")
-public class AlbumCollected implements Serializable {
+@Table(name="ALBUM_WANTLIST")
+public class AlbumWantlist implements Serializable {
 
-	private static final long serialVersionUID = 5886673759992245183L;
-	
+	private static final long serialVersionUID = 4636964225815914688L;
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name="ALBUM_COLLECTED_ID", unique = true, nullable = false)
-	private Integer albumCollectedId;
+	@Column(name="ALBUM_WANTLIST_ID", unique = true, nullable = false)
+	private Integer albumWantlistId;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="USER_ID", nullable = false)
@@ -31,12 +31,6 @@ public class AlbumCollected implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="DISCOGS_ID", unique = true, nullable = false)
 	private Album album;
-	
-	@Column(name="MEDIA_GRADING", nullable = true)
-	private String mediaGrading;
-	
-	@Column(name="SLEEVE_GRADING", nullable = true)
-	private String sleeveGrading;
 	
 	@Column(name="NOTES", nullable = true)
 	private String notes;
@@ -48,39 +42,34 @@ public class AlbumCollected implements Serializable {
 	 * CONSTRUCTORS
 	 */
 	
-	public AlbumCollected() {
+	public AlbumWantlist() {
 	}
 	
-	public AlbumCollected(User user, Album album, String mediaGrading, String sleeveGrading, String notes,
-			String dateAdded) {
+	public AlbumWantlist(User user, Album album, String notes, String dateAdded) {
 		super();
 		this.user = user;
 		this.album = album;
-		this.mediaGrading = mediaGrading;
-		this.sleeveGrading = sleeveGrading;
 		this.notes = notes;
 		this.dateAdded = dateAdded;
 	}
-
-	public AlbumCollected(User user, AlbumDiscogs albumDiscogs) {
+	
+	public AlbumWantlist(User user, AlbumDiscogsWantlist albumDiscogsWantlist) {
 		this.user = user;
-		this.album = new Album(albumDiscogs);
-		this.mediaGrading = albumDiscogs.getMediaCondition();
-		this.sleeveGrading = albumDiscogs.getSleeveCondition();
-		this.notes = albumDiscogs.getCollectionNotes();
-		this.dateAdded = albumDiscogs.getDateAdded();
+		this.album = new Album(albumDiscogsWantlist);
+		this.notes = albumDiscogsWantlist.getNotes();
+		this.dateAdded = albumDiscogsWantlist.getDateAdded();
 	}
 
 	/**
 	 * GETTERS & SETTERS
 	 */
-	
-	public Integer getAlbumCollectedId() {
-		return albumCollectedId;
-	}
 
-	public void setAlbumCollectedId(Integer collectionId) {
-		this.albumCollectedId = collectionId;
+	public Integer getAlbumWantlistId() {
+		return albumWantlistId;
+	}
+	
+	public void setAlbumWantlistdId(Integer albumWantlistdId) {
+		this.albumWantlistId = albumWantlistdId;
 	}
 
 	public User getUser() {
@@ -99,22 +88,6 @@ public class AlbumCollected implements Serializable {
 		this.album = album;
 	}
 
-	public String getMediaGrading() {
-		return mediaGrading;
-	}
-
-	public void setMediaGrading(String mediaGrading) {
-		this.mediaGrading = mediaGrading;
-	}
-
-	public String getSleeveGrading() {
-		return sleeveGrading;
-	}
-
-	public void setSleeveGrading(String sleeveGrading) {
-		this.sleeveGrading = sleeveGrading;
-	}
-
 	public String getNotes() {
 		return notes;
 	}
@@ -129,6 +102,6 @@ public class AlbumCollected implements Serializable {
 
 	public void setDateAdded(String dateAdded) {
 		this.dateAdded = dateAdded;
-	}	
+	}
 
 }

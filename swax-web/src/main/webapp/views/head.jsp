@@ -36,7 +36,8 @@
 <!-- ENABLING DATATABLE & BOOTSTRAP TOOLTIP PLUGIN -->
 <script type="text/javascript">
 	$(document).ready(function(){
-	    $('#dataTable').DataTable();
+	    $('#collectionTable').DataTable();
+	    $('#wantlistTable').DataTable();
 	    $('[data-toggle="tooltip"]').tooltip();
 	});
 </script>
