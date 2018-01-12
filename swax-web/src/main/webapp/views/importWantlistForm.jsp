@@ -17,8 +17,8 @@
 				<div class="input-group">
 					<span class="input-group-addon">
 					<i class="glyphicon glyphicon-download-alt"></i></span>
-					<form:input path="discogsURL" type="url"
-						class="form-control" id="discogsURL"
+					<form:input path="wantlistURL" type="url"
+						class="form-control" id="wantlistURL"
 						placeholder="https://www.discogs.com/fr/user/User_Name" />
 				</div>
 			</div>
@@ -31,11 +31,11 @@
 			<div class="inputGroupContainer col-md-4">
 				<div class="input-group">
                 	<label class="input-group-addon btn btn-primary">
-                    	<form:input type="file" style="display: none;" path="discogsFilePath" 
-                    	onchange="$('#upload-file-info').html(this.files[0].name)"/>
+                    	<form:input type="file" style="display: none;" path="wantlistFilePath" 
+                    	onchange="$('#upload-wantlist-info').html(this.files[0].name)"/>
                     	<i class="glyphicon glyphicon-upload"></i>
                     </label>
-                	<span id="upload-file-info" class="form-control col-md-8"></span>
+                	<span id="upload-wantlist-info" class="form-control col-md-8"></span>
 				</div>
 			</div>
 		</div>

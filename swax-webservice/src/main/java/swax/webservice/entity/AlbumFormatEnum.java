@@ -10,8 +10,7 @@ public enum AlbumFormatEnum {
 	TwelveInches("12"),
 	LP("LP"),
 	TwoXTenInches("2x10"),
-	TwoXTwelveInches("2x12"),
-;
+	TwoXTwelveInches("2x12");
 	
 	private final String albumFormat;
 	

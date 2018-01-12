@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ALBUM_WANTLIST")
+@Table(name="WANTLIST")
 public class AlbumWantlist implements Serializable {
 
 	private static final long serialVersionUID = 4636964225815914688L;
