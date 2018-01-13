@@ -9,11 +9,14 @@ import org.springframework.stereotype.Repository;
 
 import swax.webservice.entity.AlbumCollected;
 import swax.webservice.entity.AlbumDiscogs;
+import swax.webservice.entity.User;
 
 @Repository("albumCollectedDAO")
 @Transactional
 public interface IAlbumCollectedDAO extends JpaRepository<AlbumCollected, Integer> {
 
 	void save(List<AlbumDiscogs> albumsDiscogs);
+
+	List<AlbumCollected> findByUser(User user);
 
 }
