@@ -28,6 +28,11 @@ public class FilesTools {
         		getRealPath("files/"+file.getOriginalFilename()));
         Files.write(path, bytes);
 	}
+	
+	public static void deleteFile(String filePath) {
+		File fileToDelete = new File(filePath);
+        fileToDelete.delete();
+	}
 
 	public static List<AlbumDiscogs> importCollectionCSVFile(String filePath) throws IOException {
 
@@ -62,6 +67,8 @@ public class FilesTools {
 		}
 
 		br.close();
+		
+		deleteFile(filePath);
 		
 		return albumsDiscogs;
 	}
