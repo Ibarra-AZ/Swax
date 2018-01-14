@@ -23,51 +23,56 @@
 	<div class="col-md-10">
 
 		<img class="loader" src="/img/loading.gif" alt="loader" width="40" height="40" />
-		<div class="form-group">
-		<h3><span class="text-center col-md-12 well-sm label label-success">
-			${album.artist} - ${album.albumName}</span></h3><br/>
-		</div>
-		<span class="well">${album.format}</span><br/>
-		<span class="well">${album.label} - ${album.catalogNumber}</span><br/>
-		<span class="well">${album.releaseDate}</span><br/>
 		
-		<form:form id="swapAlbum-form" class="well form-horizontal" method="post" 
+		<div class="form-group row">
+			<div class="text-center col-md-12 well-sm">
+				<span class="text-uppercase lead">${album.artist}</span><br>
+				<span class="text-info">${album.albumName}, ${album.releaseDate}</span><br>
+				<span class="small"><strong>LABEL:</strong> ${album.label}. <strong>CAT#:</strong> ${album.catalogNumber}</span><br>
+				<hr style="width: 100%"/>				
+			</div>
+		</div>
+		
+ 		<form:form id="swapAlbum-form" class="well row" method="post" 
 			modelAttribute="swapAlbumModelAttribute" action="swapAlbum"	enctype="multipart/form-data">
 	
 		<fieldset>
-	
-			<div class="form-group">
-				<label class="col-md-4 control-label">Discogs User URL</label>
-				<div class="col-md-4 inputGroupContainer">
+			<div class="row">
+			<div class="form-group col-md-8">
+				<label class="col-md-12 control-label">Describe your wax</label>
+				<div class="col-md-12 inputGroupContainer">
 					<div class="input-group">
 						<span class="input-group-addon">
-						<i class="glyphicon glyphicon-download-alt"></i></span>
-<%-- 						<form:input path="discogsURL" type="url"
+						<i class="glyphicon glyphicon-pencil"></i></span>
+						<form:textarea rows="5" path="discogsURL" type="url"
 							class="form-control" id="discogsURL"
-							placeholder="https://www.discogs.com/fr/user/User_Name" />
- --%>					</div>
-				</div>
-			</div>
-			<div style="text-align: center;">OR<br/></div>
-			<div class="form-group">
-				<label class="col-md-4 control-label">Upload discogs CSV file</label>
-				<div class="inputGroupContainer col-md-4">
-					<div class="input-group">
-	                	<label class="input-group-addon btn btn-primary">
-<%-- 	                    	<form:input type="file" style="display: none;" path="discogsFilePath" 
-	                    	onchange="$('#upload-file-info').html(this.files[0].name)"/>
- --%>	                    	<i class="glyphicon glyphicon-upload"></i>
-	                    </label>
-	                	<span id="upload-file-info" class="form-control col-md-8"></span>
+							placeholder="Your edition, sleeve & media grading, why you want to swap it and what you're searching for..." />
 					</div>
 				</div>
 			</div>
-	
-			<div class="form-group">
-				<label class="col-md-4 control-label"></label>
-				<div class="col-md-4 inputGroupContainer">
+			
+			<div class="form-group col-md-4">
+				<label class="col-md-12 control-label">Upload a picture</label>
+				<div class="inputGroupContainer col-md-12">
 					<div class="input-group">
-						<button type="submit" class="btn btn-primary">Import</button>
+	                	<label class="input-group-addon btn btn-primary">
+	                    	<form:input type="file" style="display: none;" path="discogsFilePath" 
+	                    	onchange="$('#upload-file-info').html(this.files[0].name)"
+	                    	placeholder="Upload a picture !"/>
+	                    	<i class="glyphicon glyphicon-upload"></i>
+	                    </label>
+	                	<span id="upload-file-info" class="form-control col-md-12"></span>
+					</div>
+				</div>
+			</div>
+			</div>
+	
+			<div class="form-group row">
+				<!-- <label class="col-md-4 control-label"></label> -->
+				<div class="inputGroupContainer">
+					<div class="input-group col-md-4 col-md-offset-5">
+						<button type="submit" class="btn btn-primary">Propose to swap!</button>
+						<a href="/backToMySwax" class="btn btn-warning" role="button">Cancel</a>
 					</div>
 				</div>
 			</div>

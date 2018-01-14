@@ -28,25 +28,41 @@
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#home">Home </a></li>
 			<li><a data-toggle="tab" href="#collection">Collection 
-				<span class="badge badge-info">${userCollection.size()}</span></a></li>
+					<span class="badge badge-info">${userCollection.size()}</span></a>
+			</li>
 			<li><a data-toggle="tab" href="#wantlist">Wantlist 
 				<span class="badge badge-warning">${userWantlist.size()}</span></a></li>
 			<li><a data-toggle="tab" href="#propositions">Propositions </a></li>
 		</ul>
 
 		<div class="tab-content">
+			<br/>
 			<div id="home" class="tab-pane fade in active">
-				<h2>Welcome to Swax!</h2>
+				<h2 class="text-center">welcome to swax</h2>
 				<c:if test="${hasCollection==false}">
 					<p>It seems that you have no collection yet. Do you want to import your 
 					collection from Discogs?</p>
 					<%@include file="importCollectionForm.jsp"%>
 				</c:if>
+				<c:if test="${hasCollection==true}">
+					<%@include file="latestAdditions.jsp"%>
+				</c:if>
 			</div>
 			<div id="collection" class="tab-pane fade">
 				<c:if test="${hasCollection==true}">
-					<p>Browse your collection and start to swap your wax ;-)</p>
-					<%@include file="collectionTableForm.jsp"%>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4 text-center">
+							<a href="#"><i class="glyphicon glyphicon-refresh"></i>
+								<span class="text-primary"> Synchronize with discogs</span>
+							</a>
+							
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					
+					<div><%@include file="collectionTableForm.jsp"%></div>	
+					
 				</c:if>
 				<c:if test="${hasCollection==false}">
 					You have no collection to display. Import your collection from Discogs.
