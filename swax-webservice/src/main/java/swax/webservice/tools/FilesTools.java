@@ -29,9 +29,23 @@ public class FilesTools {
         Files.write(path, bytes);
 	}
 	
+	public static void uploadImg(MultipartFile file, String imgFileName, HttpServletRequest request) throws IOException {
+        byte[] bytes = file.getBytes();
+        Path path = Paths.get(request.getSession().getServletContext().getRealPath("img/swapAlbums/"+file.getOriginalFilename()));
+        Files.write(path, bytes);
+        Files.move(path, Paths.get(request.getSession().getServletContext().
+        		getRealPath("img/swapAlbums/"+imgFileName+".jpg")));
+	}
+	
 	public static void deleteFile(String filePath) {
 		File fileToDelete = new File(filePath);
         fileToDelete.delete();
+	}
+	
+	public static void renameFile(String filePath, String fileName) {
+		File fileToRename = new File(filePath);
+		File newNamedFile = new File(fileName);
+        fileToRename.renameTo(newNamedFile);
 	}
 
 	public static List<AlbumDiscogs> importCollectionCSVFile(String filePath) throws IOException {
