@@ -9,12 +9,12 @@
 <html>
 
 <!-- INCLUDES <head> -->
-<%@include file="head.jsp"%>
+<%@include file="../head.jsp"%>
 
 <body>
 
 	<!-- INCLUDES MAIN NAVIGATION BAR -->
-	<%@include file="navbar-logged.jsp"%>
+	<%@include file="../nav/navbar-logged.jsp"%>
 
 	<!-- CONTENT -->
 

@@ -9,12 +9,12 @@
 <html>
 
 <!-- INCLUDES <head> -->
-<%@include file="head.jsp"%>
+<%@include file="../head.jsp"%>
 
 <body>
 
 	<!-- INCLUDES MAIN NAVIGATION BAR -->
-	<%@include file="navbar-logged.jsp"%>
+	<%@include file="../nav/navbar-logged.jsp"%>
 
 	<!-- CONTENT -->
 
@@ -45,7 +45,7 @@
 					<%@include file="importCollectionForm.jsp"%>
 				</c:if>
 				<c:if test="${hasCollection==true}">
-					<%@include file="latestAdditions.jsp"%>
+					<%@include file="../home/latestAdditions.jsp"%>
 				</c:if>
 			</div>
 			<div id="collection" class="tab-pane fade">

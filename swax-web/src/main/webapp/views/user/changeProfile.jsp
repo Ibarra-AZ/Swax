@@ -11,7 +11,7 @@
     <body>
     
     	<!-- INCLUDES MAIN NAVIGATION BAR -->
-		<%@include file="../navbar.jsp" %>
+		<%@include file="../nav/navbar.jsp" %>
 		
 		<!-- INCLUDES JS FORM VALIDATION -->
 		<script><%@include file="../js-validator/changeProfile-js-validator.js" %></script>
