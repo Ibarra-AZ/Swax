@@ -62,7 +62,7 @@
 						        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
 						    <select name="country" class="form-control selectpicker" data-live-search="true">
 						      <option value=" " >Please select your country</option>
-						      <%@include file="countries.jsp" %>
+						      <%@include file="../utils/countries.jsp" %>
 						    </select>
 						  </div>
 						</div>
