@@ -4,6 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
+
 <!DOCTYPE html>
 
 <html>
@@ -17,6 +18,7 @@
 	<%@include file="../nav/navbar-logged.jsp"%>
 
 	<!-- INCLUDES JS FORM VALIDATION -->
+	<!-- WARN: INCLUDES PREVIEW IMG JAVASCRIPT TOO -->
 	<script><%@include file="../js-validator/swapAlbum-js-validator.js" %></script>
 
 	<!-- CONTENT -->
@@ -99,8 +101,8 @@
 				<div class="inputGroupContainer col-md-12" style="margin-bottom: 10px">
 					<div class="input-group">
 	                	<label class="input-group-addon btn btn-primary">
-	                    	<form:input type="file" style="display: none;" path="imgFilePath" 
-	                    	value="" onchange="$('#uploadFileInfo').html(this.files[0].name)"/>
+	                    	<form:input id="uploadImg" type="file" style="display: none;" path="imgFilePath" 
+	                    	value="" onchange="$('#uploadFileInfo').html(this.files[0].name)" />
 	                    	<i class="glyphicon glyphicon-upload"></i>
 	                    </label>
 	                	<span id="uploadFileInfo" class="form-control col-md-12"></span>
@@ -108,7 +110,7 @@
 				</div>
 				<br>
 				<div class="col-md-12">
-					<img src="img/swapAlbums/cover3.jpg" class="img-thumbnail" alt="Album Cover" width="" height="">
+					<img src="#" id="imgId" class="img-thumbnail" alt="Album Cover">
 				</div>
 			</div>
 			</div>
