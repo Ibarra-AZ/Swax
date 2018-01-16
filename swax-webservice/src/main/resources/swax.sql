@@ -35,9 +35,9 @@ CREATE TABLE ALBUM(DISCOGS_ID VARCHAR(255) PRIMARY KEY, ALBUM_NAME VARCHAR(255),
 	LABEL VARCHAR(255), CATALOG_NUMBER VARCHAR(255), FORMAT VARCHAR(255), RELEASE_DATE VARCHAR(255));
 	
 	
---INSERT INTO USER VALUES(1, 'ibarra@hotmail.fr', 'password', 'Alcatraz', 'Ibarra-AZ', 'FR', '2018-01-06', '2018-01-06', 'Authorized');
---INSERT INTO USER VALUES(2, 'idobi@hotmail.fr', 'password', 'Damien', 'Idobi', 'FR', '2018-01-06', '2018-01-06', 'Authorized');
---INSERT INTO USER VALUES(3, 'coco@gmail.com', 'password', 'Coco', 'CocoBoulette', 'BE', '2018-01-06', '2018-01-06', 'Banned');
+INSERT INTO USER VALUES(1, 'ibarra@hotmail.fr', 'password', 'Alcatraz', 'Ibarra-AZ', 'FR', '2018-01-06', '2018-01-06', 'Authorized');
+INSERT INTO USER VALUES(2, 'idobi@hotmail.fr', 'password', 'Damien', 'Idobi', 'FR', '2018-01-06', '2018-01-06', 'Authorized');
+INSERT INTO USER VALUES(3, 'coco@gmail.com', 'password', 'Coco', 'CocoBoulette', 'BE', '2018-01-06', '2018-01-06', 'Banned');
 
 	
 --insert into collection (USER_ID, DISCOGS_ID, MEDIA_GRADING, SLEEVE_GRADING, NOTES, DATE_ADDED) values ('1','9016102','Very Good Plus (VG+)','Very Good Plus (VG+)','Héritage Patrick Ibarra','2018-01-06 06:59:43');

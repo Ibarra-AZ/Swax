@@ -29,12 +29,12 @@ public class FilesTools {
         Files.write(path, bytes);
 	}
 	
-	public static void uploadImg(MultipartFile file, String imgFileName, HttpServletRequest request) throws IOException {
+	public static String uploadImg(MultipartFile file, String imgFileName, HttpServletRequest request) throws IOException {
+        String filePath = request.getSession().getServletContext().getRealPath("img/swapAlbums/"+imgFileName+".jpg");
         byte[] bytes = file.getBytes();
-        Path path = Paths.get(request.getSession().getServletContext().getRealPath("img/swapAlbums/"+file.getOriginalFilename()));
+        Path path = Paths.get(filePath);
         Files.write(path, bytes);
-        Files.move(path, Paths.get(request.getSession().getServletContext().
-        		getRealPath("img/swapAlbums/"+imgFileName+".jpg")));
+        return null;
 	}
 	
 	public static void deleteFile(String filePath) {

@@ -18,7 +18,7 @@
 	<%@include file="../nav/navbar-logged.jsp"%>
 
 	<!-- INCLUDES JS FORM VALIDATION -->
-	<!-- WARN: INCLUDES PREVIEW IMG JAVASCRIPT TOO -->
+	<!-- WARN: INCLUDES PREVIEW IMG JS TOO -->
 	<script><%@include file="../js-validator/swapAlbum-js-validator.js" %></script>
 
 	<!-- CONTENT -->
@@ -110,7 +110,7 @@
 				</div>
 				<br>
 				<div class="col-md-12">
-					<img src="#" id="imgId" class="img-thumbnail" alt="Album Cover">
+					<img src="img/swapAlbums/${imgURL}" id="imgId" class="img-thumbnail" alt="Album Cover">
 				</div>
 			</div>
 			</div>
