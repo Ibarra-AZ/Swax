@@ -45,7 +45,7 @@
 		</div>
 		
  		<form:form id="swapAlbum-form" class="well row" method="post" 
-			modelAttribute="swapAlbumModelAttribute" action="swapAlbum"	enctype="multipart/form-data">
+			modelAttribute="swapAlbumModelAttribute" action="saveAndSwapAlbum"	enctype="multipart/form-data">
 			
 		<form:hidden path="albumId" value="${album.albumId}"></form:hidden>
 	
@@ -97,7 +97,9 @@
 			</div>
 			
 			<div class="form-group col-md-4">
-				<label class="col-md-12 control-label">Upload a picture</label>
+				<label class="col-md-12 control-label" 
+				data-placement="auto" data-toggle="tooltip" title="Upload a picture of the album from your collection. 
+				ONLY jpg acccepted">Upload a picture (jpg ONLY!)</label>
 				<div class="inputGroupContainer col-md-12" style="margin-bottom: 10px">
 					<div class="input-group">
 	                	<label class="input-group-addon btn btn-primary">
@@ -120,8 +122,22 @@
 				<div class="inputGroupContainer">
 					<div class="input-group col-md-12">
 						<div style="display: table; margin: 0 auto;">
-						<button type="submit" class="btn btn-primary">Save &amp; Swap</button>
-						<a href="/saveAlbum" class="btn btn-info" role="button">Save only</a>
+						<button type="submit" class="btn btn-primary" name="albumToSwap" value="true"
+							data-placement="auto" data-toggle="tooltip" 
+							title="Save your modifications and propose this album for swapping">Save &amp; Swap</button>
+							
+						<button type="submit" class="btn btn-info" name="albumToSwap" value="false"
+							data-placement="auto" data-toggle="tooltip" 
+							title="Save your modifications only. This album won't be proposed for swapping">Save Only</button>
+						
+							
+						<%-- <c:url var="saveUrl" value="saveAlbumOnly">
+							<c:param name="albumId" value="${album.albumId}"></c:param>
+						</c:url>	
+						<a href="${saveUrl}" class="btn btn-info" role="button"
+							data-placement="auto" data-toggle="tooltip" title="Save your modifications only. 
+							This album won't be proposed for swapping">Save only</a> --%>
+							
 						<a href="/backToMySwax" class="btn btn-warning" role="button">Cancel</a>
 						</div>
 					</div>

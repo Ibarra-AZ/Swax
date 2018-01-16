@@ -1,9 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"	isELIgnored="false" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <div class="row text-center">
 	<span class="text-muted text-uppercase">Check out the latest
 		additions</span>
 </div>
 <div class="row">
-	<div class="col-md-2">
+	<c:forEach items="${latestAdditions}" var="album">
+		<div class="col-md-2">
+		<img src="img/swapAlbums/${album.imgName}" class="img-thumbnail"
+			alt="Album Cover" width="300" height="300">
+	</div>
+	</c:forEach>
+	<!-- <div class="col-md-2">
 		<img src="img/swapAlbums/cover1.jpg" class="img-thumbnail"
 			alt="Album Cover" width="300" height="300">
 	</div>
@@ -27,4 +38,4 @@
 		<img src="img/swapAlbums/cover6.jpg" class="img-thumbnail"
 			alt="Album Cover" width="300" height="300">
 	</div>
-</div>
+ --></div>

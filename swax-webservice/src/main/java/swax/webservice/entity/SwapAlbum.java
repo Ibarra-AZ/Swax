@@ -46,11 +46,16 @@ public class SwapAlbum implements Serializable {
 	
 	@Column(name="DATE_ADDED", nullable = false)
 	private String dateAdded;
+	
+	@Column(name="ALBUM_TO_SWAP", nullable = false)
+	private boolean albumToSwap;
+	
+	
 
 	/** CONTRUCTORS **/
 	
 	public SwapAlbum(Integer swapAlbumId, User user, AlbumCollected albumCollected, String mediaGrading, String sleeveGrading,
-			String waxValue, String description, String imgName, String dateAdded) {
+			String waxValue, String description, String imgName, String dateAdded, boolean albumToSwap) {
 		super();
 		this.swapAlbumId = swapAlbumId;
 		this.user = user;
@@ -61,10 +66,11 @@ public class SwapAlbum implements Serializable {
 		this.description = description;
 		this.imgName = imgName;
 		this.dateAdded = dateAdded;
+		this.albumToSwap = albumToSwap;
 	}
 	
 	public SwapAlbum(User user, AlbumCollected albumCollected, String mediaGrading, String sleeveGrading,
-			String waxValue, String description, String imgName, String dateAdded) {
+			String waxValue, String description, String imgName, String dateAdded, boolean albumToSwap) {
 		super();
 		this.user = user;
 		this.albumCollected = albumCollected;
@@ -74,6 +80,7 @@ public class SwapAlbum implements Serializable {
 		this.description = description;
 		this.imgName = imgName;
 		this.dateAdded = dateAdded;
+		this.albumToSwap = albumToSwap;
 	}
 	
 	public SwapAlbum() {
@@ -151,6 +158,14 @@ public class SwapAlbum implements Serializable {
 
 	public void setDateAdded(String dateAdded) {
 		this.dateAdded = dateAdded;
+	}
+
+	public boolean isAlbumToSwap() {
+		return albumToSwap;
+	}
+
+	public void setAlbumToSwap(boolean albumToSwap) {
+		this.albumToSwap = albumToSwap;
 	}
 
 	@Override

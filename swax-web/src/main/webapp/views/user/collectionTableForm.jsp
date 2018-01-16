@@ -25,9 +25,6 @@
 					<a href="${swapUrl}" data-placement="auto" 
 					data-toggle="tooltip" title="Describe & swap this Album">
 					<i class="glyphicon glyphicon-retweet"></i></a>
-<%-- 					<a href="swapAlbum/?albumId=${album.albumId}" data-placement="auto" 
-					data-toggle="tooltip" title="Describe & swap this Album">
-					<i class="glyphicon glyphicon-retweet"></i></a> --%>
 				</td>
 				<td>
 					<a href="album?${album.albumId}"><strong><c:out value="${album.artist} - ${album.albumName}" /></strong></a><br/>
