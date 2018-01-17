@@ -23,18 +23,18 @@ public class FilesTools {
 //	TODO check out how to limit the size (client validation ?)
 	
 	public static void uploadFile(MultipartFile file, HttpServletRequest request) throws IOException {
+		
         byte[] bytes = file.getBytes();
         Path path = Paths.get(request.getSession().getServletContext().
         		getRealPath("files/"+file.getOriginalFilename()));
         Files.write(path, bytes);
 	}
 	
-	public static String uploadImg(MultipartFile file, String imgFileName, HttpServletRequest request) throws IOException {
+	public static void uploadImg(MultipartFile file, String imgFileName, HttpServletRequest request) throws IOException {
         String filePath = request.getSession().getServletContext().getRealPath("img/swapAlbums/"+imgFileName+".jpg");
         byte[] bytes = file.getBytes();
         Path path = Paths.get(filePath);
         Files.write(path, bytes);
-        return null;
 	}
 	
 	public static void deleteFile(String filePath) {

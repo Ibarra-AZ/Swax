@@ -1,10 +1,13 @@
 package swax.webservice.entity;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +21,7 @@ public class SwapAlbum implements Serializable {
 	private static final long serialVersionUID = -5693601176310892785L;
 
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name="SWAP_ALBUM_ID", unique = true, nullable = false)
 	private Integer swapAlbumId;
 	
