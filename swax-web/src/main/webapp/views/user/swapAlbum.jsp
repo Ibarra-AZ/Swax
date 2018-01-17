@@ -79,7 +79,7 @@
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-piggy-bank"></i></span>
 						    <select name="waxValue" class="form-control selectpicker" data-live-search="true">
-						      <option value=""></option>
+						      <option value="${waxValue}">${waxValue}</option>
 						<%@include file="../utils/waxValues.jsp" %>
 						</select>
 					</div>	
