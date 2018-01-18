@@ -1,0 +1,5 @@
+package swax.webservice.serviceImpl.home;
+import java.util.ArrayList;import java.util.List;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Service;import swax.webservice.entity.album.SwapAlbum;import swax.webservice.service.album.ISwapAlbumService;import swax.webservice.service.home.IHomeService;
+@Service("homeService")public class HomeServiceImpl implements IHomeService {		@Autowired	private ISwapAlbumService swapAlbumService = null;	@Override	public List<SwapAlbum> initHome() {		List<SwapAlbum> swapAlbums = swapAlbumService.findAll();		List<SwapAlbum> result = new ArrayList<>();				int i = 1;		int j = swapAlbums.size()-1;		while (i <=6 && j >=0) {			if (swapAlbums.get(j).isAlbumToSwap()==true) {				i++;				result.add(swapAlbums.get(j));			}			j--;		}						if (result.size() < 6) {			result = null;		}				return result;			}
+
+}

@@ -1,0 +1,5 @@
+package swax.webservice.serviceImpl.album;
+import java.util.ArrayList;import java.util.List;import org.springframework.stereotype.Service;import swax.webservice.entity.album.AlbumDiscogsWantlist;import swax.webservice.entity.album.AlbumFormatEnum;import swax.webservice.service.album.IAlbumDiscogsWantlistService;
+@Service("albumDiscogsWantlistService")public class AlbumDiscogsWantlistServiceImpl implements IAlbumDiscogsWantlistService {	@Override
+	public List<AlbumDiscogsWantlist> trimAlbumsDiscogsWantlist(List<AlbumDiscogsWantlist> albumsDiscogsWantlist) {				albumsDiscogsWantlist.remove(0);				List<AlbumDiscogsWantlist> albumsDiscogsWantlistResult = new ArrayList<AlbumDiscogsWantlist>();				for (AlbumDiscogsWantlist albumDiscogsWantlist: albumsDiscogsWantlist) {			boolean swaxAlbum = false;			for (String format: AlbumFormatEnum.albumFormats()) {				if (albumDiscogsWantlist.getFormat().contains(format)) {					swaxAlbum = true;				}			}			if (swaxAlbum) {				albumsDiscogsWantlistResult.add(albumDiscogsWantlist);			}		}				return albumsDiscogsWantlistResult;			}
+}

@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import swax.webservice.entity.AlbumDiscogs;
-import swax.webservice.entity.AlbumDiscogsWantlist;
+import swax.webservice.entity.album.AlbumDiscogs;
+import swax.webservice.entity.album.AlbumDiscogsWantlist;
 
 public class FilesTools {
 	
