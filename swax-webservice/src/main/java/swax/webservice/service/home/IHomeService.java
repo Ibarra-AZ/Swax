@@ -1,2 +1,2 @@
-package swax.webservice.service.home;import java.util.List;import swax.webservice.entity.album.SwapAlbum;public interface IHomeService {		public List<SwapAlbum> initHome();
+package swax.webservice.service.home;import java.util.Collection;import swax.webservice.entity.album.SwapAlbum;import swax.webservice.entity.user.User;public interface IHomeService {		public Collection<SwapAlbum> initHome(User user);
 }

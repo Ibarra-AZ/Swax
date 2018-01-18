@@ -112,7 +112,7 @@
 				</div>
 				<br>
 				<div class="col-md-12">
-					<img src="img/swapAlbums/${imgURL}" id="imgId" class="img-thumbnail" alt="Album Cover">
+					<img src="img/swapAlbums/${imgURL}" id="imgId" class="img-thumbnail" alt="Album Cover" height="400" width="400">
 				</div>
 			</div>
 			</div>
@@ -128,15 +128,7 @@
 							
 						<button type="submit" class="btn btn-info" name="albumToSwap" value="false"
 							data-placement="auto" data-toggle="tooltip" 
-							title="Save your modifications only. This album won't be proposed for swapping">Save Only</button>
-						
-							
-						<%-- <c:url var="saveUrl" value="saveAlbumOnly">
-							<c:param name="albumId" value="${album.albumId}"></c:param>
-						</c:url>	
-						<a href="${saveUrl}" class="btn btn-info" role="button"
-							data-placement="auto" data-toggle="tooltip" title="Save your modifications only. 
-							This album won't be proposed for swapping">Save only</a> --%>
+							title="Save your modifications only. This album won't be proposed for swapping or will be removed">Save / Remove</button>
 							
 						<a href="/backToMySwax" class="btn btn-warning" role="button">Cancel</a>
 						</div>

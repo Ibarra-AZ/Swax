@@ -27,7 +27,7 @@
 					<i class="glyphicon glyphicon-retweet"></i></a>
 				</td>
 				<td>
-					<a href="album?${album.albumId}"><strong><c:out value="${album.artist} - ${album.albumName}" /></strong></a><br/>
+					<a href="/swapAlbum?albumId=${album.albumId}"><strong><c:out value="${album.artist} - ${album.albumName}" /></strong></a><br/>
 					<span class="small"><c:out value="${album.format}" /></span><br/>
 					<span class="small"><c:out value="${album.label} - ${album.catalogNumber}" /></span><br/>
 					<span class="small"><c:out value="${album.releaseDate}" /></span>

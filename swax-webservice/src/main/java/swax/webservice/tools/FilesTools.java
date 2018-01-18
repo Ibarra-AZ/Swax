@@ -9,7 +9,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.locks.ReentrantLock;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,17 +30,22 @@ public class FilesTools {
         Files.write(path, bytes);
 	}
 	
-	public static void uploadImg(MultipartFile file, String imgFileName, HttpServletRequest request) throws IOException {
-        String filePath = request.getSession().getServletContext().getRealPath("img/swapAlbums/"+imgFileName+".jpg");
+	public static String uploadImg(MultipartFile file, String imgFileName, HttpServletRequest request) throws IOException {
+        
+		String filePath = request.getSession().getServletContext().getRealPath("img/swapAlbums/"+imgFileName+".jpg");
         byte[] bytes = file.getBytes();
-        Path path = Paths.get(filePath);
-        ReentrantLock lock = new ReentrantLock();
-        lock.lock();
-		try {
-			Files.write(path, bytes);
-		} finally {
-			lock.unlock();
-		}
+        String pathResult = "";
+        
+        if (!file.isEmpty()) {
+        	Path path = Paths.get(filePath);
+        	Path pathWrittenFile = Files.write(path, bytes);
+        	synchronized (pathWrittenFile) {
+				pathResult = pathWrittenFile.toString();
+			}
+        }
+        
+        return pathResult;
+        
 	}
 	
 	public static void deleteFile(String filePath) {
