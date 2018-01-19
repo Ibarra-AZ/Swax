@@ -48,7 +48,7 @@
 <div class="row top15">
 	<div style="display: table; margin: 0 auto;">
 		<button type="button" class="btn btn-default btn-lg" data-placement="auto" data-toggle="tooltip" title="View more">
-			<span><i class="glyphicon glyphicon-plus"></i></span>
+			<span><i class="glyphicon glyphicon-option-horizontal"></i></span>
 		</button>
 		<button type="button" class="btn btn-default btn-lg" data-placement="auto" data-toggle="tooltip" title="Search for swaps">
 			<span><i class="glyphicon glyphicon-search"></i></span>
