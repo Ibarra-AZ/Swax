@@ -43,6 +43,7 @@
 </script>
 
 <style>
+
 	.loader {
 		background-color: white;
 		border: solid 2px black !important;
@@ -66,6 +67,24 @@
 	.badge-inverse {
 	  background-color: #333333;
 	}
+	
+	.top5 { 
+		margin-top:5px;
+	}
+
+	.top10 { 
+		margin-top:10px;
+	}
+	.top15 { 
+		margin-top:15px;
+	}
+	.top20 {
+		margin-top:20px;
+	}
+	.top30 {
+		margin-top:30px;
+	}
+	
 </style>
 
 </head>

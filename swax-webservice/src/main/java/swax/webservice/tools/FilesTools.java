@@ -10,12 +10,22 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.awt.image.BufferedImage;
+
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import swax.webservice.entity.album.AlbumDiscogs;
 import swax.webservice.entity.album.AlbumDiscogsWantlist;
+
+/**
+ * 
+ * @author Matthieu Ibarra
+ * Methods to upload files
+ *
+ */
 
 public class FilesTools {
 	
@@ -42,6 +52,12 @@ public class FilesTools {
         	synchronized (pathWrittenFile) {
 				pathResult = pathWrittenFile.toString();
 			}
+        	
+    		BufferedImage originalImage = ImageIO.read(new File(filePath));
+    		int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+    		
+			BufferedImage resizeImageHintPng = ImgTools.resizeImageWithHint(originalImage, type);
+			ImageIO.write(resizeImageHintPng, "png", new File(filePath));
         }
         
         return pathResult;
