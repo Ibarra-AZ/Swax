@@ -1,0 +1,6 @@
+2018-01-19 19:44:42 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+select user0_.user_id as user_id1_3_, user0_.country as country2_3_, user0_.date_signup as date_sig3_3_, user0_.discogs_name as discogs_4_3_, user0_.email as email5_3_, user0_.last_connexion as last_con6_3_, user0_.password as password7_3_, user0_.status as status8_3_, user0_.user_name as user_nam9_3_ from user user0_ where user0_.email=? and user0_.password=? [42102-196]
+2018-01-19 19:44:55 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+select user0_.user_id as user_id1_3_, user0_.country as country2_3_, user0_.date_signup as date_sig3_3_, user0_.discogs_name as discogs_4_3_, user0_.email as email5_3_, user0_.last_connexion as last_con6_3_, user0_.password as password7_3_, user0_.status as status8_3_, user0_.user_name as user_nam9_3_ from user user0_ where user0_.email=? and user0_.password=? [42102-196]

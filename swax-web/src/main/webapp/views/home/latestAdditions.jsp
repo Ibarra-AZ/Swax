@@ -14,6 +14,11 @@
 	a:hover {
 	    text-decoration: none;
 	}
+	.caption div {
+		width: 100%; 
+		height: 18px; 
+		overflow: hidden;
+	}
  </style>
  
 <div class="row text-center">
@@ -28,11 +33,9 @@
 				<img src="img/swapAlbums/${album.imgName}" alt="Album Cover" style="width:100%">
 				<a href="viewSwap?albumId=${album.swapAlbumId}">
 				<div class="caption text-center a-btn">
-					<p>
-						<strong>${album.albumCollected.album.artist}</strong><br>
-						<small>${album.albumCollected.album.albumName}<br>
-						${album.albumCollected.album.releaseDate}</small>
-					</p>
+					<div><strong>${album.albumCollected.album.artist}</strong></div>
+					<div><small>${album.albumCollected.album.albumName}</small></div>
+					<div><small>${album.albumCollected.album.releaseDate}</small></div>
 				</div>
 				</a>
 				
