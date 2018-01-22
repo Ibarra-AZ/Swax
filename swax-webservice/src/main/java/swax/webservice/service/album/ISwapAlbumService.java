@@ -21,4 +21,6 @@ public interface ISwapAlbumService {
 
 	SwapAlbum findByAlbumCollected(AlbumCollected albumCollected);
 
+	List<Object> findPossibleSwapsByUser(int user_id);
+
 }

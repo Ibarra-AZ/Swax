@@ -35,6 +35,10 @@ public class SwapAlbum implements Serializable {
 	@JoinColumn(name="ALBUM_COLLECTED_ID", unique = true, nullable = false)
 	private AlbumCollected albumCollected;
 	
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ALBUM_ID", unique = true, nullable = false)
+	private Album album;
+	
 	@Column(name="MEDIA_GRADING", nullable = true)
 	private String mediaGrading;
 	
@@ -56,16 +60,16 @@ public class SwapAlbum implements Serializable {
 	@Column(name="ALBUM_TO_SWAP", nullable = false)
 	private boolean albumToSwap;
 	
-	
 
 	/** CONTRUCTORS **/
 	
-	public SwapAlbum(Integer swapAlbumId, User user, AlbumCollected albumCollected, String mediaGrading, String sleeveGrading,
-			String waxValue, String description, String imgName, String dateAdded, boolean albumToSwap) {
+	public SwapAlbum(Integer swapAlbumId, User user, AlbumCollected albumCollected, Album album, String mediaGrading, 
+			String sleeveGrading, String waxValue, String description, String imgName, String dateAdded, boolean albumToSwap) {
 		super();
 		this.swapAlbumId = swapAlbumId;
 		this.user = user;
 		this.albumCollected = albumCollected;
+		this.album = album;
 		this.mediaGrading = mediaGrading;
 		this.sleeveGrading = sleeveGrading;
 		this.waxValue = waxValue;
@@ -75,11 +79,12 @@ public class SwapAlbum implements Serializable {
 		this.albumToSwap = albumToSwap;
 	}
 	
-	public SwapAlbum(User user, AlbumCollected albumCollected, String mediaGrading, String sleeveGrading,
+	public SwapAlbum(User user, AlbumCollected albumCollected, Album album, String mediaGrading, String sleeveGrading,
 			String waxValue, String description, String imgName, String dateAdded, boolean albumToSwap) {
 		super();
 		this.user = user;
 		this.albumCollected = albumCollected;
+		this.album = album;
 		this.mediaGrading = mediaGrading;
 		this.sleeveGrading = sleeveGrading;
 		this.waxValue = waxValue;
@@ -116,6 +121,14 @@ public class SwapAlbum implements Serializable {
 
 	public void setAlbumCollected(AlbumCollected albumCollected) {
 		this.albumCollected = albumCollected;
+	}
+	
+	public Album getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(Album album) {
+		this.album = album;
 	}
 
 	public String getMediaGrading() {
@@ -177,8 +190,9 @@ public class SwapAlbum implements Serializable {
 	@Override
 	public String toString() {
 		return "SwapAlbum [swapAlbumId=" + swapAlbumId + ", user=" + user + ", albumCollected=" + albumCollected
-				+ ", mediaGrading=" + mediaGrading + ", sleeveGrading=" + sleeveGrading + ", waxValue=" + waxValue
-				+ ", description=" + description + ", imgName=" + imgName + ", dateAdded=" + dateAdded + "]";
+				+ ", album=" + album + ", mediaGrading=" + mediaGrading + ", sleeveGrading=" + sleeveGrading
+				+ ", waxValue=" + waxValue + ", description=" + description + ", imgName=" + imgName + ", dateAdded="
+				+ dateAdded + ", albumToSwap=" + albumToSwap + "]";
 	}
 	
 }
