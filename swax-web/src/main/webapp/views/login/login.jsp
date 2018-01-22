@@ -71,8 +71,9 @@
 			</div>
 			 
 			<div>
-				<p>Not a member yet? <a href="register">Register Now.</a>
-				Forgot your password? <a href="changePassword">Ask for a new one!</a>
+				<p><spring:message code="login.register1"/><a href="register">
+					<spring:message code="login.register2"/></a>
+				<spring:message code="login.member1"/><a href="changePassword"><spring:message code="login.member2"/></a>
 				</p>
 			</div>
 		

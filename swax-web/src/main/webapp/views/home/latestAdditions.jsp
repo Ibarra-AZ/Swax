@@ -22,7 +22,7 @@
  </style>
  
 <div class="row text-center">
-	<span class="text-muted text-uppercase">Check out the latest additions</span>
+	<span class="text-muted text-uppercase"><spring:message code="latestAdditions.checkout"/></span>
 </div>
 
 <div class="row top15">
@@ -30,12 +30,12 @@
 		<c:forEach items="${latestAdditions}" var="album">
 		<div class="col-md-2">
 			<div class="thumbnail">
-				<img src="img/swapAlbums/${album.imgName}" alt="Album Cover" style="width:100%">
+				<img src="img/swapAlbums/${album.imgURL}" alt="Album Cover" style="width:100%">
 				<a href="viewSwap?albumId=${album.swapAlbumId}">
 				<div class="caption text-center a-btn">
-					<div><strong>${album.albumCollected.album.artist}</strong></div>
-					<div><small>${album.albumCollected.album.albumName}</small></div>
-					<div><small>${album.albumCollected.album.releaseDate}</small></div>
+					<div><strong>${album.artist}</strong></div>
+					<div><small>${album.albumName}</small></div>
+					<div><small>${album.releaseDate}</small></div>
 				</div>
 				</a>
 				
@@ -47,10 +47,12 @@
 
 <div class="row top15">
 	<div style="display: table; margin: 0 auto;">
-		<button type="button" class="btn btn-default btn-lg" data-placement="auto" data-toggle="tooltip" title="View more">
+		<spring:message code="latestAdditions.tooltip.viewMore" var="viewMore"/>
+		<button type="button" class="btn btn-default btn-lg" data-placement="auto" data-toggle="tooltip" title="${viewMore}">
 			<span><i class="glyphicon glyphicon-option-horizontal"></i></span>
 		</button>
-		<button type="button" class="btn btn-default btn-lg" data-placement="auto" data-toggle="tooltip" title="Search for swaps">
+		<spring:message code="latestAdditions.tooltip.search" var="search"/>
+		<button type="button" class="btn btn-default btn-lg" data-placement="auto" data-toggle="tooltip" title="${search}">
 			<span><i class="glyphicon glyphicon-search"></i></span>
 		</button>
 	</div>
