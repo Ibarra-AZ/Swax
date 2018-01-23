@@ -26,17 +26,32 @@
 			height="40" />
 
 		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#home">Home </a></li>
-			<li><a data-toggle="tab" href="#collection">Collection 
+			<li class="active"><a data-toggle="tab" href="#home">
+				<spring:message code="userNav.menu.home"/></a>
+			</li>
+			<li><a data-toggle="tab" href="#collection">
+				<spring:message code="userNav.menu.collection"/>
 					<span class="badge badge-info">${userCollection.size()}</span></a>
 			</li>
-			<li><a data-toggle="tab" href="#wantlist">Wantlist 
-				<span class="badge badge-warning">${userWantlist.size()}</span></a></li>
-			<li><a data-toggle="tab" href="#propositions">Propositions </a></li>
+			<li><a data-toggle="tab" href="#wantlist">
+				<spring:message code="userNav.menu.wantlist"/>
+				<span class="badge badge-warning">${userWantlist.size()}</span></a>
+			</li>
+			<li><a data-toggle="tab" href="#propositions">
+				<spring:message code="userNav.menu.albumsISwap"/>
+				<span class="badge badge-success">${userSwapPropositions.size()}</span></a>
+			</li>
 		</ul>
 
 		<div class="tab-content">
 			<br/>
+			
+			<c:if test="${!errorMsg.equals('') && errorMsg != null}">
+				<div class="alert alert-danger">
+					${errorMsg}
+				</div>
+			</c:if>
+			
 			<div id="home" class="tab-pane fade in active">
 				<h2 class="text-center">welcome to swax</h2>
 				<c:if test="${hasCollection==false}">
@@ -48,6 +63,7 @@
 					<%@include file="../home/latestAdditions.jsp"%>
 				</c:if>
 			</div>
+			
 			<div id="collection" class="tab-pane fade">
 				<c:if test="${hasCollection==true}">
 					<div class="row">
@@ -68,6 +84,7 @@
 					You have no collection to display. Import your collection from Discogs.
 				</c:if>
 			</div>
+			
 			<div id="wantlist" class="tab-pane fade">
 				<c:if test="${hasWantlist==true}">
 					<p>Browse your wantlist and start to swap your wax ;-)</p>
@@ -78,8 +95,11 @@
 					<%@include file="importWantlistForm.jsp"%>
 				</c:if>
 			</div>
+			
 			<div id="propositions" class="tab-pane fade">
-				<p>See your swaps</p>
+				<c:if test="${userSwapPropositions.size()!=0}">
+				<%@include file="myAlbumsToSwap.jsp"%>
+				</c:if>
 			</div>
 		</div>
 	</div>
