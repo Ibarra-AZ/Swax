@@ -27,7 +27,7 @@
 
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#home">
-				<spring:message code="userNav.menu.home"/></a>
+				<i class="glyphicon glyphicon-home"></i></a>
 			</li>
 			<li><a data-toggle="tab" href="#collection">
 				<spring:message code="userNav.menu.collection"/>
