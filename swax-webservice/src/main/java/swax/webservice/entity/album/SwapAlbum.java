@@ -5,19 +5,38 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 
+import swax.webservice.dto.PossibleSwapDTO;
 import swax.webservice.entity.user.User;
 
 @Entity
 @Table(name="SWAPALBUM")
+@SqlResultSetMapping(
+        name = "possibleSwapsMapping",
+        classes = @ConstructorResult(
+                targetClass = PossibleSwapDTO.class,
+                columns = {
+                    @ColumnResult(name = "swap_album_id",type=Integer.class),
+                    @ColumnResult(name = "user_id",type = Integer.class),
+                    @ColumnResult(name = "album_wantlist_id", type = Integer.class)}))
+@NamedNativeQuery(name="findPossibleSwapsbyUserCreatedQuery",
+	query="select swap_album_id, swapalbum.user_id, album_wantlist_id from swapalbum "
+			+ "join (select discogs_id as discogs_id, album_wantlist_id as album_wantlist_id from wantlist where user_id=(?1)) "
+			+ "as wantlist2 on swapalbum.album_id = wantlist2.discogs_id "
+			+ "where (swapalbum.user_id != (?1) and album_to_swap=true);",
+			resultSetMapping="possibleSwapsMapping")
 public class SwapAlbum implements Serializable {
 
 	private static final long serialVersionUID = -5693601176310892785L;

@@ -11,6 +11,8 @@
 			<th>Notes</th>
 			<th>Added</th>
 			<th>Discogs</th>
+			<th>Found on swax</th>
+			<th>Proposed by</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -31,6 +33,20 @@
 				<td>
 					<a href="https://www.discogs.com/release/${album.discogsId}" target="_blank">
 					<i class="glyphicon glyphicon-record"></i></a>
+				</td>
+				<td>
+					<c:if test="${album.possibleSwaps.size() != 0}">
+						${album.possibleSwaps.size()}
+					</c:if>
+				</td>
+				<td>
+					<c:if test="${album.possibleSwaps.size() != 0}">
+					<c:forEach items="${album.possibleSwaps}" var="swapAlbum">
+						<a href="seeSwapProposition?albumId=${swapAlbum.swapAlbumId}">
+						<i class="glyphicon glyphicon-user"></i> Proposed by ${swapAlbum.user.userName}</a>
+						<br>
+					</c:forEach>
+					</c:if>
 				</td>
 			</tr>
 		</c:forEach>

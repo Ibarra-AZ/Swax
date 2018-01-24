@@ -36,8 +36,12 @@
 <!-- ENABLING DATATABLE & BOOTSTRAP TOOLTIP PLUGIN -->
 <script type="text/javascript">
 	$(document).ready(function(){
-	    $('#collectionTable').DataTable();
-	    $('#wantlistTable').DataTable();
+	    $('#collectionTable').DataTable({
+	    	"aaSorting": [[ 4, "desc" ]]
+	    } );
+	    $('#wantlistTable').DataTable( {
+	    	"aaSorting": [[ 4, "desc" ]]
+	    } );
 	    $('[data-toggle="tooltip"]').tooltip();
 	});
 </script>

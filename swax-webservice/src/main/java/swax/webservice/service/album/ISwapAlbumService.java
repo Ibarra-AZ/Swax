@@ -2,6 +2,7 @@ package swax.webservice.service.album;
 
 import java.util.List;
 
+import swax.webservice.dto.PossibleSwapDTO;
 import swax.webservice.dto.SwapAlbumDTO;
 import swax.webservice.entity.album.AlbumCollected;
 import swax.webservice.entity.album.SwapAlbum;
@@ -21,6 +22,6 @@ public interface ISwapAlbumService {
 
 	SwapAlbum findByAlbumCollected(AlbumCollected albumCollected);
 
-	List<Object> findPossibleSwapsByUser(int user_id);
+	List<PossibleSwapDTO> findPossibleSwapsByUser(int user_id);
 
 }

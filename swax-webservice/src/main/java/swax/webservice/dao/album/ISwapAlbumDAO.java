@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import swax.webservice.dto.PossibleSwapDTO;
 import swax.webservice.entity.album.AlbumCollected;
 import swax.webservice.entity.album.SwapAlbum;
 import swax.webservice.entity.user.User;
@@ -22,10 +23,7 @@ public interface ISwapAlbumDAO extends JpaRepository<SwapAlbum, Integer>{
 
 	SwapAlbum findByAlbumCollected(AlbumCollected albumCollected);
 
-    @Query(value = "select swap_album_id, swapalbum.user_id, album_collected_id, album_id, media_grading, sleeve_grading,"
-    		+ " wax_value, description, img_name, album_wantlist_id from swapalbum "
-    		+ " join wantlist on swapalbum.album_id = wantlist.discogs_id"
-    		+ " where (swapalbum.user_id != (?1) and album_to_swap=true);", nativeQuery = true)
-    List<Object> findPossibleSwapsByUser(int user_id);
+	@Query(name="findPossibleSwapsbyUserCreatedQuery", nativeQuery = true)   
+    List<PossibleSwapDTO> findPossibleSwapsByUser(int user_id);
 
 }
