@@ -34,7 +34,7 @@
 					<fieldset>
 					
 						<div class="form-group">
-							<label class="col-md-4 control-label">Email</label>
+							<label class="col-md-4 control-label"><spring:message code="login.email"/></label>
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
@@ -45,7 +45,7 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="col-md-4 control-label">Password</label>
+							<label class="col-md-4 control-label"><spring:message code="login.password"/></label>
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>

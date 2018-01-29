@@ -32,6 +32,8 @@ public class FilesTools {
 //	TODO Add controls on the file uploaded (type, variables...)
 //	TODO check out how to limit the size (client validation ?)
 	
+	static final long IMG_MAX_SIZE = 3145728;
+	
 	public static void uploadFile(MultipartFile file, HttpServletRequest request) throws IOException {
 		
         byte[] bytes = file.getBytes();
@@ -44,14 +46,26 @@ public class FilesTools {
         
 		String filePath = request.getSession().getServletContext().getRealPath("img/swapAlbums/"+imgFileName+".jpg");
         byte[] bytes = file.getBytes();
-        String pathResult = "";
+        String errMsg = "";
         
+        if (!file.getContentType().equals("image/jpeg")) {
+        	errMsg = "Please try to upload a JPEG/JPG image";
+        	return errMsg;
+        }
+        
+        
+        if (file.getSize() > IMG_MAX_SIZE) {
+        	errMsg = "The file's size must be < 3M";
+        	return errMsg;        	
+        }
+                
         if (!file.isEmpty()) {
         	Path path = Paths.get(filePath);
-        	Path pathWrittenFile = Files.write(path, bytes);
-        	synchronized (pathWrittenFile) {
-				pathResult = pathWrittenFile.toString();
-			}
+        	Files.write(path, bytes);
+//        	Path pathWrittenFile = Files.write(path, bytes);
+//        	synchronized (pathWrittenFile) {
+//				pathResult = pathWrittenFile.toString();
+//			}
         	
     		BufferedImage originalImage = ImageIO.read(new File(filePath));
     		int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
@@ -59,8 +73,9 @@ public class FilesTools {
 			BufferedImage resizeImageHintPng = ImgTools.resizeImageWithHint(originalImage, type);
 			ImageIO.write(resizeImageHintPng, "png", new File(filePath));
         }
+        else errMsg = "The file you uploaded is empty";
         
-        return pathResult;
+        return errMsg;
         
 	}
 	

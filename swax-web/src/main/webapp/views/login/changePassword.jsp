@@ -23,7 +23,7 @@
 				<form:form id="changePassword-form" class="well form-horizontal" method="post" 
 					modelAttribute="changePasswordModelAttribute" action="changePasswordAction">
 					
-					<legend>Reinitialize your password</legend>
+					<legend><spring:message code="changePassword.legend"/></legend>
 					
 					<c:if test="${!changePasswordModelAttribute.errorMsg.equals('')}">
 						<div class="alert alert-danger">
@@ -34,7 +34,7 @@
 					<fieldset>
 					
 						<div class="form-group">
-							<label class="col-md-4 control-label">Email</label>
+							<label class="col-md-4 control-label"><spring:message code="changePassword.email"/></label>
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
@@ -48,8 +48,10 @@
 							<label class="col-md-4 control-label"></label>
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
-									<button type="submit" class="btn btn-primary">Send me a new password</button>
-									<a href="/logout" class="btn btn-warning" role="button">Cancel</a>
+									<button type="submit" class="btn btn-primary">
+										<spring:message code="changePassword.btn.send"/></button>
+									<a href="/logout" class="btn btn-warning" role="button">
+										<spring:message code="changePassword.btn.cancel"/></a>
 								</div>
 							</div>
 						</div>
@@ -61,7 +63,8 @@
 			</div>
 			 
 			<div>
-				<p>Not a member yet? <a href="register">Register Now.</a></p>
+				<p><spring:message code="changePassword.member1"/>
+				<a href="register"><spring:message code="changePassword.btn.member2"/></a></p>
 			</div>
 		
 		</div>

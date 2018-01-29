@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <!-- INCLUDES <head> -->
 <%@include file="../head.jsp"%>
@@ -99,7 +99,9 @@
 			<div class="form-group col-md-4">
 				<label class="col-md-12 control-label" 
 				data-placement="auto" data-toggle="tooltip" title="Upload a picture of the album from your collection. 
-				ONLY jpg acccepted">Upload a picture (jpg ONLY!)</label>
+				ONLY jpg acccepted">Upload a picture (Size allowed: 3M, type: JPG/JPEG ONLY!)</label>
+
+				
 				<div class="inputGroupContainer col-md-12" style="margin-bottom: 10px">
 					<div class="input-group">
 	                	<label class="input-group-addon btn btn-primary">
@@ -111,6 +113,9 @@
 					</div>
 				</div>
 				<br>
+				<c:if test="${!errorMsg.equals('')}">
+					<span class="text-danger col-md-12">${errorMsg}</span>
+				</c:if>
 				<div class="col-md-12">
 					<img src="img/swapAlbums/${imgURL}" id="imgId" class="img-thumbnail" alt="Album Cover" height="400" width="400">
 				</div>
