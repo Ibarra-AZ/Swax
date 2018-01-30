@@ -20,7 +20,7 @@
 		overflow: hidden;
 	}
 	.Gold {
-		background-color: #FFDF00;
+		background-color: e5b73b /* #FFDF00 */;
 	}
 	.Silver {
 		background-color: #C0C0C0;
