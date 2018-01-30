@@ -41,11 +41,25 @@
 				</td>
 				<td>
 					<c:if test="${album.possibleSwaps.size() != 0}">
-					<c:forEach items="${album.possibleSwaps}" var="swapAlbum">
-						<a href="seeSwapProposition?albumId=${swapAlbum.swapAlbumId}">
-						<i class="glyphicon glyphicon-user"></i> Proposed by ${swapAlbum.user.userName}</a>
-						<br>
-					</c:forEach>
+						<c:forEach items="${album.possibleSwaps}" var="swapAlbum">
+								<c:if test="${perfectMatchesMap.get(swapAlbum.user)!=null}">
+									<a href="seePossibleSwapsWith?userId=${swapAlbum.user.userId}">
+									<i class="glyphicon glyphicon-user text-danger"></i>
+									<span class="text-danger" data-placement="auto" data-toggle="tooltip" 
+										title="You have ${perfectMatchesMap.get(swapAlbum.user).size()} album(s) 
+										${swapAlbum.user.userName} wants">Proposed by ${swapAlbum.user.userName}
+									</span>
+									</a>
+								</c:if>
+								<c:if test="${perfectMatchesMap.get(swapAlbum.user)==null}">
+									<a href="seePossibleSwapsWith?userId=${swapAlbum.user.userId}">
+									<i class="glyphicon glyphicon-user"></i>
+									<span class="text-info">Proposed by ${swapAlbum.user.userName}</span>
+									</a>
+								</c:if>
+							
+							<br>
+						</c:forEach>
 					</c:if>
 				</td>
 			</tr>

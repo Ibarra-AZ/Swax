@@ -29,6 +29,7 @@ public class MavUtil {
 		mav.getModel().put("latestAdditions", mapInitUser.get("latestAdditions"));
 		mav.getModel().put("hasSwapProposition", mapInitUser.get("hasSwapProposition"));
 		mav.getModel().put("userSwapPropositions", mapInitUser.get("userSwapPropositions"));
+		mav.getModel().put("perfectMatchesMap", mapInitUser.get("perfectMatchesMap"));
 		
 		if (!(boolean) mapInitUser.get("hasCollection")) {
 			mav.getModel().put("importCollectionModelAttribute", new PojoModelImportCollectionForm());
