@@ -38,14 +38,17 @@
 	<div class="col-md-10">
 
 		<div class="row text-center">
-			<span class="text-muted text-uppercase">Possible Swaps !</span>
+			<h2 class="text-center">possible swaps</h2>
 		</div>
 
 		<div class="row top15 col-md-12">
 		
-		<div id="userConnected" class="col-md-6" style="background-color: #F8F8F8; border-right-style: solid;">
-			<div class="text-muted text-center text-info">I HAVE, ${userToSwapWith.userName} WANTS</div>
-			<div style="display: table; margin: 0 auto;">
+		<table>
+		<tr>
+		<td class="col-md-6" style="border-right-style: solid; vertical-align: top;">
+		<div id="userConnected" class="" style="" >
+			<div class="text-center text-info">Your albums</div>
+			<div class="top15" style="display: table; margin: 0 auto; margin-top: 15px;">
 				<c:forEach items="${albumsUserToSwapWithWants}" var="album">
 					<div class="col-md-4">
 						<div class="thumbnail">
@@ -60,10 +63,12 @@
 				</c:forEach>
 			</div>
 		</div>
+		</td>
 		
-		<div id="userToSwapWith" class="col-md-6"  style="border-left-style: solid;">
-		<div class="text-muted text-center text-danger">${userToSwapWith.userName} HAS, I WANT</div>
-			<div style="display: table; margin: 0 auto;">
+		<td class="col-md-6" style="border-left-style: solid; vertical-align: top;">
+		<div id="userToSwapWith" class="" style="">
+		<div class="text-center text-danger">${userToSwapWith.userName}'s albums</div>
+			<div style="display: table; margin: 0 auto; margin-top: 15px;">
 				<c:forEach items="${albumsUserConnectedWants}" var="album">
 					<div class="col-md-4">
 						<div class="thumbnail">
@@ -80,6 +85,10 @@
 				</c:forEach>
 			</div>
 		</div>
+		</td>
+		
+		</tr>
+		</table>
 		
 		</div>
 		
