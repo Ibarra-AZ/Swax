@@ -19,6 +19,16 @@
 		height: 18px; 
 		overflow: hidden;
 	}
+	.Gold {
+		background-color: #FFDF00;
+	}
+	.Silver {
+		background-color: #C0C0C0;
+	}
+	.Bronze {
+		background-color: #cd7f32;
+	}
+	
 </style>
 
 <html>
@@ -50,10 +60,10 @@
 			<div class="text-center text-info">Your albums</div>
 			<div class="top15" style="display: table; margin: 0 auto; margin-top: 15px;">
 				<c:forEach items="${albumsUserToSwapWithWants}" var="album">
-					<div class="col-md-4">
+					<div class="col-md-4" style="padding: 5px;">
 						<div class="thumbnail">
 							<img src="img/swapAlbums/${album.imgName}" alt="Album Cover" style="width:100%">
-							<div class="caption text-center">
+							<div class="caption text-center ${album.waxValue}">
 								<div><strong>${album.album.artist}</strong></div>
 								<div><small>${album.album.albumName}</small></div>
 								<div><small>${album.album.releaseDate}</small></div>
@@ -70,11 +80,11 @@
 		<div class="text-center text-danger">${userToSwapWith.userName}'s albums</div>
 			<div style="display: table; margin: 0 auto; margin-top: 15px;">
 				<c:forEach items="${albumsUserConnectedWants}" var="album">
-					<div class="col-md-4">
+					<div class="col-md-4" style="padding: 5px;">
 						<div class="thumbnail">
 							<img src="img/swapAlbums/${album.imgName}" alt="Album Cover" style="width:100%">
 						<a href="viewSwap?albumId=${album.swapAlbumId}">
-						<div class="caption text-center a-btn">
+						<div class="caption text-center a-btn ${album.waxValue}">
 							<div><strong>${album.album.artist}</strong></div>
 							<div><small>${album.album.albumName}</small></div>
 							<div><small>${album.album.releaseDate}</small></div>
