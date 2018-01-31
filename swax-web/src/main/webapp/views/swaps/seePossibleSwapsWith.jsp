@@ -58,7 +58,7 @@
 		<td class="col-md-6" style="border-right-style: solid; vertical-align: top;">
 		<div id="userConnected" class="" style="" >
 			<div class="text-center text-info">Your albums</div>
-			<div class="top15" style="display: table; margin: 0 auto; margin-top: 15px;">
+			<div style="display: table; margin: 0 auto; margin-top: 15px;">
 				<c:forEach items="${albumsUserToSwapWithWants}" var="album">
 					<div class="col-md-4" style="padding: 5px;">
 						<div class="thumbnail">
