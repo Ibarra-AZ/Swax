@@ -47,7 +47,7 @@
 	    	"aaSorting": [[ 4, "desc" ]]
 	    } );
 	    $('#swapAlbumsTable').DataTable( {
-	    	"aaSorting": [[ 3, "desc" ]]
+	    	"aaSorting": [[ 2, "desc" ]]
 	    } );
 	    $('[data-toggle="tooltip"]').tooltip();
 	});
@@ -94,6 +94,11 @@
 	}
 	.top30 {
 		margin-top:30px;
+	}
+	
+	td, th {
+	    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	    font-size: 13px;
 	}
 	
 </style>

@@ -8,6 +8,10 @@
 <!-- INCLUDES <head> -->
 <%@include file="../head.jsp"%>
 
+<style>
+
+</style>
+
 <body>
 
 	<!-- INCLUDES MAIN NAVIGATION BAR -->
@@ -16,24 +20,23 @@
 	<!-- CONTENT -->
 
 	<div class="col-md-1"></div>
-	
+
 	<div class="col-md-10">
 
 		<div class="row text-center">
 			<h2 class="text-center">search for swaps</h2>
 		</div>
-
-		<div class="row top15 col-md-12">
+	
+		<%-- <form:form id="searchForSwaps-form"> --%>
 		
 		<table id="swapAlbumsTable" class="table table-hover table-bordered table-condensed">
 		
 		<thead>
 			<tr class="active">
-				<th class="col-md-3">Cover</th>
-				<th>Artist</th>
-				<th>Album</th>
-				<th>Release Date</th>
-				<th>Grading (media / sleeve)</th>
+				<th>Cover</th>
+				<th>Artist/Album info</th>
+				<th>Added</th>
+				<th>Condition Media/Sleeve</th>
 				<th>Proposed by</th>
 				<th>Discogs</th>
 			</tr>
@@ -41,30 +44,39 @@
 		
 		<tbody>
 		
-		<c:forEach items="${swapAlbums}" var="album">
-		<tr>
-			<td class="col-md-1" style="vertical-align: top;">
-					<img src="img/swapAlbums/${album.imgName}" alt="Album Cover" style="width:100%">
-			</td>
-			<td class="" style="vertical-align: top;">${album.album.artist}</td>
-			<td class="" style="vertical-align: top;">${album.album.albumName}</td>
-			<td class="" style="vertical-align: top;">${album.dateAdded}</td>
-			<td class="" style="vertical-align: top;">${album.mediaGrading} / ${album.sleeveGrading}</td>
-			<td class="" style="vertical-align: top;">${album.user.userName}</td>
-			<td>
-				<a href="https://www.discogs.com/release/${album.album.discogsId}" target="_blank">
-				<i class="glyphicon glyphicon-record"></i></a>
-			</td>
-		</tr>
-		</c:forEach>
-		
+			<c:forEach items="${swapAlbums}" var="album">
+				<tr>
+					<td class="col-md-1">
+							<img src="img/swapAlbums/${album.imgName}" alt="Album Cover" style="width:100%">
+					</td>
+					<td class="col-md-3">
+						<a href="/swapAlbum?albumId=${album.swapAlbumId}">
+							<strong><c:out value="${album.album.artist} - ${album.album.albumName}" /></strong>
+						</a><br/>
+						<span class="small"><c:out value="${album.album.format}" /></span><br/>
+						<span class="small"><c:out value="${album.album.label} - ${album.album.catalogNumber}" /></span><br/>
+						<span class="small"><c:out value="${album.album.releaseDate}" /></span>
+					</td>
+					<td class="col-md-2">${album.dateAdded}</td>
+					<td class="col-md-3">${album.mediaGrading}<br>${album.sleeveGrading}</td>
+					<td class="col-md-2">${album.user.userName}</td>
+					<td class="col-md-1">
+						<a href="https://www.discogs.com/release/${album.album.discogsId}" target="_blank">
+						<i class="glyphicon glyphicon-record"></i></a>
+					</td>
+				</tr>
+			</c:forEach>
+	
 		</tbody>
 
 		</table>
 		
-		</div>
+		<%-- </form:form> --%>
+	
+	</div>
 		
-		</div>
-
+	<div class="col-md-1"></div>
+		
 </body>
+
 </html>
