@@ -57,14 +57,16 @@
 	
 	<div class="row top15">
 		<div style="display: table; margin: 0 auto;">
-			<spring:message code="latestAdditions.tooltip.viewMore" var="viewMore"/>
+<%-- 			<spring:message code="latestAdditions.tooltip.viewMore" var="viewMore"/>
 			<button type="button" class="btn btn-default btn-lg" data-placement="auto" data-toggle="tooltip" title="${viewMore}">
 				<span><i class="glyphicon glyphicon-option-horizontal"></i></span>
-			</button>
+			</button> --%>
 			<spring:message code="latestAdditions.tooltip.search" var="search"/>
-			<button type="button" class="btn btn-default btn-lg" data-placement="auto" data-toggle="tooltip" title="${search}">
-				<span><i class="glyphicon glyphicon-search"></i></span>
-			</button>
+			<a href="/searchForSwaps">
+				<button type="button" class="btn btn-default btn-lg" data-placement="auto" data-toggle="tooltip" title="${search}">
+					<span><i class="glyphicon glyphicon-search"></i></span>
+				</button>
+			</a>
 		</div>
 	</div>
 

@@ -1,0 +1,5 @@
+package swax.web.controller.user;
+import java.util.List;import javax.servlet.http.HttpServletRequest;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Controller;import org.springframework.web.bind.annotation.RequestMapping;import org.springframework.web.bind.annotation.RequestMethod;import org.springframework.web.servlet.ModelAndView;import swax.webservice.entity.album.SwapAlbum;import swax.webservice.service.album.ISwapAlbumService;
+@Controllerpublic class LatestAdditionsController {
+	@Autowired	private ISwapAlbumService swapAlbumService;		@RequestMapping(value="/searchForSwaps", method = RequestMethod.GET)	public ModelAndView searchForSwaps(HttpServletRequest request, ModelAndView mav) {		List<SwapAlbum> swapAlbums = (List<SwapAlbum>) swapAlbumService.findAllSortedByDateAdded();		mav.getModel().put("swapAlbums", swapAlbums);			mav.setViewName("swaps/searchForSwaps");		return mav;	}	
+}

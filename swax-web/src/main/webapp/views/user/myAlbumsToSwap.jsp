@@ -19,8 +19,8 @@
 		height: 18px; 
 		overflow: hidden;
 	}
- </style>
- 
+</style>
+
 <c:if test="${userSwapPropositions.size()==null}">
 
 	<div class="row text-center">

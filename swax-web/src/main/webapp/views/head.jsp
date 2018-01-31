@@ -46,6 +46,9 @@
 	    $('#wantlistTable').DataTable( {
 	    	"aaSorting": [[ 4, "desc" ]]
 	    } );
+	    $('#swapAlbumsTable').DataTable( {
+	    	"aaSorting": [[ 3, "desc" ]]
+	    } );
 	    $('[data-toggle="tooltip"]').tooltip();
 	});
 </script>

@@ -1,5 +1,6 @@
 package swax.webservice.service.album;
 
+import java.util.Collection;
 import java.util.List;
 
 import swax.webservice.dto.PossibleSwapDTO;
@@ -23,5 +24,7 @@ public interface ISwapAlbumService {
 	SwapAlbum findByAlbumCollected(AlbumCollected albumCollected);
 
 	List<PossibleSwapDTO> findPossibleSwapsByUser(int user_id);
+
+	Collection<SwapAlbum> findAllSortedByDateAdded();
 
 }
