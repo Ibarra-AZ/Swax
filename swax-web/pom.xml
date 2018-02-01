@@ -20,6 +20,7 @@
 	</properties>
 
 	<dependencies>
+	
 		<dependency>
 			<groupId>swax</groupId>
 			<artifactId>swax-webservice</artifactId>
@@ -27,10 +28,10 @@
 		</dependency>
 
 		<!-- Web -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+		</dependency> -->
 
 		<!-- Web with Tomcat + Embed -->
 		<dependency>

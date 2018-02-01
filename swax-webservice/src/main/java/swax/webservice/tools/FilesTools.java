@@ -48,13 +48,13 @@ public class FilesTools {
         byte[] bytes = file.getBytes();
         String errMsg = "";
         
-        if (!file.getContentType().equals("image/jpeg")) {
+        if (file.isEmpty()) {
+        	errMsg = "No image";
+        	return errMsg;
+        } else if (!file.getContentType().equals("image/jpeg")) {
         	errMsg = "Please try to upload a JPEG/JPG image";
         	return errMsg;
-        }
-        
-        
-        if (file.getSize() > IMG_MAX_SIZE) {
+        } else if (file.getSize() > IMG_MAX_SIZE) {
         	errMsg = "The file's size must be < 3M";
         	return errMsg;        	
         }

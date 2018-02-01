@@ -51,7 +51,14 @@ $(document).ready(function() {
                         message: 'This password is not the same'
                     }
             	}
-			}
+			},
+			discogsName: {
+                validators: {
+                    notEmpty: {
+                        message: 'A discogs user name is necessary to fetch your collection and wantlist'
+                    }
+                }
+            }
         }
 	})
 });

@@ -10,7 +10,7 @@
 	    </div>
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="/backToMySwax"><i class="glyphicon glyphicon-home"></i></a></li>
+	        <li><a href="/backToMySwax"><i class="glyphicon glyphicon-home"></i></a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 	        <li><a href="/loadUserProfilePage" data-placement="auto" data-toggle="tooltip" title="Change profile">

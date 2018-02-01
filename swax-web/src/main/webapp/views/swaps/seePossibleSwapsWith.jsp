@@ -45,10 +45,26 @@
 
 	<div class="col-md-1"></div>
 	
+	<form:form id="seePossibleSwaps-form" modelAttribute="seePossibleSwapsModelAttribute">
+	
 	<div class="col-md-10">
 
 		<div class="row text-center">
 			<h2 class="text-center">possible swaps</h2>
+		</div>
+
+		<div class="form-group">
+			<div class="inputGroupContainer">
+				<div class="input-group col-md-12">
+					<div style="display: table; margin: 0 auto;">
+					<!-- <button type="submit" class="btn btn-primary">Change Profile</button> -->
+					<a href="/userProfile?userId=${userToSwapWith.userId}" class="btn btn-danger" role="button">
+						All ${userToSwapWith.userName}'s albums</a>
+					<a href="/sendProposition" class="btn btn-success" role="button">Send a proposition</a>
+					<a href="/backToMySwax" class="btn btn-warning" role="button">Cancel</a>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<div class="row top15 col-md-12">
@@ -58,6 +74,12 @@
 		<td class="col-md-6" style="border-right-style: solid; vertical-align: top;">
 		<div id="userConnected" class="" style="" >
 			<div class="text-center text-info">Your albums</div>
+			<c:if test="${albumsUserToSwapWithWants.size()==0 || albumsUserToSwapWithWants==null}">
+				<div class="row top15 col-md-12 text-justify">You don't have any albums to propose to ${userToSwapWith.userName}. However, you 
+					can send an invitation for him to check out the albums you swap.
+				</div>
+			</c:if>
+			<c:if test="${albumsUserToSwapWithWants.size() != 0}">
 			<div style="display: table; margin: 0 auto; margin-top: 15px;">
 				<c:forEach items="${albumsUserToSwapWithWants}" var="album">
 					<div class="col-md-4" style="padding: 5px;">
@@ -72,6 +94,7 @@
 					</div>
 				</c:forEach>
 			</div>
+			</c:if>
 		</div>
 		</td>
 		
@@ -83,13 +106,16 @@
 					<div class="col-md-4" style="padding: 5px;">
 						<div class="thumbnail">
 							<img src="img/swapAlbums/${album.imgName}" alt="Album Cover" style="width:100%">
-						<a href="viewSwap?albumId=${album.swapAlbumId}">
-						<div class="caption text-center a-btn ${album.waxValue}">
+						<%-- <a href="viewSwap?albumId=${album.swapAlbumId}"> --%>
+						<div class="caption text-center a-btn ${album.waxValue}"
+							data-placement="auto" data-toggle="tooltip" title="Sleeve is ${album.sleeveGrading},  
+							Media is ${album.mediaGrading}. ${album.description}">
 							<div><strong>${album.album.artist}</strong></div>
 							<div><small>${album.album.albumName}</small></div>
 							<div><small>${album.album.releaseDate}</small></div>
-							</div>
-							</a>
+							<div><form:checkbox path="albumsSelected" value="${album.swapAlbumId}"></form:checkbox></div>
+						</div>
+						<!-- </a> -->
 						</div>
 					</div>
 				</c:forEach>
@@ -103,6 +129,8 @@
 		</div>
 		
 		</div>
+		
+		</form:form>
 
 </body>
 </html>
