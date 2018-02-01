@@ -18,15 +18,14 @@
 	<tbody>
 		<c:forEach items="${userCollection}" var="album">
 			<tr>
-				<td>
+				<td class="col-md-1">
 					<c:url value="/swapAlbum" var="swapUrl">
 					<c:param name="albumId" value="${album.albumId}"/>
 					</c:url>
-					<a href="${swapUrl}" data-placement="auto" 
-					data-toggle="tooltip" title="Describe & swap this Album">
+					<a href="${swapUrl}" data-placement="auto" data-toggle="tooltip" title="Describe & swap this Album">
 					<i class="glyphicon glyphicon-retweet"></i></a>
 				</td>
-				<td>
+				<td class="col-md-3">
 					<a href="/swapAlbum?albumId=${album.albumId}">
 						<strong><c:out value="${album.artist} - ${album.albumName}" /></strong>
 					</a><br/>
@@ -34,16 +33,14 @@
 					<span class="small"><c:out value="${album.label} - ${album.catalogNumber}" /></span><br/>
 					<span class="small"><c:out value="${album.releaseDate}" /></span>
 				</td>
-				<td>
-					<c:out value="${album.mediaGrading} - ${album.sleeveGrading}" />
-				</td>
-				<td>
+				<td class="col-md-2">${album.mediaGrading}<br>${album.sleeveGrading}</td>
+				<td class="col-md-3">
 					<c:out value="${album.notes}" />
 				</td>
-				<td>
+				<td class="col-md-2">
 					<c:out value="${album.dateAdded}" />
 				</td>
-				<td>
+				<td class="col-md-1">
 					<a href="https://www.discogs.com/release/${album.discogsId}" target="_blank">
 					<i class="glyphicon glyphicon-record"></i></a>
 				</td>

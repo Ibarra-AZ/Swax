@@ -22,6 +22,8 @@
 	<script><%@include file="../js-validator/swapAlbum-js-validator.js" %></script>
 
 	<!-- CONTENT -->
+	
+	<div class="container col-md-12" style="margin-top:50px">
 
 	<div class="col-md-1"></div>
 
@@ -146,6 +148,8 @@
 
 	</div>
 	<div class="col-md-1"></div>
+	
+	</div>
 
 </body>
 

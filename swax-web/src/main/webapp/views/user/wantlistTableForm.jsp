@@ -10,36 +10,32 @@
 			<th>Artist/Album info</th>
 			<th>Notes</th>
 			<th>Added</th>
-			<th>Discogs</th>
 			<th>Found on swax</th>
 			<th>Proposed by</th>
+			<th>Discogs</th>
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach items="${userWantlist}" var="album">
 			<tr>
-				<td>
+				<td class="col-md-3">
 					<a href="album?${album.albumId}"><strong><c:out value="${album.artist} - ${album.albumName}" /></strong></a><br/>
 					<span class="small"><c:out value="${album.format}" /></span><br/>
 					<span class="small"><c:out value="${album.label} - ${album.catalogNumber}" /></span><br/>
 					<span class="small"><c:out value="${album.releaseDate}" /></span>
 				</td>
-				<td>
+				<td class="col-md-2">
 					<c:out value="${album.notes}" />
 				</td>
-				<td>
+				<td class="col-md-2">
 					<c:out value="${album.dateAdded}" />
 				</td>
-				<td>
-					<a href="https://www.discogs.com/release/${album.discogsId}" target="_blank">
-					<i class="glyphicon glyphicon-record"></i></a>
-				</td>
-				<td>
+				<td class="col-md-2">
 					<c:if test="${album.possibleSwaps.size() != 0}">
 						${album.possibleSwaps.size()}
 					</c:if>
 				</td>
-				<td>
+				<td class="col-md-2">
 					<c:if test="${album.possibleSwaps.size() != 0}">
 						<c:forEach items="${album.possibleSwaps}" var="swapAlbum">
 								<c:if test="${perfectMatchesMap.get(swapAlbum.user)!=null}">
@@ -47,20 +43,23 @@
 									<i class="glyphicon glyphicon-user text-danger"></i>
 									<span class="text-danger" data-placement="auto" data-toggle="tooltip" 
 										title="You have ${perfectMatchesMap.get(swapAlbum.user).size()} album(s) 
-										${swapAlbum.user.userName} wants">Proposed by ${swapAlbum.user.userName}
+										${swapAlbum.user.userName} wants">${swapAlbum.user.userName}
 									</span>
 									</a>
 								</c:if>
 								<c:if test="${perfectMatchesMap.get(swapAlbum.user)==null}">
 									<a href="seePossibleSwapsWith?userId=${swapAlbum.user.userId}">
 									<i class="glyphicon glyphicon-user"></i>
-									<span class="text-info">Proposed by ${swapAlbum.user.userName}</span>
+									<span class="text-info">${swapAlbum.user.userName}</span>
 									</a>
-								</c:if>
-							
+								</c:if>							
 							<br>
 						</c:forEach>
 					</c:if>
+				</td>
+				<td class="col-md-1">
+					<a href="https://www.discogs.com/release/${album.discogsId}" target="_blank">
+					<i class="glyphicon glyphicon-record"></i></a>
 				</td>
 			</tr>
 		</c:forEach>

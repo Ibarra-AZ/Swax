@@ -27,8 +27,7 @@
 	}
 	.Bronze {
 		background-color: #cd7f32;
-	}
-	
+	}	
 </style>
 
 <html>
@@ -42,6 +41,8 @@
 	<%@include file="../nav/navbar-logged.jsp"%>
 
 	<!-- CONTENT -->
+	
+	<div class="container col-md-12" style="margin-top:50px">
 
 	<div class="col-md-1"></div>
 	
@@ -107,9 +108,7 @@
 						<div class="thumbnail">
 							<img src="img/swapAlbums/${album.imgName}" alt="Album Cover" style="width:100%">
 						<%-- <a href="viewSwap?albumId=${album.swapAlbumId}"> --%>
-						<div class="caption text-center a-btn ${album.waxValue}"
-							data-placement="auto" data-toggle="tooltip" title="Sleeve is ${album.sleeveGrading},  
-							Media is ${album.mediaGrading}. ${album.description}">
+						<div role="button" class="caption text-center a-btn ${album.waxValue}" data-target="#infoModal${album.swapAlbumId}" data-toggle="modal">
 							<div><strong>${album.album.artist}</strong></div>
 							<div><small>${album.album.albumName}</small></div>
 							<div><small>${album.album.releaseDate}</small></div>
@@ -117,6 +116,26 @@
 						</div>
 						<!-- </a> -->
 						</div>
+					</div>
+					<!-- Modal -->
+					<div id="infoModal${album.swapAlbumId}" class="modal fade" role="dialog" style="top: 100px;">
+					  <div class="modal-dialog">
+					    <!-- Modal content-->
+					    <div class="modal-content panel panel-default">
+					      <div class="modal-header panel-heading">
+					        <button type="button" class="close" data-dismiss="modal">&times;</button>
+					        <h4 class="modal-title text-center">${album.album.artist}<br><small>${album.album.albumName}</small></h4>
+					      </div>
+					      <div class="modal-body panel-body">
+					        <p>Media grading: ${album.mediaGrading}.<br>
+					        	Sleeve grading: ${album.sleeveGrading}<br>
+					        	<br>${album.description}</p>
+					      </div>
+					      <!-- <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					      </div> -->
+					    </div>
+					  </div>
 					</div>
 				</c:forEach>
 			</div>
@@ -131,6 +150,10 @@
 		</div>
 		
 		</form:form>
+		
+		<div class="col-md-1"></div>
+		
+		</div>
 
 </body>
 </html>

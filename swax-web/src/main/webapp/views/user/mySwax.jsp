@@ -17,7 +17,8 @@
 	<%@include file="../nav/navbar-logged.jsp"%>
 
 	<!-- CONTENT -->
-
+	<div class="container col-md-12" style="margin-top:50px">
+	
 	<div class="col-md-1"></div>
 
 	<div class="col-md-10">
@@ -120,6 +121,8 @@
 	</div>
 
 	<div class="col-md-1"></div>
+	
+	</div>
 
 </body>
 

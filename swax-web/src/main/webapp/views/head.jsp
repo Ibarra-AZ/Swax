@@ -100,7 +100,11 @@
 	    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	    font-size: 13px;
 	}
-	
+	.affix {
+      top: 0;
+      width: 100%;
+      z-index: 9999 !important;
+	}
 </style>
 
 </head>
