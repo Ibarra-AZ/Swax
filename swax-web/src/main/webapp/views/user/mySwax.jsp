@@ -63,10 +63,9 @@
 			
 			<!-- HOME -->
 			<div id="home" class="tab-pane fade in active">
-				<h2 class="text-center">welcome to swax</h2>
+				<h2 class="text-center"><spring:message code="mySwax.home.h2.title"/></h2>
 				<c:if test="${hasCollection==false}">
-					<p>It seems that you have no collection yet. Do you want to import your 
-					collection from Discogs?</p>
+					<p><spring:message code="mySwax.home.h2.noCollection"/></p>
 					<%@include file="importCollectionForm.jsp"%>
 				</c:if>
 				<c:if test="${hasCollection==true}">
@@ -77,11 +76,11 @@
 			
 			<!-- COLLECTION -->
 			<div id="collection" class="tab-pane fade">
-				<div class="row col-md-12 text-center" style="display: table; margin: 0 auto; padding: 0;">
-					<h2 class=""><spring:message code="mySwax.collection.h2.title"/></h2>
-					<p class="alert alert-warning"><spring:message code="mySwax.collection.info"/></p>
-				</div>
 				<c:if test="${hasCollection==true}">
+					<div class="row col-md-12 text-center" style="display: table; margin: 0 auto; padding: 0;">
+						<h2 class=""><spring:message code="mySwax.collection.h2.title"/></h2>
+						<p class="alert alert-warning"><spring:message code="mySwax.collection.info"/></p>
+					</div>
 <!-- 					<div class="row text-center" style="display: table; margin: 0 auto; padding: 0;">
 						<a href="#"><i class="glyphicon glyphicon-refresh"></i>
 							<span class="text-primary"> Synchronize with discogs</span>
@@ -90,22 +89,22 @@
 					<div><%@include file="collectionTableForm.jsp"%></div>	
 				</c:if>
 				<c:if test="${hasCollection==false}">
-					You have no collection to display. Import your collection from Discogs.
+					<spring:message code="mySwax.collection.noCollection"/>
 				</c:if>
 			</div>
 			
 			
 			<!-- WANTLIST -->
 			<div id="wantlist" class="tab-pane fade">
-				<div class="row col-md-12 text-center" style="display: table; margin: 0 auto; padding: 0;">
-					<h2 class=""><spring:message code="mySwax.wantlist.h2.title"/></h2>
-					<p class="alert alert-warning"><spring:message code="mySwax.wantlist.info"/></p>
-				</div>
 				<c:if test="${hasWantlist==true}">
+					<div class="row col-md-12 text-center" style="display: table; margin: 0 auto; padding: 0;">
+						<h2 class=""><spring:message code="mySwax.wantlist.h2.title"/></h2>
+						<p class="alert alert-warning"><spring:message code="mySwax.wantlist.info"/></p>
+					</div>
 					<%@include file="wantlistTableForm.jsp"%>
 				</c:if>
 				<c:if test="${hasWantlist==false}">
-					You have no wantlist to display. Import your wantlist from Discogs.
+					<spring:message code="mySwax.wantlist.noWantlist"/>
 					<%@include file="importWantlistForm.jsp"%>
 				</c:if>
 			</div>
@@ -113,7 +112,7 @@
 			
 			<!-- ALBUMS USER SWAPS -->
 			<div id="propositions" class="tab-pane fade">
-				<h2 class="text-center">albums you swap</h2>
+				<h2 class="text-center"><spring:message code="mySwax.propositions.h2.title"/></h2>
 				<c:if test="${userSwapPropositions.size()!=0}">
 				<%@include file="myAlbumsToSwap.jsp"%>
 				</c:if>
