@@ -13,9 +13,11 @@
 	        <li><a href="/backToMySwax"><i class="glyphicon glyphicon-home"></i></a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="/loadUserProfilePage" data-placement="auto" data-toggle="tooltip" title="Change profile">
+	        <li><a href="/loadUserProfilePage" data-placement="auto" data-toggle="tooltip" 
+	        	title="<spring:message code="navbarLogged.tooltip.profile"/>">
 	        	<span class="glyphicon glyphicon-user"></span> ${user.userName}</a></li>
-	        <li><a href="/logout" data-placement="auto" data-toggle="tooltip" title="Goodbye!">
+	        <li><a href="/logout" data-placement="auto" data-toggle="tooltip" 
+	        	title="<spring:message code="navbarLogged.tooltip.logout"/>">
 	        	<span class="glyphicon glyphicon-log-out"></span></a></li>
 	      </ul>
 	    </div>

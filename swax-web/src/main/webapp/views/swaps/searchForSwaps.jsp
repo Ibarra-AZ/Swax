@@ -25,11 +25,9 @@
 
 	<div class="col-md-10">
 
-		<div class="row text-center">
-			<h2 class="text-center">search for swaps</h2>
-			<p class="text-justify">Here, you can search for albums available for swapping. 
-				Check out a user's profile to see all the albums he wants to swap. 
-				You can also see the edition proposed on discogs.</p>
+		<div class="row col-md-12 text-center" style="display: table; margin: 0 auto; padding: 0;">
+			<h2 class=""><spring:message code="searchForSwaps.h2.title"/></h2>
+			<p class="alert alert-warning"><spring:message code="searchForSwaps.info"/></p>
 		</div>
 	
 		<%-- <form:form id="searchForSwaps-form"> --%>
@@ -38,12 +36,12 @@
 		
 		<thead>
 			<tr class="active">
-				<th>Cover</th>
-				<th>Artist/Album info</th>
-				<th>Added</th>
-				<th>Condition Media/Sleeve</th>
-				<th>Proposed by</th>
-				<th>Discogs</th>
+				<th><spring:message code="searchForSwaps.th.cover"/></th>
+				<th><spring:message code="searchForSwaps.th.artist"/></th>
+				<th><spring:message code="searchForSwaps.th.added"/></th>
+				<th><spring:message code="searchForSwaps.th.condition"/></th>
+				<th><spring:message code="searchForSwaps.th.proposed"/></th>
+				<th><spring:message code="searchForSwaps.th.discogs"/></th>
 			</tr>
 		</thead>
 		

@@ -77,13 +77,16 @@
 			
 			<!-- COLLECTION -->
 			<div id="collection" class="tab-pane fade">
-				<h2 class="text-center">your collection</h2>
+				<div class="row col-md-12 text-center" style="display: table; margin: 0 auto; padding: 0;">
+					<h2 class=""><spring:message code="mySwax.collection.h2.title"/></h2>
+					<p class="alert alert-warning"><spring:message code="mySwax.collection.info"/></p>
+				</div>
 				<c:if test="${hasCollection==true}">
-					<div class="row text-center">
+<!-- 					<div class="row text-center" style="display: table; margin: 0 auto; padding: 0;">
 						<a href="#"><i class="glyphicon glyphicon-refresh"></i>
 							<span class="text-primary"> Synchronize with discogs</span>
 						</a>
-					</div>
+					</div> -->
 					<div><%@include file="collectionTableForm.jsp"%></div>	
 				</c:if>
 				<c:if test="${hasCollection==false}">
@@ -94,9 +97,11 @@
 			
 			<!-- WANTLIST -->
 			<div id="wantlist" class="tab-pane fade">
-				<h2 class="text-center">your wantlist</h2>
+				<div class="row col-md-12 text-center" style="display: table; margin: 0 auto; padding: 0;">
+					<h2 class=""><spring:message code="mySwax.wantlist.h2.title"/></h2>
+					<p class="alert alert-warning"><spring:message code="mySwax.wantlist.info"/></p>
+				</div>
 				<c:if test="${hasWantlist==true}">
-					<p>Browse your wantlist and start to swap your wax ;-)</p>
 					<%@include file="wantlistTableForm.jsp"%>
 				</c:if>
 				<c:if test="${hasWantlist==false}">

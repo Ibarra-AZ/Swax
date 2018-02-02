@@ -1,5 +1,5 @@
 <head>
-<title>Welcome to SWAX</title>
+<title>SWAX, swap your wax!</title>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,10 +24,8 @@
 
 <!-- DATATABLES LINKS -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"/>
-
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
-
 <!-- END OF DATATABLES LINKS -->
 
 <!-- GIF LOADER MANAGER -->
@@ -53,58 +51,7 @@
 	});
 </script>
 
-<style>
-
-	.loader {
-		background-color: white;
-		border: solid 2px black !important;
-		box-shadow: 0px 0px 4px black !important;
-		display: block;
-		margin: auto;
-	}
-	
-	.badge-error {
-	  background-color: #b94a48;
-	}
-	.badge-warning {
-	  background-color: #f89406;
-	}
-	.badge-success {
-	  background-color: #468847;
-	}
-	.badge-info {
-	  background-color: #3a87ad;
-	}
-	.badge-inverse {
-	  background-color: #333333;
-	}
-	
-	.top5 { 
-		margin-top:5px;
-	}
-
-	.top10 { 
-		margin-top:10px;
-	}
-	.top15 { 
-		margin-top:15px;
-	}
-	.top20 {
-		margin-top:20px;
-	}
-	.top30 {
-		margin-top:30px;
-	}
-	
-	td, th {
-	    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-	    font-size: 13px;
-	}
-	.affix {
-      top: 0;
-      width: 100%;
-      z-index: 9999 !important;
-	}
-</style>
+<!-- SWAX CSS STYLES -->
+<link rel="stylesheet" type="text/css" href="../css/head.css"/>
 
 </head>

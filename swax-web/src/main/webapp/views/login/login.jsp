@@ -49,8 +49,9 @@
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+									<spring:message code="login.password.placeholder" var="passwordPlaceholder"/>
 									<form:input path="password" type="password" class="form-control" id="password" 
-										placeholder="Enter your password"/>
+										placeholder="${passwordPlaceholder}" />
 								</div>
 							</div>
 						</div>

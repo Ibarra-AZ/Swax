@@ -1,0 +1,49 @@
+/* LOADER */
+.loader {
+	background-color: white;
+	border: solid 2px black !important;
+	box-shadow: 0px 0px 4px black !important;
+	display: block;
+	margin: auto;
+}
+
+/* BADGES */
+.badge-error {
+  background-color: #b94a48;
+}
+.badge-warning {
+  background-color: #f89406;
+}
+.badge-success {
+  background-color: #468847;
+}
+.badge-info {
+  background-color: #3a87ad;
+}
+.badge-inverse {
+  background-color: #333333;
+}
+
+/* TOP-MARGINS */
+.top5 { 
+	margin-top:5px;
+}
+
+.top10 { 
+	margin-top:10px;
+}
+.top15 { 
+	margin-top:15px;
+}
+.top20 {
+	margin-top:20px;
+}
+.top30 {
+	margin-top:30px;
+}
+
+/* DATATABLES */
+td, th {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+}

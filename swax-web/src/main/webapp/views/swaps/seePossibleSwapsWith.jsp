@@ -3,32 +3,8 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<style>
-	.a-btn {
-	    transition: .2s;
-	}
-	.a-btn:hover, .btn:focus {
-	    background-color: #f1f1f1;
-	    text-decoration: none;
-	}
-	a:hover {
-	    text-decoration: none;
-	}
-	.caption div {
-		width: 100%; 
-		height: 18px; 
-		overflow: hidden;
-	}
-	.Gold {
-		background-color: e5b73b /* #FFDF00 */;
-	}
-	.Silver {
-		background-color: #C0C0C0;
-	}
-	.Bronze {
-		background-color: #cd7f32;
-	}	
-</style>
+<!-- SWAX CSS STYLES -->
+<link rel="stylesheet" type="text/css" href="../../css/seePossibleSwapsWith.css"/>
 
 <html>
 
@@ -108,12 +84,14 @@
 						<div class="thumbnail">
 							<img src="img/swapAlbums/${album.imgName}" alt="Album Cover" style="width:100%">
 						<%-- <a href="viewSwap?albumId=${album.swapAlbumId}"> --%>
-						<div role="button" class="caption text-center a-btn ${album.waxValue}" data-target="#infoModal${album.swapAlbumId}" data-toggle="modal">
+						<div role="button" class="caption text-center a-btn ${album.waxValue}" 
+							data-target="#infoModal${album.swapAlbumId}" data-toggle="modal"
+							data-placement="auto" data-toggle="tooltip" title="Click for info">
 							<div><strong>${album.album.artist}</strong></div>
 							<div><small>${album.album.albumName}</small></div>
 							<div><small>${album.album.releaseDate}</small></div>
-							<div><form:checkbox path="albumsSelected" value="${album.swapAlbumId}"></form:checkbox></div>
 						</div>
+						<div class="text-center" style="margin: 0; padding: 0;"><form:checkbox path="albumsSelected" value="${album.swapAlbumId}"></form:checkbox></div>
 						<!-- </a> -->
 						</div>
 					</div>
@@ -131,9 +109,6 @@
 					        	Sleeve grading: ${album.sleeveGrading}<br>
 					        	<br>${album.description}</p>
 					      </div>
-					      <!-- <div class="modal-footer">
-					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					      </div> -->
 					    </div>
 					  </div>
 					</div>
