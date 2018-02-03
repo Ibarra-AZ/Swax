@@ -5,6 +5,19 @@
 
 <html>
 
+<style>
+
+p.text-info {
+	border-left: solid;
+	border-radius: 5px; 
+	border-right: solid;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
+</style>
+
+
 <!-- INCLUDES <head> -->
 <%@include file="../head.jsp"%>
 
@@ -27,7 +40,7 @@
 
 		<div class="row col-md-12 text-center" style="display: table; margin: 0 auto; padding: 0;">
 			<h2 class=""><spring:message code="searchForSwaps.h2.title"/></h2>
-			<p class="alert alert-warning"><spring:message code="searchForSwaps.info"/></p>
+			<p class="text-info text-justify"><spring:message code="searchForSwaps.info"/></p>
 		</div>
 	
 		<%-- <form:form id="searchForSwaps-form"> --%>

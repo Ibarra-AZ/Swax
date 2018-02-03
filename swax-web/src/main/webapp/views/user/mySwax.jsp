@@ -8,6 +8,22 @@
 
 <html>
 
+<style>
+
+h2 {
+	margin-top: 0px !important;
+}
+
+p.text-info {
+	border-left: solid;
+	border-radius: 5px; 
+	border-right: solid;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
+</style>
+
 <!-- INCLUDES <head> -->
 <%@include file="../head.jsp"%>
 
@@ -65,7 +81,7 @@
 			<div id="home" class="tab-pane fade in active">
 				<h2 class="text-center"><spring:message code="mySwax.home.h2.title"/></h2>
 				<c:if test="${hasCollection==false}">
-					<p><spring:message code="mySwax.home.h2.noCollection"/></p>
+					<p>collectionTableForm</p>
 					<%@include file="importCollectionForm.jsp"%>
 				</c:if>
 				<c:if test="${hasCollection==true}">
@@ -78,14 +94,9 @@
 			<div id="collection" class="tab-pane fade">
 				<c:if test="${hasCollection==true}">
 					<div class="row col-md-12 text-center" style="display: table; margin: 0 auto; padding: 0;">
-						<h2 class=""><spring:message code="mySwax.collection.h2.title"/></h2>
-						<p class="alert alert-warning"><spring:message code="mySwax.collection.info"/></p>
+						<h2><spring:message code="mySwax.collection.h2.title"/></h2>
+						<p class="text-info text-justify"><spring:message code="mySwax.collection.info"/></p>
 					</div>
-<!-- 					<div class="row text-center" style="display: table; margin: 0 auto; padding: 0;">
-						<a href="#"><i class="glyphicon glyphicon-refresh"></i>
-							<span class="text-primary"> Synchronize with discogs</span>
-						</a>
-					</div> -->
 					<div><%@include file="collectionTableForm.jsp"%></div>	
 				</c:if>
 				<c:if test="${hasCollection==false}">
@@ -99,7 +110,7 @@
 				<c:if test="${hasWantlist==true}">
 					<div class="row col-md-12 text-center" style="display: table; margin: 0 auto; padding: 0;">
 						<h2 class=""><spring:message code="mySwax.wantlist.h2.title"/></h2>
-						<p class="alert alert-warning"><spring:message code="mySwax.wantlist.info"/></p>
+						<p class="text-info text-justify"><spring:message code="mySwax.wantlist.info"/></p>
 					</div>
 					<%@include file="wantlistTableForm.jsp"%>
 				</c:if>

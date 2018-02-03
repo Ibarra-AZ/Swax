@@ -7,12 +7,12 @@
 <table id="wantlistTable" class="table table-hover table-bordered table-condensed">
 	<thead>
 		<tr class="active">
-			<th>Artist/Album info</th>
-			<th>Notes</th>
-			<th>Added</th>
-			<th>Found on swax</th>
-			<th>Proposed by</th>
-			<th>Discogs</th>
+			<th><spring:message code="wantlistTableForm.th.artist"/></th>
+			<th><spring:message code="wantlistTableForm.th.notes"/></th>
+			<th><spring:message code="wantlistTableForm.th.added"/></th>
+			<th><spring:message code="wantlistTableForm.th.foundOnSwax"/></th>
+			<th><spring:message code="wantlistTableForm.th.proposed"/></th>
+			<th><spring:message code="wantlistTableForm.th.discogs"/></th>
 		</tr>
 	</thead>
 	<tbody>

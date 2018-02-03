@@ -7,12 +7,12 @@
 <table id="collectionTable" class="table table-hover table-bordered table-condensed">
 	<thead>
 		<tr class="active">
-			<th>Swap</th>
-			<th>Artist/Album info</th>
-			<th>Condition Media/Sleeve</th>
-			<th>Notes</th>
-			<th>Added</th>
-			<th>Discogs</th>
+			<th><spring:message code="collectionTableForm.th.swap"/></th>
+			<th><spring:message code="collectionTableForm.th.artist"/></th>
+			<th><spring:message code="collectionTableForm.th.condition"/></th>
+			<th><spring:message code="collectionTableForm.th.notes"/></th>
+			<th><spring:message code="collectionTableForm.th.added"/></th>
+			<th><spring:message code="collectionTableForm.th.discogs"/></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -22,7 +22,8 @@
 					<c:url value="/swapAlbum" var="swapUrl">
 					<c:param name="albumId" value="${album.albumId}"/>
 					</c:url>
-					<a href="${swapUrl}" data-placement="auto" data-toggle="tooltip" title="Describe & swap this Album">
+					<spring:message code="collectionTableForm.swapToolTip" var="swapToolTip"/>
+					<a href="${swapUrl}" data-placement="auto" data-toggle="tooltip" title="${swapToolTip}">
 					<i class="glyphicon glyphicon-retweet"></i></a>
 				</td>
 				<td class="col-md-3">
