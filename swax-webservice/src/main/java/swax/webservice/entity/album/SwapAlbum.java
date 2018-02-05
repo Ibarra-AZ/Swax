@@ -47,7 +47,7 @@ public class SwapAlbum implements Serializable {
 	private Integer swapAlbumId;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="USER_ID", unique = true, nullable = false)
+	@JoinColumn(name="USER_ID", unique = false, nullable = false)
 	private User user;
 	
 	@OneToOne(fetch=FetchType.LAZY)
@@ -55,7 +55,7 @@ public class SwapAlbum implements Serializable {
 	private AlbumCollected albumCollected;
 	
 	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ALBUM_ID", unique = true, nullable = false)
+	@JoinColumn(name="ALBUM_ID", unique = false, nullable = false)
 	private Album album;
 	
 	@Column(name="MEDIA_GRADING", nullable = true)

@@ -31,7 +31,7 @@ public class AlbumCollected implements Serializable {
 	private User user;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="DISCOGS_ID", unique = true, nullable = false)
+	@JoinColumn(name="DISCOGS_ID", unique = false, nullable = false)
 	private Album album;
 	
 	@Column(name="MEDIA_GRADING", nullable = true)

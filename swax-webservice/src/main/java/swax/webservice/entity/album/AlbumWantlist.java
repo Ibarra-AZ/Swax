@@ -31,7 +31,7 @@ public class AlbumWantlist implements Serializable {
 	private User user;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="DISCOGS_ID", unique = true, nullable = false)
+	@JoinColumn(name="DISCOGS_ID", nullable = false)
 	private Album album;
 	
 	@Column(name="NOTES", nullable = true)
