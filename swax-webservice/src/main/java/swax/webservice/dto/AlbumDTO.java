@@ -1,9 +1,21 @@
 package swax.webservice.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import swax.webservice.entity.album.AlbumCollected;
+
+/**
+ * 
+ * @author Matthieu Ibarra
+ * DTO to display albums in the collection table
+ *
+ */
 
 public class AlbumDTO implements Serializable {
-
+	
+	// Useful for objects put in session
 	private static final long serialVersionUID = -8368788561833058931L;
 	
 	private Integer albumId;
@@ -65,6 +77,21 @@ public class AlbumDTO implements Serializable {
 		this.releaseDate = releaseDate;
 		this.dateAdded = dateAdded;
 		this.discogsId = discogsId;
+	}
+	
+	/** METHODS **/ 
+	public static List<AlbumDTO> getAlbumsDTO(List<AlbumCollected> albumsCollected) {
+		List<AlbumDTO> albumsDTO = new ArrayList<AlbumDTO>();
+		for (AlbumCollected albumCollected: albumsCollected) {
+			AlbumDTO albumDTO = new AlbumDTO(albumCollected.getAlbumCollectedId(), albumCollected.getAlbum().getAlbumName(),
+					albumCollected.getAlbum().getArtist(), albumCollected.getAlbum().getLabel(), albumCollected.getAlbum().getCatalogNumber(), 
+					albumCollected.getAlbum().getFormat(), albumCollected.getMediaGrading(), 
+					albumCollected.getSleeveGrading(), albumCollected.getNotes(), 
+					albumCollected.getAlbum().getReleaseDate(), albumCollected.getDateAdded(),
+					albumCollected.getAlbum().getDiscogsId());
+			albumsDTO.add(albumDTO);
+		}
+		return albumsDTO;
 	}
 
 	/** GETTERS & SETTERS **/

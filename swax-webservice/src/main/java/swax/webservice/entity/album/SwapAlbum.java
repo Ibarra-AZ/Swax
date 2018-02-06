@@ -213,5 +213,30 @@ public class SwapAlbum implements Serializable {
 				+ ", waxValue=" + waxValue + ", description=" + description + ", imgName=" + imgName + ", dateAdded="
 				+ dateAdded + ", albumToSwap=" + albumToSwap + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((swapAlbumId == null) ? 0 : swapAlbumId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SwapAlbum other = (SwapAlbum) obj;
+		if (swapAlbumId == null) {
+			if (other.swapAlbumId != null)
+				return false;
+		} else if (!swapAlbumId.equals(other.swapAlbumId))
+			return false;
+		return true;
+	}
 	
 }
