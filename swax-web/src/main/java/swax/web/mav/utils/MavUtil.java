@@ -29,7 +29,7 @@ public class MavUtil {
 	@Autowired
 	private IUserService userService = null;
 
-	public ModelAndView mySwax(User user) {
+	public ModelAndView mySwax(User user, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> mapInitUser;
@@ -52,9 +52,12 @@ public class MavUtil {
 		mav.getModel().put("hasWantlist", mapInitUser.get("hasWantlist"));
 		mav.getModel().put("userWantlist", mapInitUser.get("userWantlist"));
 		mav.getModel().put("latestAdditions", mapInitUser.get("latestAdditions"));
+		mav.getModel().put("possibleSwaps", mapInitUser.get("possibleSwaps"));
 		mav.getModel().put("hasSwapProposition", mapInitUser.get("hasSwapProposition"));
 		mav.getModel().put("userSwapPropositions", mapInitUser.get("userSwapPropositions"));
 		mav.getModel().put("perfectMatchesMap", mapInitUser.get("perfectMatchesMap"));
+		
+		request = this.initSession(mav, request);
 		
 		if (!(boolean) mapInitUser.get("hasCollection")) {
 			mav.getModel().put("importCollectionModelAttribute", new PojoModelImportCollectionForm());
@@ -96,6 +99,7 @@ public class MavUtil {
 		request.getSession().setAttribute("hasCollection", mav.getModel().get("hasCollection"));
 		request.getSession().setAttribute("hasWantlist", mav.getModel().get("hasWantlist"));
 		request.getSession().setAttribute("possibleSwaps", mav.getModel().get("possibleSwaps"));
+		request.getSession().setAttribute("latestAdditions", mav.getModel().get("latestAdditions"));
 		request.getSession().setAttribute("hasSwapProposition", mav.getModel().get("hasSwapProposition"));
 		request.getSession().setAttribute("userSwapPropositions", mav.getModel().get("userSwapPropositions"));
 		request.getSession().setAttribute("perfectMatchesMap", mav.getModel().get("perfectMatchesMap"));
@@ -107,6 +111,7 @@ public class MavUtil {
 		mav.getModel().put("userCollection", request.getSession().getAttribute("userCollection"));
 		mav.getModel().put("hasWantlist", request.getSession().getAttribute("hasWantlist"));
 		mav.getModel().put("userWantlist", request.getSession().getAttribute("userWantlist"));
+		mav.getModel().put("possibleSwaps", request.getSession().getAttribute("possibleSwaps"));
 		mav.getModel().put("latestAdditions", request.getSession().getAttribute("latestAdditions"));
 		mav.getModel().put("hasSwapProposition", request.getSession().getAttribute("hasSwapProposition"));
 		mav.getModel().put("userSwapPropositions", request.getSession().getAttribute("userSwapPropositions"));

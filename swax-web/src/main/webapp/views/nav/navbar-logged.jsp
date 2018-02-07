@@ -9,7 +9,9 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li><a href="/backToMySwax"><i class="glyphicon glyphicon-home"></i></a></li>
+				<li><a href="/backToMySwaxRefresh" data-placement="auto" data-toggle="tooltip" title="Refresh datas and go back home">
+					<i class="glyphicon glyphicon-home"></i></a>
+				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
