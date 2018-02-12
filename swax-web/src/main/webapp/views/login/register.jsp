@@ -17,7 +17,7 @@
 		<script><%@include file="../js-validator/register-js-validator.js" %></script>
 	
 		<!-- CONTENT -->
-        <div class="container">
+        <div class="container" style="margin-top: 100px;">
 			
 			<div>
 				<form:form id="register-form" class="well form-horizontal" method="post" modelAttribute="registerModelAttribute" 
@@ -111,7 +111,7 @@
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
 									<button type="submit" class="btn btn-primary"><spring:message code="register.button.register" /></button>
-									<a href="/logout" class="btn btn-warning" role="button"><spring:message code="register.button.cancel" /></a>
+									<a href="/" class="btn btn-warning" role="button"><spring:message code="register.button.cancel" /></a>
 								</div>
 							</div>
 						</div>

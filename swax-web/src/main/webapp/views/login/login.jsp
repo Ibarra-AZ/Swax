@@ -17,7 +17,7 @@
 		<script><%@include file="../js-validator/login-js-validator.js" %></script>
 	
 		<!-- CONTENT -->
-        <div class="container">
+        <div class="container" style="margin-top: 100px;">
 			
 			<div>
 				<form:form id="login-form" class="well form-horizontal" method="post" modelAttribute="loginModelAttribute" 
