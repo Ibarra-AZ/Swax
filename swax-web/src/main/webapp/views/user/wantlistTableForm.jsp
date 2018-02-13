@@ -38,16 +38,16 @@
 				<td class="col-md-2">
 					<c:if test="${album.possibleSwaps.size() != 0}">
 						<c:forEach items="${album.possibleSwaps}" var="swapAlbum">
-								<c:if test="${perfectMatchesMap.get(swapAlbum.user)!=null}">
+								<c:if test="${perfectMatchesMap.get(swapAlbum.user.userId)!=null}">
 									<a href="seePossibleSwapsWith?userId=${swapAlbum.user.userId}">
 									<i class="glyphicon glyphicon-user text-danger"></i>
 									<span class="text-danger" data-placement="auto" data-toggle="tooltip" 
-										title="You have ${perfectMatchesMap.get(swapAlbum.user).size()} album(s) 
+										title="You have ${perfectMatchesMap.get(swapAlbum.user.userId).size()} album(s) 
 										${swapAlbum.user.userName} wants">${swapAlbum.user.userName}
 									</span>
 									</a>
 								</c:if>
-								<c:if test="${perfectMatchesMap.get(swapAlbum.user)==null}">
+								<c:if test="${perfectMatchesMap.get(swapAlbum.user.userId)==null}">
 									<a href="seePossibleSwapsWith?userId=${swapAlbum.user.userId}">
 									<i class="glyphicon glyphicon-user"></i>
 									<span class="text-info">${swapAlbum.user.userName}</span>
