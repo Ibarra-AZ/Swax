@@ -17,7 +17,7 @@
 		<script><%@include file="../js-validator/changeProfile-js-validator.js" %></script>
 	
 		<!-- CONTENT -->
-        <div class="container">
+        <div class="container" style="margin-top: 100px;">
 			
 			<div>
 				<form:form id="changeProfile-form" class="well form-horizontal" method="post" modelAttribute="registerModelAttribute" 
@@ -95,7 +95,7 @@
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-record"></i></span>
-									<form:input path="discogsName" type="text"	class="form-control" id="discogsName" 
+									<form:input disabled="true" path="discogsName" type="text"	class="form-control" id="discogsName" 
 									value="${registerModelAttribute.discogsName}" />
 								</div>
 							</div>

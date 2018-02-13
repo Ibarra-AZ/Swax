@@ -99,7 +99,7 @@
 						<div class="col-md-4 inputGroupContainer">
 							<div class="input-group">
 								<spring:message code="register.input.placeholder.discogsName" var="discogsNamePlaceholder"/>
-								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								<span class="input-group-addon"><i class="glyphicon glyphicon-record"></i></span>
 								<form:input path="discogsName" type="text"	class="form-control" id="discogsName" 
 								placeholder="${discogsNamePlaceholder}" />
 							</div>
