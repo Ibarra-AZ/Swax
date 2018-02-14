@@ -2,6 +2,11 @@
 package swax.webservice.apiDiscogs.model;
 
 import java.util.List;
+
+import swax.webservice.entity.album.AlbumDiscogs;
+import lombok.Getter;
+import lombok.Setter;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -9,59 +14,32 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "descriptions",
+    "text",
     "name",
-    "qty",
-    "text"
+    "qty"
 })
+@Getter
+@Setter
 public class Format {
 
     @JsonProperty("descriptions")
-    private List<String> descriptions = null;
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("qty")
-    private String qty;
+    public List<String> descriptions = null;
     @JsonProperty("text")
-    private String text;
-
-    @JsonProperty("descriptions")
-    public List<String> getDescriptions() {
-        return descriptions;
-    }
-
-    @JsonProperty("descriptions")
-    public void setDescriptions(List<String> descriptions) {
-        this.descriptions = descriptions;
-    }
-
+    public String text;
     @JsonProperty("name")
-    public String getName() {
-        return name;
-    }
-
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    public String name;
     @JsonProperty("qty")
-    public String getQty() {
-        return qty;
-    }
+    public String qty;
 
-    @JsonProperty("qty")
-    public void setQty(String qty) {
-        this.qty = qty;
+    /**
+     * Utilisé pour la transformation en objet {@link AlbumDiscogs}
+     */
+    @Override
+    public String toString() {
+    	if(name!=null){
+    		return name;
+    	}else{
+    		return "";
+    	}
     }
-
-    @JsonProperty("text")
-    public String getText() {
-        return text;
-    }
-
-    @JsonProperty("text")
-    public void setText(String text) {
-        this.text = text;
-    }
-
 }

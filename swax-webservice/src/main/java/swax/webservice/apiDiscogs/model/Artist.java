@@ -1,6 +1,10 @@
 
 package swax.webservice.apiDiscogs.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import swax.webservice.entity.album.AlbumDiscogs;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -15,91 +19,35 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "resource_url",
     "id"
 })
+@Getter
+@Setter
 public class Artist {
 
     @JsonProperty("join")
-    private String join;
+    public String join;
     @JsonProperty("name")
-    private String name;
+    public String name;
     @JsonProperty("anv")
-    private String anv;
+    public String anv;
     @JsonProperty("tracks")
-    private String tracks;
+    public String tracks;
     @JsonProperty("role")
-    private String role;
+    public String role;
     @JsonProperty("resource_url")
-    private String resourceUrl;
+    public String resourceUrl;
     @JsonProperty("id")
-    private Long id;
-
-    @JsonProperty("join")
-    public String getJoin() {
-        return join;
-    }
-
-    @JsonProperty("join")
-    public void setJoin(String join) {
-        this.join = join;
-    }
-
-    @JsonProperty("name")
-    public String getName() {
-        return name;
-    }
-
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JsonProperty("anv")
-    public String getAnv() {
-        return anv;
-    }
-
-    @JsonProperty("anv")
-    public void setAnv(String anv) {
-        this.anv = anv;
-    }
-
-    @JsonProperty("tracks")
-    public String getTracks() {
-        return tracks;
-    }
-
-    @JsonProperty("tracks")
-    public void setTracks(String tracks) {
-        this.tracks = tracks;
-    }
-
-    @JsonProperty("role")
-    public String getRole() {
-        return role;
-    }
-
-    @JsonProperty("role")
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    @JsonProperty("resource_url")
-    public String getResourceUrl() {
-        return resourceUrl;
-    }
-
-    @JsonProperty("resource_url")
-    public void setResourceUrl(String resourceUrl) {
-        this.resourceUrl = resourceUrl;
-    }
-
-    @JsonProperty("id")
-    public Long getId() {
-        return id;
-    }
-
-    @JsonProperty("id")
-    public void setId(Long id) {
-        this.id = id;
+    public Integer id;
+    
+    /**
+     * Utilisé pour la transformation en objet {@link AlbumDiscogs}
+     */
+    @Override
+    public String toString() {
+    	if(name!=null){
+    		return name;
+    	}else{
+    		return "";
+    	}
     }
 
 }

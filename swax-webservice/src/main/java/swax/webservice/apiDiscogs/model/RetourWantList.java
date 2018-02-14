@@ -2,6 +2,10 @@
 package swax.webservice.apiDiscogs.model;
 
 import java.util.List;
+
+import lombok.Getter;
+import lombok.Setter;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -11,6 +15,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "wants",
     "pagination"
 })
+@Getter
+@Setter
 public class RetourWantList {
 
     @JsonProperty("wants")
@@ -18,17 +24,4 @@ public class RetourWantList {
     @JsonProperty("pagination")
     public Pagination pagination;
     
-	public List<Want> getWants() {
-		return wants;
-	}
-	public void setWants(List<Want> wants) {
-		this.wants = wants;
-	}
-	public Pagination getPagination() {
-		return pagination;
-	}
-	public void setPagination(Pagination pagination) {
-		this.pagination = pagination;
-	}
-
 }

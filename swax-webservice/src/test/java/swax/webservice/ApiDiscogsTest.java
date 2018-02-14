@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import swax.webservice.apiDiscogs.model.Release;
 import swax.webservice.apiDiscogs.model.Want;
+import swax.webservice.entity.album.AlbumDiscogs;
 import swax.webservice.service.apiDiscogs.IApiDiscogsService;
 
 @RunWith(SpringRunner.class)
@@ -39,6 +40,20 @@ public class ApiDiscogsTest{
 
 			List<Want> wantList = apiDiscogsService.getWantListFromUserName("Ibarra-AZ");
 			System.out.println("La wantlist de Matthieu compte "+wantList.size()+" éléments : "+wantList);
+			Assert.assertTrue(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+	}
+	
+	@Test
+	public void getCollectionFormatSwaxFromUserNameTest(){
+		try {
+			List<Release> collection = apiDiscogsService.getCollectionFromUserName("Ibarra-AZ");
+			List<AlbumDiscogs> collectionFormatSwax = apiDiscogsService.getAlbumsDiscogsFromReleases(collection);
+			System.out.println(collectionFormatSwax);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
