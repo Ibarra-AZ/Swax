@@ -27,3 +27,15 @@ a:hover {
 .Bronze {
 	background-color: #cd7f32;
 }
+
+h2 {
+	margin-top: 15px !important;
+}
+
+p.text-info {
+	border-left: solid;
+	border-radius: 5px; 
+	border-right: solid;
+	padding: 10px;
+	margin-bottom: 15px;
+}

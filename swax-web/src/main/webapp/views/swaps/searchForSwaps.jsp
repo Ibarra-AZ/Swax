@@ -45,6 +45,16 @@ p.text-info {
 	
 		<%-- <form:form id="searchForSwaps-form"> --%>
 		
+		<div class="form-group">
+			<div class="inputGroupContainer">
+				<div class="input-group col-md-12">
+					<div style="display: table; margin: 0 auto;">
+					<a href="/backToMySwax" class="btn btn-warning" role="button"><spring:message code="searchForSwaps.button.cancel"/></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<table id="swapAlbumsTable" class="table table-hover table-bordered table-condensed">
 		
 		<thead>

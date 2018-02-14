@@ -26,8 +26,9 @@
 	
 	<div class="col-md-10">
 
-		<div class="row text-center">
-			<h2 class="text-center">possible swaps</h2>
+		<div class="row col-md-12 text-center" style="display: table; margin: 0 auto; padding: 0;">
+			<h2><spring:message code="seePossibleSwax.h2.title"/></h2>
+			<p class="text-info text-justify"><spring:message code="seePossibleSwax.info"/></p>
 		</div>
 
 		<div class="form-group">
@@ -43,44 +44,19 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="row top15 col-md-12">
 		
-		<table>
-		<tr>
-		<td class="col-md-6" style="border-right-style: solid; vertical-align: top;">
-		<div id="userConnected" class="" style="" >
-			<div class="text-center text-info">Your albums</div>
+		<div id="userToSwapWith" class="row top5 col-md-12" style="">
+			<div class="text-center text-danger">${userToSwapWith.userName}'s albums</div>
 			<c:if test="${albumsUserToSwapWithWants.size()==0 || albumsUserToSwapWithWants==null}">
-				<div class="row top15 col-md-12 text-justify">You don't have any albums to propose to ${userToSwapWith.userName}. However, you 
-					can send an invitation for him to check out the albums you swap.
-				</div>
+				<p class="col-md-12 text-center"><spring:message code="seePossibleSwax.info.noMatch"/> ${userToSwapWith.userName}.</p>
 			</c:if>
-			<c:if test="${albumsUserToSwapWithWants.size() != 0}">
-			<div style="display: table; margin: 0 auto; margin-top: 15px;">
-				<c:forEach items="${albumsUserToSwapWithWants}" var="album">
-					<div class="col-md-4" style="padding: 5px;">
-						<div class="thumbnail">
-							<img src="img/swapAlbums/${album.imgName}" alt="Album Cover" style="width:100%">
-							<div class="caption text-center ${album.waxValue}">
-								<div><strong>${album.album.artist}</strong></div>
-								<div><small>${album.album.albumName}</small></div>
-								<div><small>${album.album.releaseDate}</small></div>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-			</div>
+			<c:if test="${albumsUserToSwapWithWants.size() != 0 && albumsUserToSwapWithWants != null}">
+				<p class="col-md-12 text-center">${albumsUserToSwapWithWants.size()} <spring:message code="seePossibleSwax.info.match"/> ${userToSwapWith.userName}.</p>
 			</c:if>
-		</div>
-		</td>
-		
-		<td class="col-md-6" style="border-left-style: solid; vertical-align: top;">
-		<div id="userToSwapWith" class="" style="">
-		<div class="text-center text-danger">${userToSwapWith.userName}'s albums</div>
-			<div style="display: table; margin: 0 auto; margin-top: 15px;">
+			
+			<div style="display: table; margin: 0 auto; margin-top: 15px; width: 100%;">
 				<c:forEach items="${albumsUserConnectedWants}" var="album">
-					<div class="col-md-4" style="padding: 5px;">
+					<div class="col-md-2" style="padding: 5px;">
 						<div class="thumbnail">
 							<img src="img/swapAlbums/${album.imgName}" alt="Album Cover" style="width:100%">
 						<%-- <a href="viewSwap?albumId=${album.swapAlbumId}"> --%>
@@ -115,12 +91,6 @@
 				</c:forEach>
 			</div>
 		</div>
-		</td>
-		
-		</tr>
-		</table>
-		
-		</div>
 		
 		</div>
 		
@@ -129,6 +99,12 @@
 		<div class="col-md-1"></div>
 		
 		</div>
+		
+		
+		
+		
+		
+<!-- 		</div> -->
 
 </body>
 </html>

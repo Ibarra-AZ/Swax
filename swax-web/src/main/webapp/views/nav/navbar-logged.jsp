@@ -29,6 +29,9 @@
 						<li><a href="/logout">
 							<i class="glyphicon glyphicon-log-out"></i>
 							<span>Log out</span></a></li>
+						<li><a href="/deleteAccount">
+							<i class="glyphicon glyphicon-volume-off"></i>
+							<span>Delete account</span></a></li>
 					</ul>
 				</li>
 			</ul>

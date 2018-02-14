@@ -19,7 +19,7 @@
 		<c:forEach items="${userWantlist}" var="album">
 			<tr>
 				<td class="col-md-3">
-					<a href="album?${album.albumId}"><strong><c:out value="${album.artist} - ${album.albumName}" /></strong></a><br/>
+					<%-- <a href="album?${album.albumId}"> --%><strong><c:out value="${album.artist} - ${album.albumName}" /></strong><!-- </a> --><br/>
 					<span class="small"><c:out value="${album.format}" /></span><br/>
 					<span class="small"><c:out value="${album.label} - ${album.catalogNumber}" /></span><br/>
 					<span class="small"><c:out value="${album.releaseDate}" /></span>
