@@ -13,8 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
 import swax.webservice.entity.user.User;
 
+@Data
 @Entity
 @Table(name="WANTLIST")
 public class AlbumWantlist implements Serializable {
@@ -60,50 +62,6 @@ public class AlbumWantlist implements Serializable {
 		this.album = new Album(albumDiscogsWantlist);
 		this.notes = albumDiscogsWantlist.getNotes();
 		this.dateAdded = albumDiscogsWantlist.getDateAdded();
-	}
-
-	/**
-	 * GETTERS & SETTERS
-	 */
-
-	public Integer getAlbumWantlistId() {
-		return albumWantlistId;
-	}
-	
-	public void setAlbumWantlistdId(Integer albumWantlistdId) {
-		this.albumWantlistId = albumWantlistdId;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Album getAlbum() {
-		return album;
-	}
-
-	public void setAlbum(Album album) {
-		this.album = album;
-	}
-
-	public String getNotes() {
-		return notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-
-	public String getDateAdded() {
-		return dateAdded;
-	}
-
-	public void setDateAdded(String dateAdded) {
-		this.dateAdded = dateAdded;
 	}
 
 }

@@ -13,8 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
 import swax.webservice.entity.user.User;
 
+@Data
 @Entity
 @Table(name="COLLECTION")
 public class AlbumCollected implements Serializable {
@@ -72,65 +74,5 @@ public class AlbumCollected implements Serializable {
 		this.notes = albumDiscogs.getCollectionNotes();
 		this.dateAdded = albumDiscogs.getDateAdded();
 	}
-
-	/**
-	 * GETTERS & SETTERS
-	 */
-	
-	public Integer getAlbumCollectedId() {
-		return albumCollectedId;
-	}
-
-	public void setAlbumCollectedId(Integer collectionId) {
-		this.albumCollectedId = collectionId;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Album getAlbum() {
-		return album;
-	}
-
-	public void setAlbum(Album album) {
-		this.album = album;
-	}
-
-	public String getMediaGrading() {
-		return mediaGrading;
-	}
-
-	public void setMediaGrading(String mediaGrading) {
-		this.mediaGrading = mediaGrading;
-	}
-
-	public String getSleeveGrading() {
-		return sleeveGrading;
-	}
-
-	public void setSleeveGrading(String sleeveGrading) {
-		this.sleeveGrading = sleeveGrading;
-	}
-
-	public String getNotes() {
-		return notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-
-	public String getDateAdded() {
-		return dateAdded;
-	}
-
-	public void setDateAdded(String dateAdded) {
-		this.dateAdded = dateAdded;
-	}	
 
 }

@@ -18,9 +18,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 
+import lombok.Data;
 import swax.webservice.dto.PossibleSwapDTO;
 import swax.webservice.entity.user.User;
 
+@Data
 @Entity
 @Table(name="SWAPALBUM")
 @SqlResultSetMapping(
@@ -114,88 +116,6 @@ public class SwapAlbum implements Serializable {
 	}
 	
 	public SwapAlbum() {
-	}
-
-	/** GETTERS & SETTERS **/
-
-	public Integer getSwapAlbumId() {
-		return swapAlbumId;
-	}
-
-	public void setSwapAlbumId(Integer swapAlbumId) {
-		this.swapAlbumId = swapAlbumId;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public AlbumCollected getAlbumCollected() {
-		return albumCollected;
-	}
-
-	public void setAlbumCollected(AlbumCollected albumCollected) {
-		this.albumCollected = albumCollected;
-	}
-	
-	public Album getAlbum() {
-		return album;
-	}
-
-	public void setAlbum(Album album) {
-		this.album = album;
-	}
-
-	public String getMediaGrading() {
-		return mediaGrading;
-	}
-
-	public void setMediaGrading(String mediaGrading) {
-		this.mediaGrading = mediaGrading;
-	}
-
-	public String getSleeveGrading() {
-		return sleeveGrading;
-	}
-
-	public void setSleeveGrading(String sleeveGrading) {
-		this.sleeveGrading = sleeveGrading;
-	}
-
-	public String getWaxValue() {
-		return waxValue;
-	}
-
-	public void setWaxValue(String notes) {
-		this.waxValue = notes;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getImgName() {
-		return imgName;
-	}
-
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
-	}
-
-	public String getDateAdded() {
-		return dateAdded;
-	}
-
-	public void setDateAdded(String dateAdded) {
-		this.dateAdded = dateAdded;
 	}
 
 	public boolean isAlbumToSwap() {
