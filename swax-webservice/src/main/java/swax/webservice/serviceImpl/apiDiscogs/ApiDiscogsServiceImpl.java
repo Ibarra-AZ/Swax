@@ -19,6 +19,8 @@ import swax.webservice.service.apiDiscogs.IApiDiscogsService;
 @Service("apiDiscogsService")
 public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 	
+	private final int NB_ITEM_MAX_PAGE = 500;
+	
 	// COUCOU LES COQUINOUX
 	@Override
 	public List<AlbumDiscogs> getAlbumsDiscogsFromReleases(List<Release> releases){
@@ -92,7 +94,7 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 
 	private RetourCollection firstCollectionCall(String userName) throws Exception{
 		return ClientBuilder.newClient()
-				.target("https://api.discogs.com").path("users/"+userName+"/collection/folders/0/releases")
+				.target("https://api.discogs.com").path("users/"+userName+"/collection/folders/0/releases").queryParam("per_page", NB_ITEM_MAX_PAGE)
 				.request().get(RetourCollection.class);
 	}
 
@@ -131,7 +133,7 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 	
 	private RetourWantList firstWantListCall(String userName) throws Exception{
 		return ClientBuilder.newClient()
-				.target("https://api.discogs.com").path("users/"+userName+"/wants")
+				.target("https://api.discogs.com").path("users/"+userName+"/wants").queryParam("per_page", NB_ITEM_MAX_PAGE)
 				.request().get(RetourWantList.class);
 	}
 	
