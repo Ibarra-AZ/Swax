@@ -20,5 +20,7 @@ public interface IAlbumCollectedDAO extends JpaRepository<AlbumCollected, Intege
 	List<AlbumCollected> findByUser(User user);
 
 	AlbumCollected findByAlbumCollectedId(Integer albumId);
+	
+	void deleteByUser(User user);
 
 }

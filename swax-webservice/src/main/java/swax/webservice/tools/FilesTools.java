@@ -9,7 +9,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
@@ -42,7 +47,7 @@ public class FilesTools {
         Files.write(path, bytes);
 	}
 	
-	public static String uploadImg(MultipartFile file, String imgFileName, HttpServletRequest request) throws IOException {
+	public static String uploadImg(MultipartFile file, String imgFileName, HttpServletRequest request) throws IOException, InterruptedException {
         
 		String filePath = request.getSession().getServletContext().getRealPath("img/swapAlbums/"+imgFileName+".jpg");
         byte[] bytes = file.getBytes();
@@ -62,10 +67,24 @@ public class FilesTools {
         if (!file.isEmpty()) {
         	Path path = Paths.get(filePath);
         	Files.write(path, bytes);
-//        	Path pathWrittenFile = Files.write(path, bytes);
-//        	synchronized (pathWrittenFile) {
-//				pathResult = pathWrittenFile.toString();
-//			}
+        	
+//    		ExecutorService service = Executors.newFixedThreadPool(10);
+//    		Future<String> future = service.submit(new Callable<String>() {				
+//				public String call() {
+//					System.out.println("debut tache " + Thread.currentThread().getName());
+//					try {
+//						Files.write(path, bytes);
+//					} catch (IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//					String errMsg = "ImgWritten";
+//					System.out.println("Fin tache: "+errMsg+" "+Thread.currentThread().getName());
+//					return errMsg;
+//				}
+//			});
+//    		service.shutdown();
+//    		service.awaitTermination(1, TimeUnit.HOURS);
         	
     		BufferedImage originalImage = ImageIO.read(new File(filePath));
     		int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
