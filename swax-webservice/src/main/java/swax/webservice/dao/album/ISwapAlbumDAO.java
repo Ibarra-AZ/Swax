@@ -26,4 +26,6 @@ public interface ISwapAlbumDAO extends JpaRepository<SwapAlbum, Integer>{
 	@Query(name="findPossibleSwapsbyUserCreatedQuery", nativeQuery = true)   
     List<PossibleSwapDTO> findPossibleSwapsByUser(int user_id);
 
+	void deleteByUser(User user);
+
 }

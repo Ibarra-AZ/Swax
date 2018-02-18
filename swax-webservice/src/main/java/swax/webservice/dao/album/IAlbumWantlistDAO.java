@@ -15,5 +15,7 @@ import swax.webservice.entity.user.User;
 public interface IAlbumWantlistDAO extends JpaRepository<AlbumWantlist, Integer> {
 
 	List<AlbumWantlist> findByUser(User user);
+	
+	void deleteByUser(User user);
 
 }

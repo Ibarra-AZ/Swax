@@ -26,5 +26,7 @@ public interface ISwapAlbumService {
 	List<PossibleSwapDTO> findPossibleSwapsByUser(int user_id);
 
 	Collection<SwapAlbum> findAllSortedByDateAdded();
+	
+	void deleteByUser(User user);
 
 }
