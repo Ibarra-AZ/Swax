@@ -135,7 +135,7 @@ public class FilesTools {
 				}
 				i++;
 			}
-			AlbumDiscogs albumDiscogsWantlist = new AlbumDiscogs(var.get(0), var.get(1), var.get(2), var.get(3), 
+			AlbumDiscogs albumDiscogsWantlist = new AlbumDiscogs(null,var.get(0), var.get(1), var.get(2), var.get(3), 
 					var.get(4), var.get(5), var.get(6), var.get(7), var.get(8), var.get(9), var.get(10),
 					var.get(11), var.get(12));
 			albumsDiscogs.add(albumDiscogsWantlist);

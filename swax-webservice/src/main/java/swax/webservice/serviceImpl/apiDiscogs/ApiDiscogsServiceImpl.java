@@ -59,7 +59,9 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 						.collect(Collectors.joining(", ")));
 			}
 		}
-		// TODO : album.setCollectionId()=release.getInstanceId();
+		if(release.getInstanceId()!=null){
+		album.setCollection_id(release.getInstanceId().toString());
+		}
 		if(release.getRating()!=null){
 			album.setRating(release.getRating().toString());
 		}
@@ -79,6 +81,7 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 
 		if(premierRetour!=null
 				&&premierRetour.getPagination()!=null){
+			collection.addAll(premierRetour.getReleases());
 			Integer nbPagesCollection = premierRetour.getPagination().getPages();
 			Integer numberPerPage = premierRetour.getPagination().getPerPage();
 			RetourCollection retourCourant;

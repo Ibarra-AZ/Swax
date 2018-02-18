@@ -9,16 +9,17 @@ public class AlbumDiscogs implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String catalog, artist, title, label, format, rating, released, release_id, collectionFolder, dateAdded, 
+	private String collection_id, catalog, artist, title, label, format, rating, released, release_id, collectionFolder, dateAdded, 
 		mediaCondition,	sleeveCondition, collectionNotes;
 
 	public AlbumDiscogs() {
 	}
 	
-	public AlbumDiscogs(String catalog, String artist, String title, String label, String format, String rating,
+	public AlbumDiscogs(String collection_id, String catalog, String artist, String title, String label, String format, String rating,
 			String released, String release_id, String collectionFolder, String dateAdded, String mediaCondition,
 			String sleeveCondition, String collectionNotes) {
 		super();
+		this.collection_id=collection_id;
 		this.catalog = catalog;
 		this.artist = artist;
 		this.title = title;
