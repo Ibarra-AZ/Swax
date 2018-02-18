@@ -30,20 +30,6 @@
 			<h2><spring:message code="seePossibleSwax.h2.title"/></h2>
 			<p class="text-info text-justify"><spring:message code="seePossibleSwax.info"/></p>
 		</div>
-
-		<div class="form-group">
-			<div class="inputGroupContainer">
-				<div class="input-group col-md-12">
-					<div style="display: table; margin: 0 auto;">
-					<!-- <button type="submit" class="btn btn-primary">Change Profile</button> -->
-					<a href="/userProfile?userId=${userToSwapWith.userId}" class="btn btn-danger" role="button">
-						All ${userToSwapWith.userName}'s albums</a>
-					<a href="/sendProposition" class="btn btn-success" role="button">Send a proposition</a>
-					<a href="/backToMySwax" class="btn btn-warning" role="button">Cancel</a>
-					</div>
-				</div>
-			</div>
-		</div>
 		
 		<div id="userToSwapWith" class="row top5 col-md-12" style="">
 			<div class="text-center text-danger">${userToSwapWith.userName}'s albums</div>
@@ -89,6 +75,20 @@
 					  </div>
 					</div>
 				</c:forEach>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="inputGroupContainer">
+				<div class="input-group col-md-12">
+					<div style="display: table; margin: 0 auto;">
+					<!-- <button type="submit" class="btn btn-primary">Change Profile</button> -->
+					<a href="/userProfile?userId=${userToSwapWith.userId}" class="btn btn-danger" role="button">
+						All ${userToSwapWith.userName}'s albums</a>
+					<a href="/sendProposition" class="btn btn-success" role="button">Send a proposition</a>
+					<a href="/backToMySwax" class="btn btn-warning" role="button">Cancel</a>
+					</div>
+				</div>
 			</div>
 		</div>
 		

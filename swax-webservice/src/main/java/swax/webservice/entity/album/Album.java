@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name="ALBUM")
 public class Album implements Serializable {
@@ -60,7 +63,7 @@ public class Album implements Serializable {
 	}
 	
 	public Album(AlbumDiscogs albumDiscogs) {
-		this.discogsId = albumDiscogs.getReleased_id();
+		this.discogsId = albumDiscogs.getRelease_id();
 		this.albumName = albumDiscogs.getTitle();
 		this.artist = albumDiscogs.getArtist();
 		this.label = albumDiscogs.getLabel();
@@ -77,74 +80,6 @@ public class Album implements Serializable {
 		this.catalogNumber = albumDiscogsWantlist.getCatalog();
 		this.format = albumDiscogsWantlist.getFormat();
 		this.releaseDate = albumDiscogsWantlist.getReleased();
-	}
-
-	/**
-	 * GETTERS & SETTERS
-	 */
-	
-//	public Integer getAlbumId() {
-//		return albumId;
-//	}
-//
-//	public void setAlbumId(Integer albumId) {
-//		this.albumId = albumId;
-//	}
-
-	public String getDiscogsId() {
-		return discogsId;
-	}
-
-	public void setDiscogsId(String discogsId) {
-		this.discogsId = discogsId;
-	}
-
-	public String getAlbumName() {
-		return albumName;
-	}
-
-	public void setAlbumName(String albumName) {
-		this.albumName = albumName;
-	}
-
-	public String getArtist() {
-		return artist;
-	}
-
-	public void setArtist(String artist) {
-		this.artist = artist;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public String getCatalogNumber() {
-		return catalogNumber;
-	}
-
-	public void setCatalogNumber(String catalogNumber) {
-		this.catalogNumber = catalogNumber;
-	}
-
-	public String getFormat() {
-		return format;
-	}
-
-	public void setFormat(String format) {
-		this.format = format;
-	}
-
-	public String getReleaseDate() {
-		return releaseDate;
-	}
-
-	public void setReleaseDate(String releaseDate) {
-		this.releaseDate = releaseDate;
 	}
 
 }
