@@ -98,7 +98,8 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 	private RetourCollection firstCollectionCall(String userName) throws Exception{
 		return ClientBuilder.newClient()
 				.target("https://api.discogs.com").path("users/"+userName+"/collection/folders/0/releases").queryParam("per_page", NB_ITEM_MAX_PAGE)
-				.request().get(RetourCollection.class);
+				.request()
+				.get(RetourCollection.class);
 	}
 
 

@@ -14,19 +14,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 import swax.web.mav.utils.MavUtil;
 import swax.webservice.apiDiscogs.model.Release;
-import swax.webservice.dao.album.IAlbumDAO;
 import swax.webservice.entity.album.AlbumDiscogs;
 import swax.webservice.entity.user.User;
+import swax.webservice.service.album.IAlbumCollectedService;
+import swax.webservice.service.album.IAlbumDiscogsService;
+import swax.webservice.service.album.IAlbumService;
 import swax.webservice.service.apiDiscogs.IApiDiscogsService;
 
 @Controller
 public class SynchronizeWithDiscogsController {
 
 	@Autowired
-	private IApiDiscogsService apiDscogsService;
-
+	private IApiDiscogsService apiDiscogsService;
+	
 	@Autowired
-	private IAlbumDAO albumsDAO;
+	private IAlbumDiscogsService albumDiscogsService;
+	
+	@Autowired
+	private IAlbumService albumService;
+	
+	@Autowired
+	private IAlbumCollectedService albumCollectedService;
+
 
 	@Autowired
 	private MavUtil mavUtil;
@@ -34,26 +43,29 @@ public class SynchronizeWithDiscogsController {
 	private Logger logger = Logger.getLogger(this.getClass());
 
 	@RequestMapping(value="/synchronizeWithDiscogs", method = RequestMethod.GET)
-	public ModelAndView synchronizeWithDiscogs(
-			HttpServletRequest request, ModelAndView mav) {
+	public ModelAndView synchronizeWithDiscogs(HttpServletRequest request, ModelAndView mav) {
 
 		logger.debug(this.getClass().getName()+this.getClass()+": synchronizeWithDiscogs");
 
 		User user = (User) request.getSession().getAttribute("user");
 		List<Release> releases = new ArrayList<Release>();
 		try{
-			releases = apiDscogsService.getCollectionFromUserName(user.getUserName());	
+			releases = apiDiscogsService.getCollectionFromUserName(user.getDiscogsName());	
 		}catch(Exception e){
 			// TODO : faire marcher l'affichage du message d'erreur
 			String errorMsg = "Erreur dans la synchronisation de la collection avec Discogs";
+			e.printStackTrace();
 			mav.getModel().put("errorMsg", errorMsg);
 			// TODO : rediriger vers la vue d'origine ?
 			mav = mavUtil.mySwax(user, request);
 			return mav;
 		}
 
-		List<AlbumDiscogs> albumsDiscogs = apiDscogsService.getAlbumsDiscogsFromReleases(releases);
-		albumsDAO.save(albumsDiscogs);
+		List<AlbumDiscogs> albumsDiscogs = apiDiscogsService.getAlbumsDiscogsFromReleases(releases);
+		albumsDiscogs = albumDiscogsService.trimAlbumsDiscogsAPI(albumsDiscogs);
+		albumService.updateAlbumTable(albumsDiscogs);
+		albumCollectedService.createUserCollection(user, albumsDiscogs);
+		
 		// TODO : rediriger vers la vue d'origine ?
 		mav = mavUtil.mySwax(user, request);
 		return mav;
