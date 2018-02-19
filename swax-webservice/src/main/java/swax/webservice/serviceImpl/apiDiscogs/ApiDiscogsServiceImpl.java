@@ -68,7 +68,9 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 		if(release.getId()!=null){
 			album.setRelease_id(release.getId().toString());
 		}
-		album.setTitle(infosAlbums.getTitle());	
+		album.setTitle(infosAlbums.getTitle());
+		album.setDateAdded(release.dateAdded);
+		album.setReleased(Integer.toString(infosAlbums.year));
 
 		return album;
 	}

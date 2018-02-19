@@ -30,7 +30,7 @@ import swax.webservice.entity.user.User;
         classes = @ConstructorResult(
                 targetClass = PossibleSwapDTO.class,
                 columns = {
-                    @ColumnResult(name = "swap_album_id",type=Integer.class),
+                    @ColumnResult(name = "swap_album_id",type=String.class),
                     @ColumnResult(name = "user_id",type = Integer.class),
                     @ColumnResult(name = "album_wantlist_id", type = Integer.class)}))
 @NamedNativeQuery(name="findPossibleSwapsbyUserCreatedQuery",
@@ -46,7 +46,7 @@ public class SwapAlbum implements Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name="SWAP_ALBUM_ID", unique = true, nullable = false)
-	private Integer swapAlbumId;
+	private String swapAlbumId;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="USER_ID", unique = false, nullable = false)
@@ -84,7 +84,7 @@ public class SwapAlbum implements Serializable {
 
 	/** CONTRUCTORS **/
 	
-	public SwapAlbum(Integer swapAlbumId, User user, AlbumCollected albumCollected, Album album, String mediaGrading, 
+	public SwapAlbum(String swapAlbumId, User user, AlbumCollected albumCollected, Album album, String mediaGrading, 
 			String sleeveGrading, String waxValue, String description, String imgName, String dateAdded, boolean albumToSwap) {
 		super();
 		this.swapAlbumId = swapAlbumId;

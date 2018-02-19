@@ -14,24 +14,24 @@ import swax.webservice.dao.album.ISwapAlbumDAO;
 
 public class PossibleSwapDTO {
 	
-	private int swapAlbumId;
+	private String swapAlbumId;
 	
 	private int userId;
 	
 	private int albumWantlistId;
 
-	public PossibleSwapDTO(int swapAlbumId, int userId, int albumWantlistId) {
+	public PossibleSwapDTO(String swapAlbumId, int userId, int albumWantlistId) {
 		super();
 		this.swapAlbumId = swapAlbumId;
 		this.userId = userId;
 		this.albumWantlistId = albumWantlistId;
 	}
 
-	public int getSwapAlbumId() {
+	public String getSwapAlbumId() {
 		return swapAlbumId;
 	}
 
-	public void setSwapAlbumId(int swapAlbumId) {
+	public void setSwapAlbumId(String swapAlbumId) {
 		this.swapAlbumId = swapAlbumId;
 	}
 

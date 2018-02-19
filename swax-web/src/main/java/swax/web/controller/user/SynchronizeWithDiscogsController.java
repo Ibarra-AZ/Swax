@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import swax.web.form.PojoModelImportWantlistForm;
 import swax.web.mav.utils.MavUtil;
 import swax.webservice.apiDiscogs.model.Release;
 import swax.webservice.entity.album.AlbumDiscogs;
@@ -36,7 +37,6 @@ public class SynchronizeWithDiscogsController {
 	@Autowired
 	private IAlbumCollectedService albumCollectedService;
 
-
 	@Autowired
 	private MavUtil mavUtil;
 
@@ -49,6 +49,7 @@ public class SynchronizeWithDiscogsController {
 
 		User user = (User) request.getSession().getAttribute("user");
 		List<Release> releases = new ArrayList<Release>();
+		
 		try{
 			releases = apiDiscogsService.getCollectionFromUserName(user.getDiscogsName());	
 		}catch(Exception e){
@@ -62,11 +63,17 @@ public class SynchronizeWithDiscogsController {
 		}
 
 		List<AlbumDiscogs> albumsDiscogs = apiDiscogsService.getAlbumsDiscogsFromReleases(releases);
+//		for (AlbumDiscogs albumDiscogs: albumsDiscogs) {
+//			System.out.println(albumDiscogs.toString()+"\n");
+//		}
 		albumsDiscogs = albumDiscogsService.trimAlbumsDiscogsAPI(albumsDiscogs);
 		albumService.updateAlbumTable(albumsDiscogs);
 		albumCollectedService.createUserCollection(user, albumsDiscogs);
 		
+		// TODO: Supprimer les albums de la BDD qui ne sont plus présents dans discogs
+		
 		// TODO : rediriger vers la vue d'origine ?
+		mav.getModel().put("importWantlistModelAttribute", new PojoModelImportWantlistForm());
 		mav = mavUtil.mySwax(user, request);
 		return mav;
 	}

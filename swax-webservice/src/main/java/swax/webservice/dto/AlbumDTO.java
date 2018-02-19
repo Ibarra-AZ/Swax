@@ -18,7 +18,7 @@ public class AlbumDTO implements Serializable {
 	// Useful for objects put in session
 	private static final long serialVersionUID = -8368788561833058931L;
 	
-	private Integer albumId;
+	private String albumId;
 	
 	private String albumName;
 	
@@ -47,7 +47,7 @@ public class AlbumDTO implements Serializable {
 	public AlbumDTO() {
 	}
 
-	public AlbumDTO(Integer albumId, String albumName, String artist, String label, String catalogNumber, String format,
+	public AlbumDTO(String albumId, String albumName, String artist, String label, String catalogNumber, String format,
 			String mediaGrading, String sleeveGrading, String notes, String releaseDate, String dateAdded, String discogsId) {
 		super();
 		this.albumId = albumId;
@@ -64,7 +64,7 @@ public class AlbumDTO implements Serializable {
 		this.discogsId = discogsId;
 	}
 	
-	public AlbumDTO(Integer albumId, String albumName, String artist, String label, String catalogNumber, String format,
+	public AlbumDTO(String albumId, String albumName, String artist, String label, String catalogNumber, String format,
 			String notes, String releaseDate, String dateAdded, String discogsId) {
 		super();
 		this.albumId = albumId;
@@ -96,11 +96,11 @@ public class AlbumDTO implements Serializable {
 
 	/** GETTERS & SETTERS **/
 
-	public Integer getAlbumId() {
+	public String getAlbumId() {
 		return albumId;
 	}
 
-	public void setAlbumId(Integer albumId) {
+	public void setAlbumId(String albumId) {
 		this.albumId = albumId;
 	}
 

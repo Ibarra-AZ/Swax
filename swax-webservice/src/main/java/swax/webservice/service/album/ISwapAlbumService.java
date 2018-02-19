@@ -13,9 +13,9 @@ public interface ISwapAlbumService {
 
 	List<SwapAlbum> findAll();
 
-	Integer createUpdateEntity(SwapAlbum swapAlbum);
+	String createUpdateEntity(SwapAlbum swapAlbum);
 
-	SwapAlbum findBySwapAlbumId(Integer albumId);
+	SwapAlbum findBySwapAlbumId(String albumId);
 
 	List<SwapAlbum> findByUser(User user);
 

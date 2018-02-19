@@ -18,13 +18,13 @@ public class LatestAdditionDTO {
 	
 	private String imgURL;
 	
-	private int swapAlbumId;
+	private String swapAlbumId;
 
 	public LatestAdditionDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LatestAdditionDTO(String artist, String albumName, String releaseDate, String imgURL, int swapAlbumId) {
+	public LatestAdditionDTO(String artist, String albumName, String releaseDate, String imgURL, String swapAlbumId) {
 		super();
 		this.artist = artist;
 		this.albumName = albumName;
@@ -73,11 +73,11 @@ public class LatestAdditionDTO {
 		this.imgURL = imgURL;
 	}
 
-	public int getSwapAlbumId() {
+	public String getSwapAlbumId() {
 		return swapAlbumId;
 	}
 
-	public void setSwapAlbumId(int swapAlbumId) {
+	public void setSwapAlbumId(String swapAlbumId) {
 		this.swapAlbumId = swapAlbumId;
 	}
 

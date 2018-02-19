@@ -19,7 +19,7 @@ public interface ISwapAlbumDAO extends JpaRepository<SwapAlbum, Integer>{
 
 	List<SwapAlbum> findByUser(User user);
 
-	SwapAlbum findBySwapAlbumId(Integer albumId);
+	SwapAlbum findBySwapAlbumId(String albumId);
 
 	SwapAlbum findByAlbumCollected(AlbumCollected albumCollected);
 

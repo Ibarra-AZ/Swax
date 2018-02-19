@@ -6,7 +6,7 @@ public class SwapAlbumDTO implements Serializable {
 
 	private static final long serialVersionUID = -2697985225176867271L;
 
-	private Integer albumId;
+	private String albumId;
 	
 	private String albumName;
 	
@@ -39,7 +39,7 @@ public class SwapAlbumDTO implements Serializable {
 	public SwapAlbumDTO() {
 	}
 
-	public SwapAlbumDTO(Integer albumId, String albumName, String artist, String label, String catalogNumber,
+	public SwapAlbumDTO(String albumId, String albumName, String artist, String label, String catalogNumber,
 			String mediaGrading, String sleeveGrading, String waxValue, String description, String releaseDate,
 			String imgName) {
 		super();
@@ -58,11 +58,11 @@ public class SwapAlbumDTO implements Serializable {
 
 	/** GETTERS & SETTERS **/
 	
-	public Integer getAlbumId() {
+	public String getAlbumId() {
 		return albumId;
 	}
 
-	public void setAlbumId(Integer albumId) {
+	public void setAlbumId(String albumId) {
 		this.albumId = albumId;
 	}
 
