@@ -23,9 +23,12 @@
 						<li><a href="/loadUserProfilePage">
 							<i class="glyphicon glyphicon-user"></i>
 							<span>Change Profile</span></a></li>
-						<li><a href="/synchronizeWithDiscogs">
+						<li><a href="/synchronizeCollectionWithDiscogs">
 							<i class="glyphicon glyphicon-refresh"></i>
-							<span>Synchronize with discogs</span></a></li>
+							<span>Synchronize discogs collection</span></a></li>
+						<li><a href="/synchronizeWantlistWithDiscogs">
+							<i class="glyphicon glyphicon-refresh"></i>
+							<span>Synchronize discogs wantlist</span></a></li>
 						<li><a href="/logout">
 							<i class="glyphicon glyphicon-log-out"></i>
 							<span>Log out</span></a></li>

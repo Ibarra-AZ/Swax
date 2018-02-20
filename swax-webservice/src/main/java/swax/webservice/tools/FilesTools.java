@@ -1,5 +1,6 @@
 package swax.webservice.tools;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -9,13 +10,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +41,7 @@ public class FilesTools {
         Files.write(path, bytes);
 	}
 	
-	public static String uploadImg(MultipartFile file, String imgFileName, HttpServletRequest request) throws IOException, InterruptedException {
+	public static String uploadImg(MultipartFile file, String imgFileName, HttpServletRequest request) throws IOException {
         
 		String filePath = request.getSession().getServletContext().getRealPath("img/swapAlbums/"+imgFileName+".jpg");
         byte[] bytes = file.getBytes();

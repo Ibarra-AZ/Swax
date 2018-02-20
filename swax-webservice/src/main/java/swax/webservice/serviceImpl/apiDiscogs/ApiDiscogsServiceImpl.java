@@ -1,11 +1,14 @@
 package swax.webservice.serviceImpl.apiDiscogs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.ws.rs.client.ClientBuilder;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import swax.webservice.apiDiscogs.model.BasicInformation;
@@ -14,12 +17,14 @@ import swax.webservice.apiDiscogs.model.RetourCollection;
 import swax.webservice.apiDiscogs.model.RetourWantList;
 import swax.webservice.apiDiscogs.model.Want;
 import swax.webservice.entity.album.AlbumDiscogs;
+import swax.webservice.entity.user.User;
 import swax.webservice.service.apiDiscogs.IApiDiscogsService;
 
 @Service("apiDiscogsService")
 public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 	
 	private final int NB_ITEM_MAX_PAGE = 500;
+	private Logger logger = Logger.getLogger(this.getClass());
 	
 	// COUCOU LES COQUINOUX
 	@Override
@@ -30,12 +35,12 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 		}
 		return albums;
 	}
+	
 	/**
 	 * Ne valorise pas les attributs suivants :
 	 * - Catalog
 	 * - CollectionFolder
 	 * - CollectionNotes
-	 * - DateAdded
 	 * - Released
 	 * - MediaCondition
 	 * - SleeveCondition
@@ -96,6 +101,34 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 		}
 		return collection;
 	}
+	
+	@Override
+	public Map<String, Object> synchronizeCollectionWithDiscogs(User user) {
+		
+		logger.debug(this.getClass().getName()+this.getClass()+": synchronizeCollectionWithDiscogs");
+		List<Release> releases = new ArrayList<Release>();
+		String errorMsg = "";
+		Map<String, Object> result = new HashMap<>();
+		
+		try{
+			releases = this.getCollectionFromUserName(user.getDiscogsName());
+			List<AlbumDiscogs> albumsDiscogs = this.getAlbumsDiscogsFromReleases(releases);
+			if (albumsDiscogs.size() == 0 || albumsDiscogs == null) {
+				errorMsg = "La collection est vide ou n'existe pas.";
+				albumsDiscogs = null;
+			}
+			result.put("albumsDiscogs", albumsDiscogs);
+		}
+		catch(Exception e){
+			errorMsg = "Erreur dans la synchronisation de la collection avec Discogs";
+			result.put("albumsDiscogs", null);
+			e.printStackTrace();
+		}
+		
+		result.put("errorMsg", errorMsg);
+		
+		return result;
+	}
 
 	private RetourCollection firstCollectionCall(String userName) throws Exception{
 		return ClientBuilder.newClient()
@@ -152,6 +185,5 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 
 		return retour;
 	}
-
-
+	
 }

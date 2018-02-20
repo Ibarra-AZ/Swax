@@ -69,8 +69,8 @@ p.text-info {
 					<label class="col-md-12 control-label"><spring:message code="swapAlbum.form.grade.media"/></label>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-record"></i></span>
-						    <form:select path="mediaGrading" class="form-control selectpicker" data-live-search="true">
-						      <option value="${album.mediaGrading}" >${album.mediaGrading}</option>
+						 <form:select path="mediaGrading" class="form-control selectpicker" data-live-search="true">
+						      <option selected>${mediaGrading}</option>
 						<%@include file="../utils/gradings.jsp" %>
 						</form:select>
 					</div>
@@ -80,8 +80,8 @@ p.text-info {
 					<label class="col-md-12 control-label"><spring:message code="swapAlbum.form.grade.sleeve"/></label>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-						    <form:select path="sleeveGrading" class="form-control selectpicker" data-live-search="true">
-						      <option value="${album.sleeveGrading}">${album.sleeveGrading}</option>
+						<form:select path="sleeveGrading" class="form-control selectpicker" data-live-search="true">
+						      <option selected>${sleeveGrading}</option>
 						<%@include file="../utils/gradings.jsp" %>
 						</form:select>
 					</div>	
@@ -91,8 +91,8 @@ p.text-info {
 					<label class="col-md-12 control-label"><spring:message code="swapAlbum.form.waxValue"/></label>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-piggy-bank"></i></span>
-						    <select name="waxValue" class="form-control selectpicker" data-live-search="true">
-						      <option value="${waxValue}">${waxValue}</option>
+						<select name="waxValue" class="form-control selectpicker" data-live-search="true">
+						      <option selected>${waxValue}</option>
 						<%@include file="../utils/waxValues.jsp" %>
 						</select>
 					</div>	
@@ -103,8 +103,8 @@ p.text-info {
 					<div class="input-group">
 						<span class="input-group-addon">
 						<i class="glyphicon glyphicon-pencil"></i></span>
-						<form:textarea rows="5" path="description" type="text" class="form-control"
-							placeholder="Your edition, sleeve & media grading, why you want to swap it and what you're searching for..." />
+						<textarea form="swapAlbum-form" rows="5" name="description" class="form-control"
+							placeholder="Your edition, sleeve & media grading, why you want to swap it and what you're searching for...">${description}</textarea>
 					</div>
 				</div>
 			</div>

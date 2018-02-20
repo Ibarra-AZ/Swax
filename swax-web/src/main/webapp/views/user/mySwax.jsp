@@ -8,24 +8,11 @@
 
 <html>
 
-<style>
-
-h2 {
-	margin-top: 0px !important;
-}
-
-p.text-info {
-	border-left: solid;
-	border-radius: 5px; 
-	border-right: solid;
-	padding: 10px;
-	margin-bottom: 15px;
-}
-
-</style>
-
 <!-- INCLUDES <head> -->
 <%@include file="../head.jsp"%>
+
+<!-- MYSWAX CSS STYLES -->
+<link rel="stylesheet" type="text/css" href="../../css/mySwax.css"/>
 
 <body>
 
@@ -80,10 +67,10 @@ p.text-info {
 			<!-- HOME -->
 			<div id="home" class="tab-pane fade in active">
 				<h2 class="text-center"><spring:message code="mySwax.home.h2.title"/></h2>
-				<c:if test="${hasCollection==false}">
+<%-- 				<c:if test="${hasCollection==false}">
 					<p>collectionTableForm</p>
 					<%@include file="importCollectionForm.jsp"%>
-				</c:if>
+				</c:if> --%>
 				<c:if test="${hasCollection==true}">
 					<%@include file="../home/latestAdditions.jsp"%>
 				</c:if>
@@ -114,10 +101,10 @@ p.text-info {
 					</div>
 					<%@include file="wantlistTableForm.jsp"%>
 				</c:if>
-				<c:if test="${hasWantlist==false}">
+<%-- 				<c:if test="${hasWantlist==false}">
 					<spring:message code="mySwax.wantlist.noWantlist"/>
 					<%@include file="importWantlistForm.jsp"%>
-				</c:if>
+				</c:if> --%>
 			</div>
 
 			
