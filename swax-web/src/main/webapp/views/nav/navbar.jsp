@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" isELIgnored="false" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -18,9 +23,11 @@
 				<li><a href="/signin"><i class="glyphicon glyphicon-log-in"></i>
 					<span>sign in</span></a>
 				</li>
+				<c:if test="${countUsers < maximumUsers}">
 				<li><a href="/register"><i class="glyphicon glyphicon-user"></i>
 					<span>sign up</span></a>
 				</li>
+				</c:if>
 			</ul>
 		</div>
 	</div>

@@ -27,5 +27,8 @@ public interface ISwapAlbumDAO extends JpaRepository<SwapAlbum, Integer>{
     List<PossibleSwapDTO> findPossibleSwapsByUser(int user_id);
 
 	void deleteByUser(User user);
+	
+	@Query(value = "SELECT COUNT(*) FROM SWAPALBUM WHERE ALBUM_TO_SWAP=true", nativeQuery = true)
+	int countSwaps();
 
 }

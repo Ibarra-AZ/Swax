@@ -23,7 +23,6 @@
 				<form:form id="register-form" class="well form-horizontal" method="post" modelAttribute="registerModelAttribute" 
 					action="registerAction">
 					
-					
 					<legend><spring:message code="register.legend" /></legend>
 					
 					<c:if test="${!registerModelAttribute.errorMsg.equals('')}">

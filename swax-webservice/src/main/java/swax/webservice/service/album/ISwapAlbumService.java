@@ -28,5 +28,7 @@ public interface ISwapAlbumService {
 	Collection<SwapAlbum> findAllSortedByDateAdded();
 	
 	void deleteByUser(User user);
+	
+	int countSwaps();
 
 }

@@ -25,7 +25,16 @@
 			<div class="row" style="margin-top: 50px;">
 				<div class="col-md-12">
 					<h2 class="" style="display: table; margin: 0 auto; margin-top: 15px;">what to do with swax</h2>
-				<p class="text-center" style="margin-top: 0px;">"swap your wax"</p>
+				<p class="text-center" style="margin-top: 0px;">"swap your wax", </p>
+				<p class="text-center text-danger" style="margin: 0px;">
+					<small><i class="glyphicon glyphicon-user"></i> ${countUsers} users to trade with. 
+					<i class="glyphicon glhicon-record"></i> ${countSwaps} vinyls to swap.</small>
+				</p>
+				<c:if test="${countUsers >= maximumUsers}">
+					<p class="text-center text-primary" style="margin-top: 0px;">
+					Sorry, this app is in a beta test phase and we can't have more users for now. Please, come back soon.
+					</p>
+				</c:if>
 				</div>
 			</div>
 			
