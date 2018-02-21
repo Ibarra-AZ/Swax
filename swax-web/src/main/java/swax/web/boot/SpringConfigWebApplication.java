@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 
 import swax.webservice.main.Application;
-@SpringBootApplication@Import({Application.class, SwaxMvcConfig.class})@ComponentScan("swax.web")public class SpringConfigWebApplication extends SpringBootServletInitializer {
+@SpringBootApplication@Import({Application.class, SwaxMvcConfig.class})@ComponentScan({"swax.web.controller.*","swax.web.mav"})public class SpringConfigWebApplication extends SpringBootServletInitializer {
 	@Override	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {		return application.sources(SpringConfigWebApplication.class);	}
 	public static void main(String[] args) throws Exception {		SpringApplication.run(SpringConfigWebApplication.class, args);	}
 }

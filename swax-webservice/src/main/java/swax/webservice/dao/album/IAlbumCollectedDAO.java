@@ -13,7 +13,7 @@ import swax.webservice.entity.user.User;
 
 @Repository("albumCollectedDAO")
 @Transactional
-public interface IAlbumCollectedDAO extends JpaRepository<AlbumCollected, Integer> {
+public interface IAlbumCollectedDAO extends JpaRepository<AlbumCollected, String> {
 
 	void save(List<AlbumDiscogs> albumsDiscogs);
 

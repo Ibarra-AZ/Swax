@@ -15,7 +15,7 @@ import swax.webservice.entity.user.User;
 
 @Repository("swapAlbumDAO")
 @Transactional
-public interface ISwapAlbumDAO extends JpaRepository<SwapAlbum, Integer>{
+public interface ISwapAlbumDAO extends JpaRepository<SwapAlbum, String>{
 
 	List<SwapAlbum> findByUser(User user);
 

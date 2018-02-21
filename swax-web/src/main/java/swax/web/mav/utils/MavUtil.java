@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,6 +14,7 @@ import swax.web.form.PojoModelImportCollectionForm;
 import swax.web.form.PojoModelImportWantlistForm;
 import swax.web.form.PojoModelLoginForm;
 import swax.webservice.entity.user.User;
+import swax.webservice.service.album.ISwapAlbumService;
 import swax.webservice.service.user.IUserService;
 
 /**
@@ -26,8 +28,14 @@ public class MavUtil {
 	
 	private Logger logger = Logger.getLogger(MavUtil.class);
 	
+	@Value("${number.max.users}")
+	private String maximumUsersProp;
+	
 	@Autowired
 	private IUserService userService = null;
+	
+	@Autowired
+	private ISwapAlbumService swapAlbumService = null;
 
 	public ModelAndView mySwax(User user, HttpServletRequest request) {
 		
@@ -117,6 +125,18 @@ public class MavUtil {
 		mav.getModel().put("hasSwapProposition", request.getSession().getAttribute("hasSwapProposition"));
 		mav.getModel().put("userSwapPropositions", request.getSession().getAttribute("userSwapPropositions"));
 		mav.getModel().put("perfectMatchesMap", request.getSession().getAttribute("perfectMatchesMap"));
+		return mav;
+	}
+	
+	public ModelAndView initStartCounts(ModelAndView mav) {
+		
+		int countUsers = userService.countUsers();		
+		int countSwaps = swapAlbumService.countSwaps();
+		
+		mav.getModel().put("maximumUsers", Integer.parseInt(maximumUsersProp));
+		mav.getModel().put("countSwaps", countSwaps);
+		mav.getModel().put("countUsers", countUsers);
+		
 		return mav;
 	}
 
