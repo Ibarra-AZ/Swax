@@ -1,5 +1,6 @@
 package swax.web.mav.utils;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,9 +11,23 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import swax.web.component.sessionscope.HasCollection;
+import swax.web.component.sessionscope.HasSwapProposition;
+import swax.web.component.sessionscope.HasWantlist;
+import swax.web.component.sessionscope.LatestAdditions;
+import swax.web.component.sessionscope.PerfectMatchesMap;
+import swax.web.component.sessionscope.PossibleSwaps;
+import swax.web.component.sessionscope.UserCollection;
+import swax.web.component.sessionscope.UserSwapPropositions;
+import swax.web.component.sessionscope.UserWantlist;
 import swax.web.form.PojoModelImportCollectionForm;
 import swax.web.form.PojoModelImportWantlistForm;
 import swax.web.form.PojoModelLoginForm;
+import swax.webservice.dto.AlbumDTO;
+import swax.webservice.dto.AlbumWantlistDTO;
+import swax.webservice.dto.LatestAdditionDTO;
+import swax.webservice.dto.PossibleSwapDTO;
+import swax.webservice.entity.album.SwapAlbum;
 import swax.webservice.entity.user.User;
 import swax.webservice.service.album.ISwapAlbumService;
 import swax.webservice.service.user.IUserService;
@@ -36,7 +51,34 @@ public class MavUtil {
 	
 	@Autowired
 	private ISwapAlbumService swapAlbumService = null;
+	
+	@Autowired
+	private HasCollection hasCollectionSession;
+	
+	@Autowired
+	private HasWantlist hasWantlistSession;
+	
+	@Autowired
+	private HasSwapProposition hasSwapPropositionSession;
 
+	@Autowired
+	private LatestAdditions latestAdditionsSession;
+	
+	@Autowired
+	private PerfectMatchesMap perfectMatchesMapSession;
+	
+	@Autowired
+	private PossibleSwaps possibleSwapsSession;
+	
+	@Autowired
+	private UserCollection userCollectionSession;
+	
+	@Autowired
+	private UserSwapPropositions userSwapPropositionsSession;
+	
+	@Autowired
+	private UserWantlist userWantlistSession;
+	
 	public ModelAndView mySwax(User user, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -53,20 +95,11 @@ public class MavUtil {
 			loginForm.setErrorMsg(errorMsg);
 			mav.getModel().put("loginModelAttribute", loginForm);
 			mav.setViewName("login/login");
-			return mav;			
+			return mav;	
 		}
 		
-		mav.getModel().put("hasCollection", mapInitUser.get("hasCollection"));
-		mav.getModel().put("userCollection", mapInitUser.get("userCollection"));
-		mav.getModel().put("hasWantlist", mapInitUser.get("hasWantlist"));
-		mav.getModel().put("userWantlist", mapInitUser.get("userWantlist"));
-		mav.getModel().put("latestAdditions", mapInitUser.get("latestAdditions"));
-		mav.getModel().put("possibleSwaps", mapInitUser.get("possibleSwaps"));
-		mav.getModel().put("hasSwapProposition", mapInitUser.get("hasSwapProposition"));
-		mav.getModel().put("userSwapPropositions", mapInitUser.get("userSwapPropositions"));
-		mav.getModel().put("perfectMatchesMap", mapInitUser.get("perfectMatchesMap"));
-		
-		request = this.initSession(mav, request);
+		initSession(mapInitUser);
+		initMav(mav, mapInitUser);
 		
 		if (!(boolean) mapInitUser.get("hasCollection")) {
 			mav.getModel().put("importCollectionModelAttribute", new PojoModelImportCollectionForm());
@@ -77,9 +110,10 @@ public class MavUtil {
 		
 		mav.setViewName("user/mySwax");
 		
-		return mav;		
+		return mav;
 	}
 	
+
 	public ModelAndView mySwaxUsingSession(User user, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -93,39 +127,57 @@ public class MavUtil {
 			loginForm.setErrorMsg(errorMsg);
 			mav.getModel().put("loginModelAttribute", loginForm);
 			mav.setViewName("login/login");
-			return mav;			
+			return mav;
 		} else {
-			mav = this.initMavWithSession(mav, request);
+			mav = this.initMavWithSession(mav);
 			mav.setViewName("user/mySwax");
 			return mav;
 		}
 	
 	}
 	
-	public HttpServletRequest initSession(ModelAndView mav, HttpServletRequest request) {
-		request.getSession().setAttribute("userCollection", mav.getModel().get("userCollection"));
-		request.getSession().setAttribute("userWantlist", mav.getModel().get("userWantlist"));
-		request.getSession().setAttribute("hasCollection", mav.getModel().get("hasCollection"));
-		request.getSession().setAttribute("hasWantlist", mav.getModel().get("hasWantlist"));
-		request.getSession().setAttribute("possibleSwaps", mav.getModel().get("possibleSwaps"));
-		request.getSession().setAttribute("latestAdditions", mav.getModel().get("latestAdditions"));
-		request.getSession().setAttribute("hasSwapProposition", mav.getModel().get("hasSwapProposition"));
-		request.getSession().setAttribute("userSwapPropositions", mav.getModel().get("userSwapPropositions"));
-		request.getSession().setAttribute("perfectMatchesMap", mav.getModel().get("perfectMatchesMap"));
-		return request;		
+	@SuppressWarnings("unchecked")
+	public void initSession(Map<String, Object> mapInitUser) {
+		
+		hasCollectionSession.setHasCollection((boolean) mapInitUser.get("hasCollection"));
+		hasWantlistSession.setHasWantlist((boolean) mapInitUser.get("hasWantlist"));
+		hasSwapPropositionSession.setHasSwapProposition((boolean) mapInitUser.get("hasSwapProposition"));
+		latestAdditionsSession.setLatestAdditions((List<LatestAdditionDTO>) mapInitUser.get("latestAdditions"));
+		perfectMatchesMapSession.setPerfectMatchesMap((Map<Integer, List<SwapAlbum>>) mapInitUser.get("perfectMatchesMap"));
+		possibleSwapsSession.setPossibleSwaps((List<PossibleSwapDTO>) mapInitUser.get("possibleSwaps"));
+		userCollectionSession.setUserCollection((List<AlbumDTO>) mapInitUser.get("userCollection"));
+		userSwapPropositionsSession.setUserSwapPropositions((List<SwapAlbum>) mapInitUser.get("userSwapPropositions"));
+		userWantlistSession.setUserWantlist((List<AlbumWantlistDTO>) mapInitUser.get("userWantlist"));
+		
 	}
 	
-	public ModelAndView initMavWithSession (ModelAndView mav, HttpServletRequest request) {
-		mav.getModel().put("hasCollection", request.getSession().getAttribute("hasCollection"));
-		mav.getModel().put("userCollection", request.getSession().getAttribute("userCollection"));
-		mav.getModel().put("hasWantlist", request.getSession().getAttribute("hasWantlist"));
-		mav.getModel().put("userWantlist", request.getSession().getAttribute("userWantlist"));
-		mav.getModel().put("possibleSwaps", request.getSession().getAttribute("possibleSwaps"));
-		mav.getModel().put("latestAdditions", request.getSession().getAttribute("latestAdditions"));
-		mav.getModel().put("hasSwapProposition", request.getSession().getAttribute("hasSwapProposition"));
-		mav.getModel().put("userSwapPropositions", request.getSession().getAttribute("userSwapPropositions"));
-		mav.getModel().put("perfectMatchesMap", request.getSession().getAttribute("perfectMatchesMap"));
+	public ModelAndView initMavWithSession (ModelAndView mav) {
+		
+		mav.getModel().put("hasCollection", hasCollectionSession.isHasCollection());
+		mav.getModel().put("userCollection", userCollectionSession.getUserCollection());
+		mav.getModel().put("hasWantlist", hasWantlistSession.isHasWantlist());
+		mav.getModel().put("userWantlist", userWantlistSession.getUserWantlist());
+		mav.getModel().put("possibleSwaps", possibleSwapsSession.getPossibleSwaps());
+		mav.getModel().put("latestAdditions", latestAdditionsSession.getLatestAdditions());
+		mav.getModel().put("hasSwapProposition", hasSwapPropositionSession.isHasSwapProposition());
+		mav.getModel().put("userSwapPropositions", userSwapPropositionsSession.getUserSwapPropositions());
+		mav.getModel().put("perfectMatchesMap", perfectMatchesMapSession.getPerfectMatchesMap());
+		
 		return mav;
+	}
+	
+	public void initMav(ModelAndView mav, Map<String, Object> mapInitUser) {
+		
+		mav.getModel().put("hasCollection", mapInitUser.get("hasCollection"));
+		mav.getModel().put("userCollection", mapInitUser.get("userCollection"));
+		mav.getModel().put("hasWantlist", mapInitUser.get("hasWantlist"));
+		mav.getModel().put("userWantlist", mapInitUser.get("userWantlist"));
+		mav.getModel().put("latestAdditions", mapInitUser.get("latestAdditions"));
+		mav.getModel().put("possibleSwaps", mapInitUser.get("possibleSwaps"));
+		mav.getModel().put("hasSwapProposition", mapInitUser.get("hasSwapProposition"));
+		mav.getModel().put("userSwapPropositions", mapInitUser.get("userSwapPropositions"));
+		mav.getModel().put("perfectMatchesMap", mapInitUser.get("perfectMatchesMap"));
+		
 	}
 	
 	public ModelAndView initStartCounts(ModelAndView mav) {
