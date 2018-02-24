@@ -3,8 +3,6 @@ package swax.web.controller.user;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import swax.web.component.sessionscope.SessionUser;
 import swax.web.mav.utils.MavUtil;
 import swax.webservice.apiDiscogs.model.Release;
 import swax.webservice.entity.album.AlbumDiscogs;
@@ -39,14 +38,17 @@ public class SynchronizeWithDiscogsController {
 	@Autowired
 	private MavUtil mavUtil;
 
+	@Autowired
+	private SessionUser sessionUser;
+	
 	private Logger logger = Logger.getLogger(this.getClass());
 
 	@RequestMapping(value="/synchronizeCollectionWithDiscogs", method = RequestMethod.GET)
-	public ModelAndView synchronizeCollectionWithDiscogs(HttpServletRequest request, ModelAndView mav) {
+	public ModelAndView synchronizeCollectionWithDiscogs(ModelAndView mav) {
 
 		logger.debug(this.getClass().getName()+this.getClass()+": synchronizeCollectionWithDiscogs");
 
-		User user = (User) request.getSession().getAttribute("user");
+		User user = sessionUser.getSessionUser();
 		List<Release> releases = new ArrayList<Release>();
 		
 		try{
@@ -57,7 +59,7 @@ public class SynchronizeWithDiscogsController {
 			e.printStackTrace();
 			mav.getModel().put("errorMsg", errorMsg);
 			// TODO : rediriger vers la vue d'origine ?
-			mav = mavUtil.mySwax(user, request);
+			mav = mavUtil.mySwax(user);
 			return mav;
 		}
 
@@ -70,19 +72,19 @@ public class SynchronizeWithDiscogsController {
 		// TODO: Supprimer les albums de la BDD qui ne sont plus présents dans discogs
 		
 		// TODO : rediriger vers la vue d'origine ?
-		mav = mavUtil.mySwax(user, request);
+		mav = mavUtil.mySwax(user);
 		return mav;
 	}
 	
 	// TODO: Synchroniser la wantlist avec Discogs
 	@RequestMapping(value="/synchronizeWantlistWithDiscogs", method = RequestMethod.GET)
-	public ModelAndView synchronizeWantlistWithDiscogs(HttpServletRequest request, ModelAndView mav) {
+	public ModelAndView synchronizeWantlistWithDiscogs(ModelAndView mav) {
 
 		logger.debug(this.getClass().getName()+this.getClass()+": synchronizeWantlistWithDiscogs");
 
-		User user = (User) request.getSession().getAttribute("user");
+		User user = sessionUser.getSessionUser();
 		
-		mav = mavUtil.mySwax(user, request);
+		mav = mavUtil.mySwax(user);
 		return mav;
 	}
 

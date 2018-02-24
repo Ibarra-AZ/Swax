@@ -3,8 +3,6 @@ package swax.web.mav.utils;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +15,7 @@ import swax.web.component.sessionscope.HasWantlist;
 import swax.web.component.sessionscope.LatestAdditions;
 import swax.web.component.sessionscope.PerfectMatchesMap;
 import swax.web.component.sessionscope.PossibleSwaps;
+import swax.web.component.sessionscope.SessionUser;
 import swax.web.component.sessionscope.UserCollection;
 import swax.web.component.sessionscope.UserSwapPropositions;
 import swax.web.component.sessionscope.UserWantlist;
@@ -77,9 +76,12 @@ public class MavUtil {
 	private UserSwapPropositions userSwapPropositionsSession;
 	
 	@Autowired
+	private SessionUser sessionUser;
+	
+	@Autowired
 	private UserWantlist userWantlistSession;
 	
-	public ModelAndView mySwax(User user, HttpServletRequest request) {
+	public ModelAndView mySwax(User user) {
 		
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> mapInitUser;
@@ -114,10 +116,11 @@ public class MavUtil {
 	}
 	
 
-	public ModelAndView mySwaxUsingSession(User user, HttpServletRequest request) {
+	public ModelAndView mySwaxUsingSession(User user) {
 		
 		ModelAndView mav = new ModelAndView();
-		user = (User) request.getSession().getAttribute("user");
+		
+		user = sessionUser.getSessionUser();
 		
 		// Controls if user is still connected
 		if (user==null) {
@@ -162,6 +165,7 @@ public class MavUtil {
 		mav.getModel().put("hasSwapProposition", hasSwapPropositionSession.isHasSwapProposition());
 		mav.getModel().put("userSwapPropositions", userSwapPropositionsSession.getUserSwapPropositions());
 		mav.getModel().put("perfectMatchesMap", perfectMatchesMapSession.getPerfectMatchesMap());
+		mav.getModel().put("user", sessionUser.getSessionUser());
 		
 		return mav;
 	}
@@ -177,6 +181,7 @@ public class MavUtil {
 		mav.getModel().put("hasSwapProposition", mapInitUser.get("hasSwapProposition"));
 		mav.getModel().put("userSwapPropositions", mapInitUser.get("userSwapPropositions"));
 		mav.getModel().put("perfectMatchesMap", mapInitUser.get("perfectMatchesMap"));
+		mav.getModel().put("user", sessionUser.getSessionUser());
 		
 	}
 	
