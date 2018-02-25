@@ -31,4 +31,6 @@ public interface ISwapAlbumService {
 	
 	int countSwaps();
 
+	void delete(SwapAlbum swapAlbum);
+
 }

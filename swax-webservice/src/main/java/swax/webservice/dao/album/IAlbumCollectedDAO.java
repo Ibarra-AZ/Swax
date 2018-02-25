@@ -23,4 +23,6 @@ public interface IAlbumCollectedDAO extends JpaRepository<AlbumCollected, String
 	
 	void deleteByUser(User user);
 
+	void deleteByAlbumCollectedId(String albumId);
+
 }
