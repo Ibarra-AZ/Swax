@@ -57,13 +57,10 @@
 
 
 			<!-- ERROR MESSAGE -->
-			<c:if test="${!errorMsg.equals('') && errorMsg != null}">
-				<div class="alert alert-danger">
-					${errorMsg}
-				</div>
+			<c:if test="${!errorMsg.equals('')}">
+				<div class="alert alert-danger">${errorMsg}</div>
 			</c:if>
-
-			
+						
 			<!-- HOME -->
 			<div id="home" class="tab-pane fade in active">
 				<h2 class="text-center"><spring:message code="mySwax.home.h2.title"/></h2>

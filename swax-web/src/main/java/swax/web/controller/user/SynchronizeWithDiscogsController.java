@@ -53,6 +53,8 @@ public class SynchronizeWithDiscogsController {
 	
 	private Logger logger = Logger.getLogger(this.getClass());
 
+	private String errorMsg = "";
+
 	@RequestMapping(value="/synchronizeCollectionWithDiscogs", method = RequestMethod.GET)
 	public ModelAndView synchronizeCollectionWithDiscogs(ModelAndView mav) {
 
@@ -65,8 +67,7 @@ public class SynchronizeWithDiscogsController {
 			releases = apiDiscogsService.getCollectionFromUserName(user.getDiscogsName());	
 		} 
 		catch(Exception e) {
-			// TODO : faire marcher l'affichage du message d'erreur
-			String errorMsg = "Erreur dans la synchronisation de la collection avec Discogs";
+			errorMsg = "Erreur dans la synchronisation de la collection avec Discogs";
 			e.printStackTrace();
 			mav.getModel().put("errorMsg", errorMsg);
 			mav = mavUtil.mySwax(user);
@@ -74,42 +75,90 @@ public class SynchronizeWithDiscogsController {
 		}
 
 		List<AlbumDiscogs> albumsDiscogs = apiDiscogsService.getAlbumsDiscogsFromReleases(releases);
-
 		albumsDiscogs = albumDiscogsService.trimAlbumsDiscogsAPI(albumsDiscogs);
-		albumService.updateAlbumTable(albumsDiscogs);
-		albumCollectedService.createUserCollection(user, albumsDiscogs);
 		
 		// MISE A JOUR BDD EN ENLEVANT LES ALBUMS QUI NE SONT PLUS DANS DISCOGS
+		// TODO: A RENVOYER VERS COUCHE SERVICE ???
+		
 		List<AlbumDTO> albumsCollection = userCollectionSession.getUserCollection();
-		List<String> albumsDiscogsId = new ArrayList<>();
+		List<AlbumDiscogs> albumsToAdd = new ArrayList<>();
+		List<AlbumDTO> albumsToDelete = new ArrayList<>();
+		List<SwapAlbum> albumsImpossibleToDelete = new ArrayList<>();
+		List<SwapAlbum> swapAlbums = swapAalbumService.findByUser(user);
 		
-		albumsDiscogs.forEach(albumDiscogs -> albumsDiscogsId.add(albumDiscogs.getCollection_id()));
+		// ALBUMS TO ADD
+		for (AlbumDiscogs albumDiscogs: albumsDiscogs) {
+			boolean foundInCollection = false;
+			for (AlbumDTO albumCollection: albumsCollection) {
+				if (albumDiscogs.getCollection_id().equals(albumCollection.getAlbumId())) {
+					foundInCollection = true;
+				}
+			}
+			if (!foundInCollection) {
+				albumsToAdd.add(albumDiscogs);
+			}
+		}
 		
-		albumsCollection.forEach(albumCollection -> {
-			if (!albumsDiscogsId.contains(albumCollection.getAlbumId())) {
-				
-				List<SwapAlbum> swapAlbums = swapAalbumService.findByUser(user);
-				
-				swapAlbums.forEach(swapAlbum -> {
-					if (swapAlbum.getAlbumCollected().getAlbumCollectedId().equals(albumCollection.getAlbumId())) {
-						if (swapAlbum.isAlbumToSwap()==false) {
-							swapAalbumService.delete(swapAlbum);
-							albumCollectedService.deleteByAlbumCollectedId(albumCollection.getAlbumId());
-						}
-						else {
-							// TODO: IMPORTANT! L'album à supprimer est proposé à l'échange
-							System.out.println("TODO: L'album à supprimer est proposé à l'échange");
-						}
+		// ALBUMS TO DELETE
+		for (AlbumDTO albumCollection: albumsCollection) {
+			boolean foundInDiscogs = false;
+			for (AlbumDiscogs albumDiscogs: albumsDiscogs) {
+				if (albumCollection.getAlbumId().equals(albumDiscogs.getCollection_id())) {
+					foundInDiscogs = true;
+				}
+			}
+			if (!foundInDiscogs) {
+				albumsToDelete.add(albumCollection);
+			}
+		}
+		
+		List<AlbumDTO> albumsToReallyDelete = new ArrayList<>();
+		
+		for (AlbumDTO albumCollection: albumsToDelete) {
+			for (SwapAlbum swapAlbum: swapAlbums) {
+				if (swapAlbum.getAlbumCollected().getAlbumCollectedId().equals(albumCollection.getAlbumId())) {
+					if (swapAlbum.isAlbumToSwap()==true) {
+						albumsImpossibleToDelete.add(swapAlbum);
 					}
 					else {
-						albumCollectedService.deleteByAlbumCollectedId(albumCollection.getAlbumId());
+						albumsToReallyDelete.add(albumCollection);
 					}
-				});			
+				}
 			}
-		});
+		}
+		
+		System.out.println("ALBUMS A AJOUTER: "+albumsToAdd.size());
+		System.out.println("ALBUMS A SUPPRIMER: "+albumsToDelete.size());
+		System.out.println("ALBUMS A VRAIMENT SUPPRIMER: "+albumsToReallyDelete.size());
+		System.out.println("ALBUMS IMPOSSIBLE A SUPPRIMER: "+albumsImpossibleToDelete.size());
+		
+		albumService.updateAlbumTable(albumsToAdd);
+		albumCollectedService.createUserCollection(user, albumsToAdd);
+		
+		for (AlbumDTO albumToDelete: albumsToReallyDelete) {
+			for (SwapAlbum swapAlbum: swapAlbums) {
+				if (swapAlbum.getAlbumCollected().getAlbumCollectedId().equals(albumToDelete.getAlbumId())) {
+					swapAalbumService.delete(swapAlbum);
+				}
+			}
+		}
+		
+		albumCollectedService.delete(albumsToReallyDelete);
+		
+		// TODO: BILAN SYNCHRO A GERER PAR UNE NOTIFICATION
+		if (albumsImpossibleToDelete.size() != 0) {
+			errorMsg = "Certains albums n'ont pas pu être supprimés de la collection alors qu'ils ne sont plus présents"
+					+ " dans ta collection discogs car ils sont toujours proposés à l'échange:";
+			albumsImpossibleToDelete.forEach(item -> 
+				errorMsg = errorMsg.concat("\n - "+item.getAlbum().getArtist()+" - "+item.getAlbum().getAlbumName()));
+		}
+		
+		System.out.println(errorMsg);
 		// FIN
 		
 		mav = mavUtil.mySwax(user);
+		mav.getModel().put("errorMsg", errorMsg);
+		
 		return mav;
 	}
 	
