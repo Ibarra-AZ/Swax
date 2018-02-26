@@ -115,15 +115,17 @@ public class SynchronizeWithDiscogsController {
 		List<AlbumDTO> albumsToReallyDelete = new ArrayList<>();
 		
 		for (AlbumDTO albumCollection: albumsToDelete) {
+			boolean toDelete = true;
 			for (SwapAlbum swapAlbum: swapAlbums) {
 				if (swapAlbum.getAlbumCollected().getAlbumCollectedId().equals(albumCollection.getAlbumId())) {
 					if (swapAlbum.isAlbumToSwap()==true) {
 						albumsImpossibleToDelete.add(swapAlbum);
-					}
-					else {
-						albumsToReallyDelete.add(albumCollection);
+						toDelete = false;
 					}
 				}
+			}
+			if (toDelete) {
+				albumsToReallyDelete.add(albumCollection);
 			}
 		}
 		
