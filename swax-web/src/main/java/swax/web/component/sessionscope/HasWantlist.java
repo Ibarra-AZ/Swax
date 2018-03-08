@@ -11,5 +11,7 @@ import lombok.Data;
 public class HasWantlist {
 	
 	private boolean hasWantlist = false;
+	
+	private boolean testGit;
 
 }
