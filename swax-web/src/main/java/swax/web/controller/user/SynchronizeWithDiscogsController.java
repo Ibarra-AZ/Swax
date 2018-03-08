@@ -69,8 +69,8 @@ public class SynchronizeWithDiscogsController {
 		catch(Exception e) {
 			errorMsg = "Erreur dans la synchronisation de la collection avec Discogs";
 			e.printStackTrace();
-			mav.getModel().put("errorMsg", errorMsg);
 			mav = mavUtil.mySwax(user);
+			mav.getModel().put("errorMsg", errorMsg);
 			return mav;
 		}
 
