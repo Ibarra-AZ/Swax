@@ -169,7 +169,6 @@ public class SynchronizeWithDiscogsController {
 		return mav;
 	}
 	
-	// TODO: Synchroniser la wantlist avec Discogs
 	@RequestMapping(value="/synchronizeWantlistWithDiscogs", method = RequestMethod.GET)
 	public ModelAndView synchronizeWantlistWithDiscogs(ModelAndView mav) {
 
@@ -184,8 +183,8 @@ public class SynchronizeWithDiscogsController {
 		}
 		catch(Exception e){
 			errorMsg = "Erreur dans la synchronisation de la wantlist avec Discogs";
-			mav.getModel().put("errorMsg", errorMsg);
 			mav = mavUtil.mySwax(user);
+			mav.getModel().put("errorMsg", errorMsg);
 			return mav;
 		}
 
@@ -196,6 +195,8 @@ public class SynchronizeWithDiscogsController {
 		albumWantlistService.createUserWantlist(user, albumsWantlist);
 		
 		mav = mavUtil.mySwax(user);
+		mav.getModel().put("errorMsg", errorMsg);
+		
 		return mav;
 	}
 

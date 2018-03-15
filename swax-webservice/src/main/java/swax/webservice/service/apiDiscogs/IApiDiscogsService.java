@@ -20,4 +20,6 @@ public interface IApiDiscogsService {
 
 	List<AlbumDiscogs> getAlbumsWantListFromReleases(List<Want> wants);
 
+	Map<String, Object> synchronizeWantlistWithDiscogs(User user);
+
 }

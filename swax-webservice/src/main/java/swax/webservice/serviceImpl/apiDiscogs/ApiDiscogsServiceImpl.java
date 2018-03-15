@@ -16,9 +16,7 @@ import swax.webservice.apiDiscogs.model.Release;
 import swax.webservice.apiDiscogs.model.RetourCollection;
 import swax.webservice.apiDiscogs.model.RetourWantList;
 import swax.webservice.apiDiscogs.model.Want;
-import swax.webservice.entity.album.Album;
 import swax.webservice.entity.album.AlbumDiscogs;
-import swax.webservice.entity.album.AlbumWantlist;
 import swax.webservice.entity.user.User;
 import swax.webservice.service.apiDiscogs.IApiDiscogsService;
 
@@ -28,7 +26,28 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 	private final int NB_ITEM_MAX_PAGE = 500;
 	private Logger logger = Logger.getLogger(this.getClass());
 	
-	// COUCOU LES COQUINOUX
+	private RetourCollection firstCollectionCall(String userName) throws Exception{
+		
+		return ClientBuilder.newClient()
+				.target("https://api.discogs.com")
+				.path("users/"+userName+"/collection/folders/0/releases")
+				.queryParam("per_page", NB_ITEM_MAX_PAGE)
+				.request()
+				.get(RetourCollection.class);
+	}
+
+	private RetourCollection getCollectionFromUserNameAndPageNumber(String userName, Integer pageNumber, Integer numberPerPage){
+		
+		RetourCollection retour = ClientBuilder.newClient()
+				.target("https://api.discogs.com")
+				.path("users/"+userName+"/collection/folders/0/releases")
+				.queryParam("per_page", numberPerPage)
+				.queryParam("page", pageNumber)
+				.request().get(RetourCollection.class);
+
+		return retour;
+	}
+	
 	@Override
 	public List<AlbumDiscogs> getAlbumsDiscogsFromReleases(List<Release> releases){
 		List<AlbumDiscogs> albums = new ArrayList<AlbumDiscogs>();
@@ -39,19 +58,14 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 	}
 	
 	/**
-	 * Ne valorise pas les attributs suivants :
-	 * - Catalog
-	 * - CollectionFolder
-	 * - CollectionNotes
-	 * - Released
-	 * - MediaCondition
-	 * - SleeveCondition
 	 * @param release
-	 * @return
+	 * @return AlbumDiscogs
 	 */
 	private AlbumDiscogs getAlbumDiscogsFromRelease(Release release) {
+		
 		AlbumDiscogs album = new AlbumDiscogs();
 		BasicInformation infosAlbums = release.getBasicInformation();
+		
 		if(infosAlbums!=null){
 			if(infosAlbums.getArtists()!=null&&infosAlbums.getArtists().size()>0){
 				album.setArtist(infosAlbums.getArtists().stream().map(Object::toString)
@@ -66,15 +80,19 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 						.collect(Collectors.joining(", ")));
 			}
 		}
+		
 		if(release.getInstanceId()!=null){
 		album.setCollection_id(release.getInstanceId().toString());
 		}
+		
 		if(release.getRating()!=null){
 			album.setRating(release.getRating().toString());
 		}
+		
 		if(release.getId()!=null){
 			album.setRelease_id(release.getId().toString());
 		}
+		
 		album.setTitle(infosAlbums.getTitle());
 		album.setDateAdded(release.dateAdded);
 		album.setReleased(Integer.toString(infosAlbums.year));
@@ -84,8 +102,8 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 	
 	@Override
 	public List<Release> getCollectionFromUserName (String userName) throws Exception{
+		
 		List<Release> collection = new ArrayList<Release>();
-
 		RetourCollection premierRetour = firstCollectionCall(userName);
 
 		if(premierRetour!=null
@@ -101,6 +119,7 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 				}
 			}
 		}
+		
 		return collection;
 	}
 	
@@ -116,7 +135,7 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 			releases = this.getCollectionFromUserName(user.getDiscogsName());
 			List<AlbumDiscogs> albumsDiscogs = this.getAlbumsDiscogsFromReleases(releases);
 			if (albumsDiscogs.size() == 0 || albumsDiscogs == null) {
-				errorMsg = "La collection est vide ou n'existe pas.";
+				System.out.println("La collection est vide ou n'existe pas.");
 				albumsDiscogs = null;
 			}
 			result.put("albumsDiscogs", albumsDiscogs);
@@ -131,25 +150,14 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 		
 		return result;
 	}
-
-	private RetourCollection firstCollectionCall(String userName) throws Exception{
-		return ClientBuilder.newClient()
-				.target("https://api.discogs.com").path("users/"+userName+"/collection/folders/0/releases").queryParam("per_page", NB_ITEM_MAX_PAGE)
-				.request()
-				.get(RetourCollection.class);
-	}
-
-
-	private RetourCollection getCollectionFromUserNameAndPageNumber(String userName, Integer pageNumber, Integer numberPerPage){
-		RetourCollection retour = ClientBuilder.newClient()
-				.target("https://api.discogs.com").path("users/"+userName+"/collection/folders/0/releases")
-				.queryParam("per_page", numberPerPage).queryParam("page", pageNumber)
-				.request().get(RetourCollection.class);
-
-		return retour;
-	}
 	
 //	----------------------------------------- WANTLIST ----------------------------------------- 
+	
+	private RetourWantList firstWantListCall(String userName) throws Exception{
+		return ClientBuilder.newClient()
+				.target("https://api.discogs.com").path("users/"+userName+"/wants").queryParam("per_page", NB_ITEM_MAX_PAGE)
+				.request().get(RetourWantList.class);
+	}
 	
 	@Override
 	public List<Want> getWantListFromUserName(String userName) throws Exception{
@@ -172,40 +180,21 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 		return collection;
 	}
 	
-	private RetourWantList firstWantListCall(String userName) throws Exception{
-		return ClientBuilder.newClient()
-				.target("https://api.discogs.com").path("users/"+userName+"/wants").queryParam("per_page", NB_ITEM_MAX_PAGE)
-				.request().get(RetourWantList.class);
-	}
-	
 	@Override
 	public List<AlbumDiscogs> getAlbumsWantListFromReleases(List<Want> wants){
 		List<AlbumDiscogs> albums = new ArrayList<AlbumDiscogs>();
 		for (Want want : wants) {
 			AlbumDiscogs albumDiscogs = getAlbumWantListFromRelease(want);
-//			albumWantlist.setUser(user);
 			albums.add(albumDiscogs);
 		}
 		return albums;
 	}
 	
 	/**
-	 * Ne valorise pas les attributs suivants :
-	 * - Catalog
-	 * - CollectionFolder
-	 * - CollectionNotes
-	 * - DateAdded
-	 * - Released
-	 * - MediaCondition
-	 * - SleeveCondition
-	 * @param release
-	 * @return
+	 * @param want
+	 * @return AlbumDiscogs
 	 */
 	private AlbumDiscogs getAlbumWantListFromRelease(Want want) {
-		
-//		AlbumWantlist albumWantList = new AlbumWantlist();
-//		Album album = new Album();
-//		album.setDiscogsId(String.valueOf(want.getId()));
 		
 		AlbumDiscogs albumDiscogs = new AlbumDiscogs();
 		BasicInformation infosAlbums = want.getBasicInformation();
@@ -232,8 +221,7 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 		
 		albumDiscogs.setCollection_id(String.valueOf(want.getId()));
 		albumDiscogs.setRelease_id(String.valueOf(want.getId()));
-		albumDiscogs.setDateAdded(want.getDateAdded());
-//		albumDiscogs.setAlbum(album);
+		albumDiscogs.setDateAdded(want.getDateAdded().substring(0, 10));
 		
 		return albumDiscogs;
 	}	
@@ -245,6 +233,34 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 				.request().get(RetourWantList.class);
 
 		return retour;
+	}
+	
+	@Override
+	public Map<String, Object> synchronizeWantlistWithDiscogs(User user) {
+		
+		logger.debug(this.getClass().getName()+this.getClass()+": synchronizeWantlistWithDiscogs");
+		List<Want> wants= new ArrayList<Want>();
+		String errorMsg = "";
+		Map<String, Object> result = new HashMap<>();
+		
+		try{
+			wants = this.getWantListFromUserName(user.getDiscogsName());
+			List<AlbumDiscogs> albumsDiscogs = this.getAlbumsWantListFromReleases(wants);
+			if (albumsDiscogs.size() == 0 || albumsDiscogs == null) {
+				System.out.println("La wantlist est vide ou n'existe pas.");
+				albumsDiscogs = null;
+			}
+			result.put("albumsDiscogs", albumsDiscogs);
+		}
+		catch(Exception e){
+			errorMsg = "Erreur dans la synchronisation de la collection avec Discogs";
+			result.put("albumsDiscogs", null);
+			e.printStackTrace();
+		}
+		
+		result.put("errorMsg", errorMsg);
+		
+		return result;
 	}
 	
 }
