@@ -21,7 +21,6 @@ public class AlbumCollected implements Serializable {
 	private static final long serialVersionUID = 5886673759992245183L;
 	
 	@Id
-//	@GeneratedValue(strategy = IDENTITY)
 	@Column(name="ALBUM_COLLECTED_ID", unique = true, nullable = false)
 	private String albumCollectedId;
 	

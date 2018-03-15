@@ -171,7 +171,7 @@ public class FilesTools {
 				}
 				i++;
 			}
-			AlbumDiscogsWantlist albumDiscogsWantlist = new AlbumDiscogsWantlist(var.get(0), var.get(1), var.get(2), var.get(3), 
+			AlbumDiscogsWantlist albumDiscogsWantlist = new AlbumDiscogsWantlist(null, var.get(0), var.get(1), var.get(2), var.get(3), 
 					var.get(4), var.get(5), var.get(6), var.get(7), var.get(8), var.get(9));
 			albumsDiscogsWantlist.add(albumDiscogsWantlist);
 		}

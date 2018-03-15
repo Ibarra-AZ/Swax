@@ -1,13 +1,10 @@
 package swax.webservice.entity.album;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,7 +21,6 @@ public class AlbumWantlist implements Serializable {
 	private static final long serialVersionUID = 4636964225815914688L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
 	@Column(name="ALBUM_WANTLIST_ID", unique = true, nullable = false)
 	private Integer albumWantlistId;
 	
@@ -63,5 +59,15 @@ public class AlbumWantlist implements Serializable {
 		this.notes = albumDiscogsWantlist.getNotes();
 		this.dateAdded = albumDiscogsWantlist.getDateAdded();
 	}
+	
+	public AlbumWantlist(User user, AlbumDiscogs albumDiscogs) {
+		this.user = user;
+		this.albumWantlistId = Integer.valueOf(albumDiscogs.getCollection_id());
+		this.album = new Album(albumDiscogs);
+//		this.notes = albumDiscogs.getNotes;
+		this.dateAdded = albumDiscogs.getDateAdded();
+	}
+	
+	
 
 }

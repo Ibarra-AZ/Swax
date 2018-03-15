@@ -18,4 +18,6 @@ public interface IApiDiscogsService {
 	
 	Map<String, Object> synchronizeCollectionWithDiscogs(User user);
 
+	List<AlbumDiscogs> getAlbumsWantListFromReleases(List<Want> wants);
+
 }
