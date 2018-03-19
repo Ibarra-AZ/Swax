@@ -12,10 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import swax.web.component.sessionscope.SessionUser;
 import swax.web.component.sessionscope.UserCollection;
+import swax.web.component.sessionscope.UserWantlist;
 import swax.web.mav.utils.MavUtil;
 import swax.webservice.apiDiscogs.model.Release;
 import swax.webservice.apiDiscogs.model.Want;
 import swax.webservice.dto.AlbumDTO;
+import swax.webservice.dto.AlbumWantlistDTO;
 import swax.webservice.entity.album.AlbumDiscogs;
 import swax.webservice.entity.album.SwapAlbum;
 import swax.webservice.entity.user.User;
@@ -55,6 +57,9 @@ public class SynchronizeWithDiscogsController {
 	
 	@Autowired
 	private UserCollection userCollectionSession;
+	
+	@Autowired
+	private UserWantlist userWantlistSession;
 	
 	private Logger logger = Logger.getLogger(this.getClass());
 
@@ -188,11 +193,48 @@ public class SynchronizeWithDiscogsController {
 			return mav;
 		}
 
-		List<AlbumDiscogs> albumsWantlist = apiDiscogsService.getAlbumsWantListFromReleases(wantlist);
-		albumsWantlist = albumDiscogsService.trimAlbumsDiscogsAPI(albumsWantlist);
+		List<AlbumDiscogs> albumsDiscogs = apiDiscogsService.getAlbumsWantListFromReleases(wantlist);
+		albumsDiscogs = albumDiscogsService.trimAlbumsDiscogsAPI(albumsDiscogs);
 		
-		albumService.updateAlbumTable(albumsWantlist);
-		albumWantlistService.createUserWantlist(user, albumsWantlist);
+		// MISE A JOUR BDD EN ENLEVANT LES ALBUMS QUI NE SONT PLUS DANS DISCOGS
+		// TODO: A RENVOYER VERS COUCHE SERVICE ???
+		
+		List<AlbumWantlistDTO> albumsWantlist= userWantlistSession.getUserWantlist();
+		List<AlbumDiscogs> albumsToAdd = new ArrayList<>();
+		List<AlbumWantlistDTO> albumsToDelete = new ArrayList<>();
+		
+		// ALBUMS TO ADD
+		for (AlbumDiscogs albumDiscogs: albumsDiscogs) {
+			boolean foundInWantlist = false;
+			for (AlbumWantlistDTO albumWantlist: albumsWantlist) {
+				if (albumDiscogs.getCollection_id().equals(albumWantlist.getAlbumId())) {
+					foundInWantlist = true;
+				}
+			}
+			if (!foundInWantlist) {
+				albumsToAdd.add(albumDiscogs);
+			}
+		}
+		
+		// ALBUMS TO DELETE
+		for (AlbumWantlistDTO albumWantlistDTO: albumsWantlist) {
+			boolean foundInDiscogs = false;
+			for (AlbumDiscogs albumDiscogs: albumsDiscogs) {
+				if (albumWantlistDTO.getAlbumId().equals(albumDiscogs.getCollection_id())) {
+					foundInDiscogs = true;
+				}
+			}
+			if (!foundInDiscogs) {
+				albumsToDelete.add(albumWantlistDTO);
+			}
+		}
+		
+		System.out.println("ALBUMS A AJOUTER: "+albumsToAdd.size());
+		System.out.println("ALBUMS A SUPPRIMER: "+albumsToDelete.size());
+		
+		albumService.updateAlbumTable(albumsToAdd);
+		albumWantlistService.createUserWantlist(user, albumsToAdd);
+		albumWantlistService.delete(albumsWantlist);
 		
 		mav = mavUtil.mySwax(user);
 		mav.getModel().put("errorMsg", errorMsg);

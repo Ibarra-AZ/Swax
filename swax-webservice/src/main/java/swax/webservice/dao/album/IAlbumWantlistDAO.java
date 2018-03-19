@@ -18,6 +18,8 @@ public interface IAlbumWantlistDAO extends JpaRepository<AlbumWantlist, Integer>
 
 	void deleteByUser(User user);
 	
+	void deleteByAlbumWantlistId(Integer integer);
+	
 	void save(List<AlbumWantlist> albumsWantlist);
 
 }
