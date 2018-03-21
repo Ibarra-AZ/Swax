@@ -1,0 +1,3 @@
+package swax.web.form;
+public class PojoModelSelectSwapsForm {		private String[] albumsSelected;		private String errorMsg = "";		public String getErrorMsg() {		return errorMsg;	}	public void setErrorMsg(String errorMsg) {		this.errorMsg = errorMsg;	}	public String[] getAlbumsSelected() {		return albumsSelected;	}	public void setAlbumsSelected(String[] albumsSelected) {		this.albumsSelected = albumsSelected;	}
+}

@@ -91,7 +91,6 @@ public class MavUtil {
 			mapInitUser = userService.initUser(user);
 		} catch (Exception e) {
 			logger.warn(this.getClass().getName()+": User has been disconnected");
-			e.printStackTrace();
 			String errorMsg = "Your session has expired. Please log in again.";
 			PojoModelLoginForm loginForm = new PojoModelLoginForm();
 			loginForm.setErrorMsg(errorMsg);

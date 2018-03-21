@@ -22,7 +22,7 @@
 
 	<div class="col-md-1"></div>
 	
-	<form:form id="seePossibleSwaps-form" modelAttribute="seePossibleSwapsModelAttribute">
+	<form:form id="seePossibleSwaps-form" modelAttribute="selectSwapsModelAttribute">
 	
 	<div class="col-md-10">
 
@@ -83,7 +83,7 @@
 				<div class="input-group col-md-12">
 					<div style="display: table; margin: 0 auto;">
 					<!-- <button type="submit" class="btn btn-primary">Change Profile</button> -->
-					<a href="/userProfile?userId=${userToSwapWith.userId}" class="btn btn-danger" role="button">
+					<a href="/seeUserSwaps?userId=${userToSwapWith.userId}" class="btn btn-danger" role="button">
 						All ${userToSwapWith.userName}'s albums</a>
 					<a href="/sendProposition" class="btn btn-success" role="button">Send a proposition</a>
 					<a href="/backToMySwax" class="btn btn-warning" role="button">Cancel</a>

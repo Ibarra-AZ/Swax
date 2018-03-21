@@ -86,7 +86,7 @@ p.text-info {
 					</td>
 					<td class="col-md-2">${album.dateAdded}</td>
 					<td class="col-md-2">${album.mediaGrading}<br>${album.sleeveGrading}</td>
-					<td class="col-md-2"><a href="/userProfile?userId=${album.user.userId}">
+					<td class="col-md-2"><a href="/swapsByUser?userId=${album.user.userId}">
 						<i class="glyphicon glyphicon-user"></i> ${album.user.userName}</a>
 					</td>
 					<td class="col-md-1">
