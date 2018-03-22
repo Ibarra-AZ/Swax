@@ -72,6 +72,7 @@ public class SynchronizeWithDiscogsController {
 
 		User user = sessionUser.getSessionUser();
 		List<Release> releases = new ArrayList<Release>();
+		errorMsg = "";
 		
 		try {
 			releases = apiDiscogsService.getCollectionFromUserName(user.getDiscogsName());	
@@ -180,14 +181,15 @@ public class SynchronizeWithDiscogsController {
 		logger.debug(this.getClass().getName()+this.getClass()+": synchronizeWantlistWithDiscogs");
 
 		User user = sessionUser.getSessionUser();
-		
 		List<Want> wantlist = new ArrayList<Want>();
+		errorMsg = "";
 		
 		try{
 			wantlist = apiDiscogsService.getWantListFromUserName(user.getUserName());	
 		}
 		catch(Exception e){
 			errorMsg = "Erreur dans la synchronisation de la wantlist avec Discogs";
+			e.printStackTrace();
 			mav = mavUtil.mySwax(user);
 			mav.getModel().put("errorMsg", errorMsg);
 			return mav;
@@ -207,7 +209,7 @@ public class SynchronizeWithDiscogsController {
 		for (AlbumDiscogs albumDiscogs: albumsDiscogs) {
 			boolean foundInWantlist = false;
 			for (AlbumWantlistDTO albumWantlist: albumsWantlist) {
-				if (albumDiscogs.getCollection_id().equals(albumWantlist.getAlbumId())) {
+				if (albumDiscogs.getCollection_id().equals(albumWantlist.getAlbumId().toString())) {
 					foundInWantlist = true;
 				}
 			}
@@ -220,7 +222,7 @@ public class SynchronizeWithDiscogsController {
 		for (AlbumWantlistDTO albumWantlistDTO: albumsWantlist) {
 			boolean foundInDiscogs = false;
 			for (AlbumDiscogs albumDiscogs: albumsDiscogs) {
-				if (albumWantlistDTO.getAlbumId().equals(albumDiscogs.getCollection_id())) {
+				if (albumWantlistDTO.getAlbumId().toString().equals(albumDiscogs.getCollection_id())) {
 					foundInDiscogs = true;
 				}
 			}
@@ -234,7 +236,7 @@ public class SynchronizeWithDiscogsController {
 		
 		albumService.updateAlbumTable(albumsToAdd);
 		albumWantlistService.createUserWantlist(user, albumsToAdd);
-		albumWantlistService.delete(albumsWantlist);
+		albumWantlistService.delete(albumsToDelete);
 		
 		mav = mavUtil.mySwax(user);
 		mav.getModel().put("errorMsg", errorMsg);
