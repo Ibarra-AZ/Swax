@@ -31,7 +31,7 @@ public class Album implements Serializable {
 	@Column(name="ARTIST", nullable = false)
 	private String artist;
 	
-	@Column(name="LABEL", nullable = true)
+	@Column(name="LABEL", nullable = true, columnDefinition="TEXT")
 	private String label;
 	
 	@Column(name="CATALOG_NUMBER", nullable = true)

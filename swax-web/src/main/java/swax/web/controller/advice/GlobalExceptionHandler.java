@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
 	public ModelAndView allExceptionHandler(Exception e) {
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("errorPage");
+		mav.setViewName("errors/errorPage");
 		logger.warn("EXCEPTION: "+e.getCause().toString());
 		e.printStackTrace();
 		return mav;
