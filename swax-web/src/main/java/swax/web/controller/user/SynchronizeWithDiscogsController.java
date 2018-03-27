@@ -20,6 +20,8 @@ import swax.webservice.dto.AlbumDTO;
 import swax.webservice.dto.AlbumWantlistDTO;
 import swax.webservice.entity.album.AlbumDiscogs;
 import swax.webservice.entity.album.SwapAlbum;
+import swax.webservice.entity.user.Notification;
+import swax.webservice.entity.user.NotificationTypeEnum;
 import swax.webservice.entity.user.User;
 import swax.webservice.service.album.IAlbumCollectedService;
 import swax.webservice.service.album.IAlbumDiscogsService;
@@ -27,6 +29,7 @@ import swax.webservice.service.album.IAlbumService;
 import swax.webservice.service.album.IAlbumWantlistService;
 import swax.webservice.service.album.ISwapAlbumService;
 import swax.webservice.service.apiDiscogs.IApiDiscogsService;
+import swax.webservice.service.notification.INotificationService;
 
 @Controller
 public class SynchronizeWithDiscogsController {
@@ -47,7 +50,10 @@ public class SynchronizeWithDiscogsController {
 	private ISwapAlbumService swapAalbumService;
 	
 	@Autowired
-	private IAlbumWantlistService albumWantlistService; 
+	private IAlbumWantlistService albumWantlistService;
+	
+	@Autowired
+	private INotificationService notificationService; 
 
 	@Autowired
 	private MavUtil mavUtil;
@@ -64,6 +70,8 @@ public class SynchronizeWithDiscogsController {
 	private Logger logger = Logger.getLogger(this.getClass());
 
 	private String errorMsg = "";
+	
+	private Notification notification = null;
 
 	@RequestMapping(value="/synchronizeCollectionWithDiscogs", method = RequestMethod.GET)
 	public ModelAndView synchronizeCollectionWithDiscogs(ModelAndView mav) {
@@ -164,6 +172,8 @@ public class SynchronizeWithDiscogsController {
 					+ " dans ta collection discogs car ils sont toujours proposés à l'échange:";
 			albumsImpossibleToDelete.forEach(item -> 
 				errorMsg = errorMsg.concat("\n - "+item.getAlbum().getArtist()+" - "+item.getAlbum().getAlbumName()));
+			notification = notificationService.getNotification(user, NotificationTypeEnum.Error_Synchro_Collection, errorMsg);
+			notificationService.createUpdateEntity(notification);	
 		}
 		
 		System.out.println(errorMsg);
