@@ -102,12 +102,12 @@ public class SynchronizeWithDiscogsController {
 		List<AlbumDTO> albumsCollection = userCollectionSession.getUserCollection();
 		List<SwapAlbum> swapAlbums = swapAalbumService.findByUser(user);
 		
-		// ALBUMS TO ADD, DELETE, REALLY DELETE, IMPOSSIBLE TO DELETE
+		// ALBUMS TO ADD, DELETE, REALLY DELETE, IMPOSSIBLE TO DELETE		
 		List<AlbumDiscogs> albumsToAdd = apiDiscogsService.getAlbumsToAdd(albumsDiscogs, albumsCollection);
 		List<AlbumDTO> albumsToDelete = apiDiscogsService.getAlbumsToDelete(albumsDiscogs, albumsCollection);
 		Map<String, Object> result = apiDiscogsService.getAlbumsToReallyDelete(albumsToDelete, swapAlbums);
-		List<AlbumDTO> albumsToReallyDelete = (List<AlbumDTO>) result.get("albumsToDelete");
-		List<SwapAlbum> albumsImpossibleToDelete = (List<SwapAlbum>) result.get("albumsToDelete");
+		List<AlbumDTO> albumsToReallyDelete = (List<AlbumDTO>) result.get("albumsToReallyDelete");
+		List<SwapAlbum> albumsImpossibleToDelete  = (List<SwapAlbum>) result.get("albumsImpossibleToDelete");
 		
 		System.out.println("ALBUMS A AJOUTER: "+albumsToAdd.size());
 		System.out.println("ALBUMS A SUPPRIMER: "+albumsToDelete.size());
