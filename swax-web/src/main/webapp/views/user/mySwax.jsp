@@ -38,15 +38,19 @@
 			</li>
 			<li><a data-toggle="tab" href="#collection">
 				<spring:message code="userNav.menu.collection"/>
-					<span class="badge badge-info">${userCollection.size()}</span></a>
+				<span class="badge badge-info">${userCollection.size()}</span></a>
 			</li>
 			<li><a data-toggle="tab" href="#wantlist">
 				<spring:message code="userNav.menu.wantlist"/>
 				<span class="badge badge-warning">${userWantlist.size()}</span></a>
 			</li>
-			<li><a data-toggle="tab" href="#propositions">
+			<li><a data-toggle="tab" href="#albumsToSwap">
 				<spring:message code="userNav.menu.albumsISwap"/>
 				<span class="badge badge-success">${userSwapPropositions.size()}</span></a>
+			</li>
+			<li><a data-toggle="tab" href="#notifications">
+				<spring:message code="userNav.menu.notifications"/>
+				<span class="badge badge-danger">${userNotifications.size()}</span></a>
 			</li>
 		</ul>
 
@@ -98,18 +102,27 @@
 					</div>
 					<%@include file="wantlistTableForm.jsp"%>
 				</c:if>
-<%-- 				<c:if test="${hasWantlist==false}">
+ 				<c:if test="${hasWantlist==false}">
 					<spring:message code="mySwax.wantlist.noWantlist"/>
-					<%@include file="importWantlistForm.jsp"%>
-				</c:if> --%>
+					<%-- <%@include file="importWantlistForm.jsp"%> --%>
+				</c:if>
 			</div>
 
 			
 			<!-- ALBUMS USER SWAPS -->
-			<div id="propositions" class="tab-pane fade">
-				<h2 class="text-center"><spring:message code="mySwax.propositions.h2.title"/></h2>
+			<div id="albumsToSwap" class="tab-pane fade">
+				<h2 class="text-center"><spring:message code="mySwax.albumsToSwap.h2.title"/></h2>
 				<c:if test="${userSwapPropositions.size()!=0}">
 				<%@include file="myAlbumsToSwap.jsp"%>
+				</c:if>
+			</div>
+			
+			
+			<!-- NOTIFICATIONS -->
+			<div id="notifications" class="tab-pane fade">
+				<h2 class="text-center"><spring:message code="mySwax.notifications.h2.title"/></h2>
+				<c:if test="${userNotifications.size()!=0}">
+				<%@include file="myNotifications.jsp"%>
 				</c:if>
 			</div>
 

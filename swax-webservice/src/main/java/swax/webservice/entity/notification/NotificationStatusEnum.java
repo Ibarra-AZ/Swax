@@ -1,4 +1,4 @@
-package swax.webservice.entity.user;
+package swax.webservice.entity.notification;
 
 public enum NotificationStatusEnum {
 	

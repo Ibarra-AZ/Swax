@@ -17,6 +17,7 @@ import swax.web.component.sessionscope.PerfectMatchesMap;
 import swax.web.component.sessionscope.PossibleSwaps;
 import swax.web.component.sessionscope.SessionUser;
 import swax.web.component.sessionscope.UserCollection;
+import swax.web.component.sessionscope.UserNotification;
 import swax.web.component.sessionscope.UserSwapPropositions;
 import swax.web.component.sessionscope.UserWantlist;
 import swax.web.form.PojoModelImportCollectionForm;
@@ -27,6 +28,7 @@ import swax.webservice.dto.AlbumWantlistDTO;
 import swax.webservice.dto.LatestAdditionDTO;
 import swax.webservice.dto.PossibleSwapDTO;
 import swax.webservice.entity.album.SwapAlbum;
+import swax.webservice.entity.notification.Notification;
 import swax.webservice.entity.user.User;
 import swax.webservice.service.album.ISwapAlbumService;
 import swax.webservice.service.user.IUserService;
@@ -81,6 +83,15 @@ public class MavUtil {
 	@Autowired
 	private UserWantlist userWantlistSession;
 	
+	@Autowired
+	private UserNotification userNotifications;
+	
+	/**
+	 * Initialise User with DB
+	 * 
+	 * @param user
+	 * @return
+	 */
 	public ModelAndView mySwax(User user) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -115,6 +126,12 @@ public class MavUtil {
 	}
 	
 
+	/**
+	 * Initialize User from Session
+	 * 
+	 * @param user
+	 * @return
+	 */
 	public ModelAndView mySwaxUsingSession(User user) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -138,6 +155,11 @@ public class MavUtil {
 	
 	}
 	
+	/**
+	 * Initialize SessionScope Components with mapInitUser
+	 * 
+	 * @param mapInitUser
+	 */
 	@SuppressWarnings("unchecked")
 	public void initSession(Map<String, Object> mapInitUser) {
 		
@@ -150,9 +172,16 @@ public class MavUtil {
 		userCollectionSession.setUserCollection((List<AlbumDTO>) mapInitUser.get("userCollection"));
 		userSwapPropositionsSession.setUserSwapPropositions((List<SwapAlbum>) mapInitUser.get("userSwapPropositions"));
 		userWantlistSession.setUserWantlist((List<AlbumWantlistDTO>) mapInitUser.get("userWantlist"));
+		userNotifications.setUserNotifications((List<Notification>) mapInitUser.get("userNotifications"));
 		
 	}
 	
+	/**
+	 * Initialize ModelAnView with SessionScope Components
+	 * 
+	 * @param mav
+	 * @return
+	 */
 	public ModelAndView initMavWithSession (ModelAndView mav) {
 		
 		mav.getModel().put("hasCollection", hasCollectionSession.isHasCollection());
@@ -165,10 +194,17 @@ public class MavUtil {
 		mav.getModel().put("userSwapPropositions", userSwapPropositionsSession.getUserSwapPropositions());
 		mav.getModel().put("perfectMatchesMap", perfectMatchesMapSession.getPerfectMatchesMap());
 		mav.getModel().put("user", sessionUser.getSessionUser());
+		mav.getModel().put("userNotifications", userNotifications.getUserNotifications());
 		
 		return mav;
 	}
 	
+	/**
+	 * Initialize ModelAnView with mapInitUser
+	 * 
+	 * @param mav
+	 * @param mapInitUser
+	 */
 	public void initMav(ModelAndView mav, Map<String, Object> mapInitUser) {
 		
 		mav.getModel().put("hasCollection", mapInitUser.get("hasCollection"));
@@ -181,9 +217,16 @@ public class MavUtil {
 		mav.getModel().put("userSwapPropositions", mapInitUser.get("userSwapPropositions"));
 		mav.getModel().put("perfectMatchesMap", mapInitUser.get("perfectMatchesMap"));
 		mav.getModel().put("user", sessionUser.getSessionUser());
+		mav.getModel().put("userNotifications", mapInitUser.get("userNotifications"));
 		
 	}
 	
+	/**
+	 * Retrieve counters
+	 * 
+	 * @param mav
+	 * @return
+	 */
 	public ModelAndView initStartCounts(ModelAndView mav) {
 		
 		int countUsers = userService.countUsers();		

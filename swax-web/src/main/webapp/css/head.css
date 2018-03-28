@@ -20,6 +20,9 @@
 .badge-info {
   background-color: #3a87ad;
 }
+.badge-danger {
+  background-color: #b94a48;
+}
 .badge-inverse {
   background-color: #333333;
 }

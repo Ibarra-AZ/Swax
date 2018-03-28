@@ -1,9 +1,9 @@
-package swax.webservice.entity.user;
+package swax.webservice.entity.notification;
 
 public enum NotificationTypeEnum {
 	
-	Error_Synchro_Wantlist("Error Synchro Wantlist"), 
-	Error_Synchro_Collection("Error Synchro Collection");
+	Error_Synchro_Wantlist("Error synchronizing wantlist "), 
+	Error_Synchro_Collection("Error synchronizing collection");
 	
 	private final String notificationType;
 	

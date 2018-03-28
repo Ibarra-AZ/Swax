@@ -16,7 +16,10 @@ import swax.webservice.apiDiscogs.model.Release;
 import swax.webservice.apiDiscogs.model.RetourCollection;
 import swax.webservice.apiDiscogs.model.RetourWantList;
 import swax.webservice.apiDiscogs.model.Want;
+import swax.webservice.dto.AlbumDTO;
+import swax.webservice.dto.AlbumWantlistDTO;
 import swax.webservice.entity.album.AlbumDiscogs;
+import swax.webservice.entity.album.SwapAlbum;
 import swax.webservice.entity.user.User;
 import swax.webservice.service.apiDiscogs.IApiDiscogsService;
 
@@ -26,6 +29,12 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 	private final int NB_ITEM_MAX_PAGE = 500;
 	private Logger logger = Logger.getLogger(this.getClass());
 	
+	/**
+	 * 
+	 * @param userName
+	 * @return
+	 * @throws Exception
+	 */
 	private RetourCollection firstCollectionCall(String userName) throws Exception{
 		
 		return ClientBuilder.newClient()
@@ -36,6 +45,13 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 				.get(RetourCollection.class);
 	}
 
+	/**
+	 * 
+	 * @param userName
+	 * @param pageNumber
+	 * @param numberPerPage
+	 * @return
+	 */
 	private RetourCollection getCollectionFromUserNameAndPageNumber(String userName, Integer pageNumber, Integer numberPerPage){
 		
 		RetourCollection retour = ClientBuilder.newClient()
@@ -48,6 +64,10 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 		return retour;
 	}
 	
+
+	/**
+	 * @param releases
+	 */
 	@Override
 	public List<AlbumDiscogs> getAlbumsDiscogsFromReleases(List<Release> releases){
 		List<AlbumDiscogs> albums = new ArrayList<AlbumDiscogs>();
@@ -100,6 +120,9 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 		return album;
 	}
 	
+	/**
+	 * @param userName
+	 */
 	@Override
 	public List<Release> getCollectionFromUserName (String userName) throws Exception{
 		
@@ -123,6 +146,9 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 		return collection;
 	}
 	
+	/**
+	 * @param user
+	 */
 	@Override
 	public Map<String, Object> synchronizeCollectionWithDiscogs(User user) {
 		
@@ -151,14 +177,22 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 		return result;
 	}
 	
-//	----------------------------------------- WANTLIST ----------------------------------------- 
-	
+
+	/**
+	 * 
+	 * @param userName
+	 * @return
+	 * @throws Exception
+	 */
 	private RetourWantList firstWantListCall(String userName) throws Exception{
 		return ClientBuilder.newClient()
 				.target("https://api.discogs.com").path("users/"+userName+"/wants").queryParam("per_page", NB_ITEM_MAX_PAGE)
 				.request().get(RetourWantList.class);
 	}
 	
+	/**
+	 * @param userName
+	 */
 	@Override
 	public List<Want> getWantListFromUserName(String userName) throws Exception{
 		List<Want> collection = new ArrayList<Want>();
@@ -180,6 +214,9 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 		return collection;
 	}
 	
+	/**
+	 * @param wants
+	 */
 	@Override
 	public List<AlbumDiscogs> getAlbumsWantListFromReleases(List<Want> wants){
 		List<AlbumDiscogs> albums = new ArrayList<AlbumDiscogs>();
@@ -226,6 +263,13 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 		return albumDiscogs;
 	}	
 
+	/**
+	 * 
+	 * @param userName
+	 * @param pageNumber
+	 * @param numberPerPage
+	 * @return
+	 */
 	private RetourWantList getWantListFromUserNameAndPageNumber(String userName, Integer pageNumber, Integer numberPerPage){
 		RetourWantList retour = ClientBuilder.newClient()
 				.target("https://api.discogs.com").path("users/"+userName+"/wants")
@@ -235,6 +279,9 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 		return retour;
 	}
 	
+	/**
+	 * @param user
+	 */
 	@Override
 	public Map<String, Object> synchronizeWantlistWithDiscogs(User user) {
 		
@@ -261,6 +308,116 @@ public class ApiDiscogsServiceImpl implements IApiDiscogsService {
 		result.put("errorMsg", errorMsg);
 		
 		return result;
+	}
+	
+	@Override
+	public List<AlbumDiscogs> getAlbumsToAdd(List<AlbumDiscogs> albumsDiscogs, List<AlbumDTO> albumsCollection) {
+		
+		List<AlbumDiscogs> albumsToAdd = new ArrayList<>();
+		
+		for (AlbumDiscogs albumDiscogs: albumsDiscogs) {
+			boolean foundInCollection = false;
+			for (AlbumDTO albumCollection: albumsCollection) {
+				if (albumDiscogs.getCollection_id().equals(albumCollection.getAlbumId())) {
+					foundInCollection = true;
+				}
+			}
+			if (!foundInCollection) {
+				albumsToAdd.add(albumDiscogs);
+			}
+		}
+		
+		return albumsToAdd;
+		
+	}
+	
+	@Override
+	public List<AlbumDTO> getAlbumsToDelete(List<AlbumDiscogs> albumsDiscogs, List<AlbumDTO> albumsCollection) {
+		
+		List<AlbumDTO> albumsToDelete = new ArrayList<>();
+		
+		for (AlbumDTO albumCollection: albumsCollection) {
+			boolean foundInDiscogs = false;
+			for (AlbumDiscogs albumDiscogs: albumsDiscogs) {
+				if (albumCollection.getAlbumId().equals(albumDiscogs.getCollection_id())) {
+					foundInDiscogs = true;
+				}
+			}
+			if (!foundInDiscogs) {
+				albumsToDelete.add(albumCollection);
+			}
+		}
+		
+		return albumsToDelete;
+	}
+	
+	@Override
+	public Map<String, Object> getAlbumsToReallyDelete(List<AlbumDTO> albumsToDelete, List<SwapAlbum> swapAlbums) {
+		
+		List<AlbumDTO> albumsToReallyDelete = new ArrayList<>();
+		List<SwapAlbum> albumsImpossibleToDelete = new ArrayList<>();
+		Map<String, Object> result = new HashMap<>();
+		
+		for (AlbumDTO albumCollection: albumsToDelete) {
+			boolean toDelete = true;
+			for (SwapAlbum swapAlbum: swapAlbums) {
+				if (swapAlbum.getAlbumCollected().getAlbumCollectedId().equals(albumCollection.getAlbumId())) {
+					if (swapAlbum.isAlbumToSwap()==true) {
+						albumsImpossibleToDelete.add(swapAlbum);
+						toDelete = false;
+					}
+				}
+			}
+			if (toDelete) {
+				albumsToReallyDelete.add(albumCollection);
+			}
+		}
+		
+		result.put("albumsToReallyDelete", albumsToReallyDelete);
+		result.put("albumsImpossibleToDelete", albumsImpossibleToDelete);
+		
+		return result;
+		
+	}
+	
+	@Override
+	public List<AlbumDiscogs> getWantlistAlbumsToAdd(List<AlbumDiscogs> albumsDiscogs, List<AlbumWantlistDTO> albumsWantlist) {
+		
+		List<AlbumDiscogs> albumsToAdd = new ArrayList<>();
+			
+		for (AlbumDiscogs albumDiscogs: albumsDiscogs) {
+			boolean foundInWantlist = false;
+			for (AlbumWantlistDTO albumWantlist: albumsWantlist) {
+				if (albumDiscogs.getCollection_id().equals(albumWantlist.getAlbumId().toString())) {
+					foundInWantlist = true;
+				}
+			}
+			if (!foundInWantlist) {
+				albumsToAdd.add(albumDiscogs);
+			}
+		}
+		
+		return albumsToAdd;
+	}
+	
+	@Override
+	public List<AlbumWantlistDTO> getWantlistAlbumsToDelete(List<AlbumDiscogs> albumsDiscogs, List<AlbumWantlistDTO> albumsWantlist) {
+		
+		List<AlbumWantlistDTO> albumsToDelete = new ArrayList<>();
+			
+		for (AlbumWantlistDTO albumWantlistDTO: albumsWantlist) {
+			boolean foundInDiscogs = false;
+			for (AlbumDiscogs albumDiscogs: albumsDiscogs) {
+				if (albumWantlistDTO.getAlbumId().toString().equals(albumDiscogs.getCollection_id())) {
+					foundInDiscogs = true;
+				}
+			}
+			if (!foundInDiscogs) {
+				albumsToDelete.add(albumWantlistDTO);
+			}
+		}
+		
+		return albumsToDelete;
 	}
 	
 }
