@@ -23,6 +23,7 @@ import swax.web.component.sessionscope.UserWantlist;
 import swax.web.form.PojoModelImportCollectionForm;
 import swax.web.form.PojoModelImportWantlistForm;
 import swax.web.form.PojoModelLoginForm;
+import swax.web.form.PojoModelSelectNotificationsForm;
 import swax.webservice.dto.AlbumDTO;
 import swax.webservice.dto.AlbumWantlistDTO;
 import swax.webservice.dto.LatestAdditionDTO;
@@ -195,6 +196,7 @@ public class MavUtil {
 		mav.getModel().put("perfectMatchesMap", perfectMatchesMapSession.getPerfectMatchesMap());
 		mav.getModel().put("user", sessionUser.getSessionUser());
 		mav.getModel().put("userNotifications", userNotifications.getUserNotifications());
+		mav.getModel().put("selectNotificationsModelAttribute", new PojoModelSelectNotificationsForm());
 		
 		return mav;
 	}
@@ -218,7 +220,7 @@ public class MavUtil {
 		mav.getModel().put("perfectMatchesMap", mapInitUser.get("perfectMatchesMap"));
 		mav.getModel().put("user", sessionUser.getSessionUser());
 		mav.getModel().put("userNotifications", mapInitUser.get("userNotifications"));
-		
+		mav.getModel().put("selectNotificationsModelAttribute", new PojoModelSelectNotificationsForm());
 	}
 	
 	/**

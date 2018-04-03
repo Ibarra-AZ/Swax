@@ -120,10 +120,11 @@
 			
 			<!-- NOTIFICATIONS -->
 			<div id="notifications" class="tab-pane fade">
-				<h2 class="text-center"><spring:message code="mySwax.notifications.h2.title"/></h2>
-				<c:if test="${userNotifications.size()!=0}">
+				<div class="row col-md-12 text-center" style="display: table; margin: 0 auto; padding: 0;">
+					<h2 class="text-center"><spring:message code="mySwax.notifications.h2.title"/></h2>
+					<p class="text-info text-justify"><spring:message code="mySwax.wantlist.info"/></p>
+				</div>
 				<%@include file="myNotifications.jsp"%>
-				</c:if>
 			</div>
 
 			

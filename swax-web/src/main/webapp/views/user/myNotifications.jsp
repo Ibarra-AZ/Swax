@@ -21,6 +21,24 @@
 	}
 </style>
 
+<script>
+function checkNotifications() {
+    var notifications = document.forms[0];
+    var numberBoxChecked = 0;
+    for (i = 0; i < notifications.length; i++) {
+    	  if (notifications[i].checked) {
+		  	numberBoxChecked = numberBoxChecked + 1;
+    	  }
+    	}
+    if (numberBoxChecked == 0) {
+    	document.getElementById("submitButton").disabled = true;
+        }
+    else {
+    	document.getElementById("submitButton").disabled = false;
+    }
+}
+</script>
+
 <c:if test="${userNotifications.size()==null}">
 
 	<div class="row text-center">
@@ -31,12 +49,44 @@
  
 <c:if test="${userNotifications.size() != null}">
 
-<%-- 	<div class="row text-center">
-		<span class="text-muted text-uppercase"><spring:message code="myNotifications.checkout"/></span>
-	</div> --%>
+	<form:form id="myNotifications-form" method="POST" modelAttribute="selectNotificationsModelAttribute" action="deleteNotifications">
+		
+		<table id="notificationsTable" class="table table-hover table-bordered table-condensed">
+		
+		<thead>
+			<tr class="active">
+				<th><spring:message code="myNotifications.th.select"/></th>
+				<th><spring:message code="myNotifications.th.date"/></th>
+				<th><spring:message code="myNotifications.th.subject"/></th>
+				<th><spring:message code="myNotifications.th.message"/></th>
+			</tr>
+		</thead>
+		
+		<tbody>
+		
+			<c:forEach items="${userNotifications}" var="notification">
+				<tr>
+					<td class="col-md-1"><form:checkbox onclick="checkNotifications()" path="notificationsSelected" name="notifications" value="${notification.notificationId}" /></td>
+					<td class="col-md-2"><c:out value="${notification.dateAdded}" /></td>
+					<td class="col-md-2"><c:out value="${notification.subject}" /></td>
+					<td class="col-md-7"><c:out value="${notification.message}" /></td>
+				</tr>
+			</c:forEach>
 	
-	<div class="row top15">
+		</tbody>
 
-	</div>
+		</table>
+		
+		<div class="form-group">
+			<div class="inputGroupContainer">
+				<div class="input-group col-md-12">
+					<div style="display: table; margin: 0 auto;">
+					<button id="submitButton" type="submit" class="btn btn-success" disabled><spring:message code="myNotifications.button.submit"/></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		</form:form>
 
 </c:if>
