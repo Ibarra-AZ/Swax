@@ -3,6 +3,10 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
+<html>
+
+
+
 <style>
 	.a-btn {
 	    transition: .2s;
@@ -21,21 +25,25 @@
 	}
 </style>
 
-<script>
-function checkNotifications() {
-    var notifications = document.forms[0];
-    var numberBoxChecked = 0;
-    for (i = 0; i < notifications.length; i++) {
-    	  if (notifications[i].checked) {
-		  	numberBoxChecked = numberBoxChecked + 1;
-    	  }
-    	}
+<body>
+
+<script type="text/javascript">
+var numberBoxChecked = 0;
+
+function isChecked(input) {
+	if (input.checked) {
+		numberBoxChecked = numberBoxChecked + 1;
+	}
+	else {
+		numberBoxChecked = numberBoxChecked - 1;
+	}
+    console.log(numberBoxChecked);
     if (numberBoxChecked == 0) {
     	document.getElementById("submitButton").disabled = true;
         }
     else {
     	document.getElementById("submitButton").disabled = false;
-    }
+    }  
 }
 </script>
 
@@ -66,7 +74,7 @@ function checkNotifications() {
 		
 			<c:forEach items="${userNotifications}" var="notification">
 				<tr>
-					<td class="col-md-1"><form:checkbox onclick="checkNotifications()" path="notificationsSelected" name="notifications" value="${notification.notificationId}" /></td>
+					<td class="col-md-1"><form:checkbox onclick="isChecked(this);" path="notificationsSelected" name="notifications" value="${notification.notificationId}" /></td>
 					<td class="col-md-2"><c:out value="${notification.dateAdded}" /></td>
 					<td class="col-md-2"><c:out value="${notification.subject}" /></td>
 					<td class="col-md-7"><c:out value="${notification.message}" /></td>
@@ -90,3 +98,7 @@ function checkNotifications() {
 		</form:form>
 
 </c:if>
+
+</body>
+
+</html>
